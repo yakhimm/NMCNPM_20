@@ -10,3 +10,5 @@
 ## II. CÁC CÔNG CỤ THỰC HIỆN:
 - **Slack**: https://app.slack.com/client/T046S9KR0SY/C046LT538TF/thread/C0472EV7U0H-1666756059.967449
 - **Trello**: https://trello.com/b/wEPJPnhi/nhom04
+- **Google Meet**: https://meet.google.com/jum-zybz-epb
+- **Google Drive**: https://bit.ly/nmcnpm-04
