@@ -98,3 +98,6 @@ recipe = RECIPE(filepath).recipe
 # Kết quả ghi ra không có dấu, tuy nhiên khi đọc vào bằng json thì kết quả đọc vào sẽ có dấu (read.csv có chứng minh)
 with open("recipe.json", "w", encoding ='utf8') as outfile:
     json.dump(recipe, outfile)
+
+
+print('ok')
