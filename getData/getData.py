@@ -47,6 +47,8 @@ class RECIPE:
                 truth_content += self.get_contents(content)
         # Điều kiện dừng là khi hết contents
         # Kết quả trả về là truth_content
+        truth_content = truth_content.replace('\xa0','')
+        truth_content = truth_content.replace('* ','')
         return truth_content
 
     def get_content_of_soup(self, soup, case): 
@@ -70,11 +72,20 @@ class RECIPE:
         content = requests.get(url).content
         # Dùng BeautifulSoup để lọc dữ liệu bằng html.parser
         soup = BeautifulSoup(content, 'html.parser')
+        recipe = {}
+
+        # Lấy hình ảnh 
+        detail_img = soup.find('div', {'class': 'detail_img w-100 float-left'})
+        detail_img = detail_img.find('div', {'class': 'youtube text-center'})
+        images = detail_img.findAll('img')
+        for i in images:
+            image = i['src']
+        recipe['image'] = image
+
         # Biến đếm
         cnt = 0
         # Truy đến nhánh cần lấy dữ liệu
         detail_main_row_bm3 = soup.find_all('div', {'class': 'row mb-3'}) 
-        recipe = {}
         # Vì trong web thì có 5 row mb-3
         # Mỗi row mb-3 có mỗi ý nghĩa khác nhau nên chỉ cần lấy 3 row mb-3 đầu là đủ dữ liệu
         for row_bm3 in detail_main_row_bm3:  
@@ -87,6 +98,12 @@ class RECIPE:
             if cnt == 2:
                 # Lấy dữ liệu là Thực hiện
                 recipe.update(self.get_content_of_soup(row_bm3, 'thuchien'))
+            if cnt == 3:
+                # Lấy dữ liệu là Cách dùng
+                recipe.update(self.get_content_of_soup(row_bm3, 'canhdung'))
+            if cnt == 4:
+                # Lấy dữ liệu là Mách nhỏ
+                recipe.update(self.get_content_of_soup(row_bm3, 'machnho'))
             cnt += 1
         return recipe
 
@@ -98,6 +115,3 @@ recipe = RECIPE(filepath).recipe
 # Kết quả ghi ra không có dấu, tuy nhiên khi đọc vào bằng json thì kết quả đọc vào sẽ có dấu (read.csv có chứng minh)
 with open("recipe.json", "w", encoding ='utf8') as outfile:
     json.dump(recipe, outfile)
-
-
-print('ok')
