@@ -24,13 +24,14 @@ $('.signup-form').submit( (e) => {
        
         if (regex_fields[item.attributes.name.value].test(item.value)) {
             console.log(item.attributes.name.value + ': ' + bool);
-            e.preventDefault();
+            // e.preventDefault();
             item.style.borderColor = "black";
         }
         else {
-            console.log(item.attributes.name.value + ': false');
             item.style.borderColor = "red";
-            alert(`Error: ${error_messages[item.attributes.name.value]}`);
+            console.log(item.attributes.name.value + ': false');
+            let msg = `Error: ${error_messages[item.attributes.name.value]}`;
+            setTimeout(alertMsg(msg), 5000);
             e.preventDefault();
         }
     }
@@ -42,10 +43,14 @@ $('.signup-form').submit( (e) => {
         e.preventDefault();
         // console.log(error_messages[re_pass]);
         rePassword.style.borderColor = "red";
-        alert(`Error: Mật khẩu xác nhận không trùng khớp`);
+        msg = `Error: Mật khẩu xác nhận không trùng khớp`;
+        setTimeout(alertMsg(msg), 5000);
     }
 })
 
+function alertMsg (msg) {
+    alert(msg);
+}
 
 function checkPassword(pwd, re_pwd) {
     return pwd.value === re_pwd.value;
@@ -67,7 +72,8 @@ $('.signin-form').submit( (e) => {
         else {
             console.log(item.attributes.name.value + ': false');
             item.style.borderColor = "red";
-            alert(`${item.attributes.name.value}: ${error_messages[item.attributes.name.value]}`);
+            let msg = `${item.attributes.name.value}: ${error_messages[item.attributes.name.value]}`;
+            setTimeout(alertMsg(msg), 5000);
             e.preventDefault();
         }
     }

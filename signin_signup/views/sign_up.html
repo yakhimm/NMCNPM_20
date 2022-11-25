@@ -8,10 +8,10 @@
     <title>Sign Up Form</title>
 
     <!-- Font Icon -->
-    <link rel="stylesheet" href="fonts/material-icon/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" href="../fonts/material-icon/css/material-design-iconic-font.min.css">
 
     <!-- Main css -->
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 
 <body>
@@ -23,7 +23,7 @@
                 <div class="signup-content">
                     <div class="signup-form">
                         <h2 class="form-title">Sign up</h2>
-                        <form method="POST" class="register-form" id="register-form">
+                        <form method="POST" action="/users/signin" class="register-form" id="register-form">
                             <div class="form-group">
                                 <label for="name"><i class="zmdi zmdi-account material-icons-name"></i></label>
                                 <input type="text" name="name" id="nameRegex" placeholder="Your Name" required />
@@ -65,8 +65,8 @@
                         </form>
                     </div>
                     <div class="signup-image">
-                        <figure><img src="images/cooking_sign_up.jpg" alt="sign up image"></figure>
-                        <a href="http://127.0.0.1:5500/sign_in.html" class="signup-image-link">I am
+                        <figure><img src="../images/cooking_sign_up.jpg" alt="sign up image"></figure>
+                        <a href="http://127.0.0.1:5500/signin_signup/views/sign_in.html" class="signup-image-link">I am
                             already a member!</a>
                     </div>
                 </div>
@@ -118,9 +118,9 @@
     </div>
 
     <!-- JS -->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="js/validate.js"></script>
-    <script src="./js/terms_of_service.js"></script>
+    <script src="../vendor/jquery/jquery.min.js"></script>
+    <script src="../js/validate.js"></script>
+    <script src="../js/terms_of_service.js"></script>
 
 </body>
 
