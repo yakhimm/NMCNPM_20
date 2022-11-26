@@ -30,6 +30,13 @@ app.get('/',  (req, res) => {
     res.render('home');
 });
 
+app.get('/anngon',  (req, res) => {
+    res.render('home');
+});
+
+app.post('/anngon', (req, res) => {
+    res.render('home');
+});
 
 app.listen(port, () => {
     console.log(`Server is listening to port ${port}!`)

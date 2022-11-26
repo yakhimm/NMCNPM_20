@@ -4,12 +4,12 @@ const hashLength = 64 //bytes
 
 exports.getAll = async (req, res, next) => {
     // const us = await userM.all();
-    res.redirect('/user/login');
+    res.redirect('/users/signin');
     next();
 }
 
-exports.login = async (req, res, next) => {
-    res.render('user/login');
+exports.signin = async (req, res, next) => {
+    res.render('users/signin');
 };
 
 exports.admin = async (req, res, next) => {
@@ -89,7 +89,7 @@ exports.postSignin = async (req, res, next) => {
     //         };
             
     //         const newUser = await userM.add(user);
-    //         res.redirect('/user/login');
+    //         res.redirect('/user/signin');
     //     }
     //     break;
     //     case 'temp':
@@ -108,30 +108,32 @@ exports.postSignup = async (req, res, next) => {
         usn = req.body.username,
         phone = req.body.phone,
         email = req.body.email,
-        addr = req.body.address,
-        pwd = req.body.password;
+        addr = req.body.addr,
+        pwd = req.body.pass;
 
     
-    const userDb = await userM.byName(usn);
-    console.log(userDb);
-    // if (userDb )
+   // const userDb = await userM.byName(usn);
+    // console.log(userDb);
+    // console.log("check usn");
+    // // if (userDb )
 
-    // const salt = Date.now().toString(16); // sử dụng toString để chuyển sang cơ số hex ~ 16 thì dùng toString(16)
-    // const pwdSalt = pwd + salt;
+    const salt = Date.now().toString(16); // sử dụng toString để chuyển sang cơ số hex ~ 16 thì dùng toString(16)
+    const pwdSalt = pwd + salt;
 
-    // // chuyen pwd ve 64 kytu hexa, moi kytu hexa (0->F) co 4bit ~ 16 giatri
-    // // 1 kytu thuong (thuan) thi co 256 gia tri ~ 8bit
-    // const pwdHashed = CryptoJS.SHA3(pwdSalt, { outputLength: hashLength * 4 }).toString(CryptoJS.enc.Hex); // 1 kết quả mã hóa ra 1 mảng bytes, cần chuyển sang chuỗi -> sử dụng luôn hàm toString
+    // chuyen pwd ve 64 kytu hexa, moi kytu hexa (0->F) co 4bit ~ 16 giatri
+    // 1 kytu thuong (thuan) thi co 256 gia tri ~ 8bit
+    const pwdHashed = CryptoJS.SHA3(pwdSalt, { outputLength: hashLength * 4 }).toString(CryptoJS.enc.Hex); // 1 kết quả mã hóa ra 1 mảng bytes, cần chuyển sang chuỗi -> sử dụng luôn hàm toString
     
-    // const user = {
-    //     fullname : fulln,
-    //     username: usn,
-    //     phone : phone,
-    //     email : email,
-    //     address : addr,
-    //     password: pwdHashed + salt // lưu password đã hash và salt
-    // };
+
+    const user = {
+        fullname : fulln,
+        username: usn,
+        phone : phone,
+        email : email,
+        address : addr,
+        password: pwdHashed + salt // lưu password đã hash và salt
+    };
     
-    // const newUser = await userM.add(user);
-    // res.redirect('/user/login');
+    const newUser = await userM.add(user);
+    res.redirect('/users/signin');
 }

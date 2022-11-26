@@ -67,7 +67,7 @@ $('.signin-form').submit( (e) => {
        
         if (regex_fields[item.attributes.name.value].test(item.value)) {
             console.log(item.attributes.name.value + ': ' + bool);
-            e.preventDefault();
+            // e.preventDefault();
         }
         else {
             console.log(item.attributes.name.value + ': false');

@@ -12,7 +12,6 @@ router.get('/admin', userC.admin);
 
 router.get('/signin', (req, res) => {
     res.render('users/signin');
-    // next();
 });
 
 router.post('/signin', userC.postSignin);
