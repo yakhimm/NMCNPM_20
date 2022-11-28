@@ -17,6 +17,7 @@ const error_messages = {
 $('.signup-form').submit( (e) => {
     
     const keys = document.querySelectorAll("input[id$='Regex']");
+    const agree = document.querySelector("input[id='agree-term']");
     console.log(keys);
     
     var bool = true;
@@ -24,7 +25,6 @@ $('.signup-form').submit( (e) => {
        
         if (regex_fields[item.attributes.name.value].test(item.value)) {
             console.log(item.attributes.name.value + ': ' + bool);
-            // e.preventDefault();
             item.style.borderColor = "black";
         }
         else {
@@ -67,7 +67,6 @@ $('.signin-form').submit( (e) => {
        
         if (regex_fields[item.attributes.name.value].test(item.value)) {
             console.log(item.attributes.name.value + ': ' + bool);
-            // e.preventDefault();
         }
         else {
             console.log(item.attributes.name.value + ': false');
