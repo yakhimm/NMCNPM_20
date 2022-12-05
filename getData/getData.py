@@ -11,11 +11,23 @@ class RECIPE:
         urls = pd.read_csv(filepath).values
         # Danh sách các công thức là một dictionary
         self.recipe = {}
-        for i in range(len(urls)):
+        for i in range(len(urls)):         
+            # Nội dung của url
+            content = requests.get(urls[i][0]).content
+            # Dùng BeautifulSoup để lọc dữ liệu bằng html.parser
+            self.soup = BeautifulSoup(content, 'html.parser')
+
             # Tên món
-            name = urls[i][0].split('/')[3]
+            detail_main = self.soup.find('div', {'class':'detail_main'})
+            name = detail_main.find('div', {'class':'col'}).find('h1').get_text()
+
+            self.tags = []
+            url_tag = detail_main.find('div', {'class':'tag mt-2'}).find_all('a')
+            for tag in url_tag:
+                self.tags.append(tag.get_text())
+
             # Lấy dữ liệu của từng url
-            self.recipe[name] = self.request_and_get_recipe(urls[i][0])
+            self.recipe[name] = self.request_and_get_recipe()
 
     def get_ingredient(self, soup):
         # Tìm đến mục div - class: block-nguyenlieu
@@ -26,9 +38,9 @@ class RECIPE:
         for ingredient in block_ingredient:
             raw_ingredient.append(ingredient.contents[0])
         # Split các dữ liệu có dấu \t trong nguyen liệu
-        for i in range(len(raw_ingredient)):
-            split = raw_ingredient[i].split("\t")[0]
-            raw_ingredient[i] = split
+        for i in range(len(raw_ingredient)):      
+            raw_ingredient[i] = raw_ingredient[i].replace('\t', ': ')
+            
         # Đưa về dictionary
         ingredient = {'nguyenlieu': raw_ingredient}
         return ingredient
@@ -67,15 +79,11 @@ class RECIPE:
         return soup_contents
 
     # Hàm request lên url và lấy dữ liệu recipe từ url đó 
-    def request_and_get_recipe(self, url):
-        # Nội dung của url
-        content = requests.get(url).content
-        # Dùng BeautifulSoup để lọc dữ liệu bằng html.parser
-        soup = BeautifulSoup(content, 'html.parser')
+    def request_and_get_recipe(self):
         recipe = {}
 
         # Lấy hình ảnh 
-        detail_img = soup.find('div', {'class': 'detail_img w-100 float-left'})
+        detail_img = self.soup.find('div', {'class': 'detail_img w-100 float-left'})
         detail_img = detail_img.find('div', {'class': 'youtube text-center'})
         images = detail_img.findAll('img')
         for i in images:
@@ -85,9 +93,10 @@ class RECIPE:
         # Biến đếm
         cnt = 0
         # Truy đến nhánh cần lấy dữ liệu
-        detail_main_row_bm3 = soup.find_all('div', {'class': 'row mb-3'}) 
+        detail_main_row_bm3 = self.soup.find_all('div', {'class': 'row mb-3'}) 
         # Vì trong web thì có 5 row mb-3
         # Mỗi row mb-3 có mỗi ý nghĩa khác nhau nên chỉ cần lấy 3 row mb-3 đầu là đủ dữ liệu
+        recipe['tags'] = self.tags
         for row_bm3 in detail_main_row_bm3:  
             if cnt == 0:
                 # Lấy dữ liệu là nguyên liệu
@@ -100,18 +109,21 @@ class RECIPE:
                 recipe.update(self.get_content_of_soup(row_bm3, 'thuchien'))
             if cnt == 3:
                 # Lấy dữ liệu là Cách dùng
-                recipe.update(self.get_content_of_soup(row_bm3, 'canhdung'))
+                recipe.update(self.get_content_of_soup(row_bm3, 'cachdung'))
             if cnt == 4:
                 # Lấy dữ liệu là Mách nhỏ
                 recipe.update(self.get_content_of_soup(row_bm3, 'machnho'))
+            # recipe.update()
             cnt += 1
+        
         return recipe
 
 # file csv chứa các url
 filepath = 'recipe_links.csv'
 # Tạo một dictionary tên recipe là các công thức 
 recipe = RECIPE(filepath).recipe
+
 # Ghi các công thức ra file json
 # Kết quả ghi ra không có dấu, tuy nhiên khi đọc vào bằng json thì kết quả đọc vào sẽ có dấu (read.csv có chứng minh)
-with open("recipe.json", "w", encoding ='utf8') as outfile:
+with open("recipe.json", "w") as outfile:
     json.dump(recipe, outfile)
