@@ -6,7 +6,7 @@ const express = require('express'),
 
     path = require('path');
     
-// app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/public'));
 app.use(express.static(__dirname));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -14,7 +14,7 @@ require('./configs/hbs')(app);
 
 var viewPath = path.join(__dirname, '/views');
 app.set('views', viewPath);
-console.log(viewPath)
+// console.log(viewPath)
 
 //router
 app.use(Router);
