@@ -6,6 +6,16 @@
     background-size: cover;
 } */
 
+/* css header */
+
+#header {
+    background-color: #fff;
+}
+
+#body {
+    margin-top: 80px;
+}
+
 /*Đổ bóng container chứa thanh search*/
 .navbar-search {
     --mdb-navbar-box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0.7), 0 0px 0px rgba(0, 0, 0, 0.05);

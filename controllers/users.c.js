@@ -3,18 +3,29 @@ const CryptoJS = require("crypto-js");
 const hashLength = 64 //bytes
 
 exports.getAll = async (req, res, next) => {
+   
     res.render('users/signin', {
         layout: 'option_layouts'
     });
 }
 
 exports.getSignin = async (req, res, next) => {
+
+    if (req.session.user) { // da dang nhap thi chuyen ve trang chu
+        return res.redirect("/");
+    }
+
     res.render('users/signin', {
         layout: 'option_layouts'
     });
 }
 
 exports.getSignup = async (req, res, next) => {
+
+    if (req.session.user) { // da dang nhap thi chuyen ve trang chu
+        return res.redirect("/");
+    }
+
     res.render('users/signup', {
         layout: 'option_layouts'
     });
@@ -23,7 +34,7 @@ exports.getSignup = async (req, res, next) => {
 // exports.admin = async (req, res, next) => {
 //     console.log(req.session);
 //     if (!req.session.uid) {
-//         return res.redirect('/users/signin');
+//         return res.redirect('/signin');
 //     }
 //     res.redirect('/');
 // };
@@ -45,12 +56,19 @@ exports.postSignin = async (req, res, next) => {
     console.log('signin');
     const userDb = await userM.getAll(usn);
 
-    const checkUSer = userDb.find( (user) => {
+    if (!userDb || !userDb?.length) {
+        return res.render('users/signin', {
+            layout: 'option_layouts',
+            error: 'No user found'
+        });
+    };
+
+    const checkUser = userDb.find( (user) => {
         return user.username == usn;
     });
 
     // check username
-    if (!checkUSer) {
+    if (!checkUser) {
         return res.render('users/signin', {
             layout: 'option_layouts',
             usnErr: 'Username does not exist'
@@ -58,16 +76,17 @@ exports.postSignin = async (req, res, next) => {
     }
 
     // password
-    const pwdDb = checkUSer.password;
+    const pwdDb = checkUser.password;
     const salt = pwdDb.slice(hashLength);
     const pwdSalt = pwd + salt;
     const pwdHashed = CryptoJS.SHA3(pwdSalt, { outputLength: hashLength * 4 }).toString(CryptoJS.enc.Hex); // 1 kết quả mã hóa ra 1 mảng bytes, cần chuyển sang chuỗi -> sử dụng luôn hàm toString
         
     console.log(pwdDb === (pwdHashed + salt));
     if (pwdDb === (pwdHashed + salt)) {
-        res.render('home', {
-            signin: true
-        });
+        // res.render('home', {
+        //     signin: true
+        // });
+        res.redirect("/");
     }
     else {
         res.render('users/signin', {
@@ -75,6 +94,9 @@ exports.postSignin = async (req, res, next) => {
             pwdErr: 'Password is incorrect'
         });
     }
+
+    req.session.user = checkUser;
+    // console.log(req.session.user);
 }
 
 exports.postSignup = async (req, res, next) => {
@@ -89,11 +111,11 @@ exports.postSignup = async (req, res, next) => {
     
     const userDb = await userM.getAll(usn);
     
-    const checkUSer = userDb.find( (user) => {
+    const checkUser = userDb.find( (user) => {
         return user.username == usn;
     });
 
-    if (checkUSer) {
+    if (checkUser) {
        return res.render('users/signup', {
             layout: 'option_layouts',
             usnErr: 'Username has already existed'
@@ -125,5 +147,10 @@ exports.postSignup = async (req, res, next) => {
     };
     
     const newUser = await userM.add(user);
-    res.redirect('/users/signin');
+    res.redirect('/signin');
+}
+
+exports.logout = async (res, req, next) => {
+    req.session.user = null;
+    res.redirect("/")
 }

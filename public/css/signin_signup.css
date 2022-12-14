@@ -374,6 +374,11 @@ input {
     border-bottom: 1px solid #222;
   }
 
+  .validInput {
+    /* margin-top: 0; */
+    overflow: hidden;
+  }
+
 input[type=checkbox]:not(old) {
   width: 2em;
   margin: 0;

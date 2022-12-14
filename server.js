@@ -2,8 +2,6 @@ const express = require('express'),
     app = express(),    
     port = 3000,
     Router = require('./routers/router.r'),
-    userR = require('./routers/users.r'),
-
     path = require('path');
     
 app.use(express.static(__dirname + '/public'));
@@ -11,6 +9,7 @@ app.use(express.static(__dirname));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 require('./configs/hbs')(app);
+require('./configs/session')(app);
 
 var viewPath = path.join(__dirname, '/views');
 app.set('views', viewPath);
@@ -18,7 +17,6 @@ app.set('views', viewPath);
 
 //router
 app.use(Router);
-// app.use('/users', userR);
 
 app.use((err, req, res, next) => {
     const statusCode = err.statusCode || 500;

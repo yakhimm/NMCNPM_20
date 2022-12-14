@@ -26,6 +26,8 @@
                                 <input type="phone" name="phone" id="phoneRegex" placeholder="Your Phone" required />
                             </div>
 
+                             <span><p class="validInput" id="phoneValid" style="color:red; font-size:medium"></p></span>
+
                             <div class="form-group">
                                 <label for="email"><i class="zmdi zmdi-email material-icons-name"></i></label>
                                 <input type="email" name="email" id="emailRegex" placeholder="Your Email" required />
@@ -43,13 +45,14 @@
                             </div>
                             <div class="form-group">
                                 <label for="re-pass"><i class="zmdi zmdi-lock-outline material-icons-name"></i></label>
-                                <input type="password" name="re_pass" id="re_pass" placeholder="Confirm your password"
+                                <input type="password" name="re_pass" id="repass" placeholder="Confirm your password"
                                     required />
                             </div>
 
                             {{#if rePwdErr}}
-                                <span><p class="validInput" id="re_passValid" style="color:red; font-size:medium">{{rePwdErr}}</p></span>
+                                <span><p class="validInput" id="repassValid" style="color:red; font-size:medium">{{rePwdErr}}</p></span>
                             {{/if}}
+                                <span><p class="validInput" id="repassValid" style="color:red; font-size:medium"></p></span>
 
                             <div class="form-group">
                                 <input type="checkbox" name="agree-term" id="agree-term" class="agree-term" required/>
@@ -63,7 +66,7 @@
                         </form>
                     </div>
                     <div class="signup-image">
-                        <figure><img src="./image/cooking_sign_up.jpg" alt="sign up image"></figure>
+                        <figure><img src="./images/cooking_sign_up.jpg" alt="sign up image"></figure>
                         <a href="/signin" class="signup-image-link">I am
                             already a member!</a>
                     </div>
