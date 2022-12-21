@@ -3,32 +3,44 @@ import bs4
 import requests
 import pandas as pd
 import json
+from os import walk
 
 # Class RECIPE lưu các công thức crawl được về
 class RECIPE:
     # Khi khởi tạo class thì các phần tử sau sẽ được khởi tạo
     def __init__(self, filepath):
-        urls = pd.read_csv(filepath).values
-        # Danh sách các công thức là một dictionary
+        filenames = next(walk(filepath), (None, None, []))[2]  # [] if no file
         self.recipe = {}
-        for i in range(len(urls)):         
-            # Nội dung của url
-            content = requests.get(urls[i][0]).content
-            # Dùng BeautifulSoup để lọc dữ liệu bằng html.parser
-            self.soup = BeautifulSoup(content, 'html.parser')
+        for filename in filenames:
+            urls = pd.read_csv(filepath + filename).values
+            # Danh sách các công thức là một dictionary      
+            for i in range(len(urls)):
+                # Nội dung của url
+                content = requests.get(urls[i][0]).content
+                # Dùng BeautifulSoup để lọc dữ liệu bằng html.parser
+                self.soup = BeautifulSoup(content, 'html.parser')
 
-            # Tên món
-            detail_main = self.soup.find('div', {'class':'detail_main'})
-            name = detail_main.find('div', {'class':'col'}).find('h1').get_text()
+                # Tên món
+                detail_main = self.soup.find('div', {'class':'detail_main'})
+                name = detail_main.find('div', {'class':'col'}).find('h1').get_text()
 
-            self.tags = []
-            url_tag = detail_main.find('div', {'class':'tag mt-2'}).find_all('a')
-            for tag in url_tag:
-                self.tags.append(tag.get_text())
+                self.tags = []
+                self.tags.append('miền ' + filename[:-4])
+                url_tag = detail_main.find('div', {'class':'tag mt-2'}).find_all('a')
+                for tag in url_tag:
+                    self.tags.append(tag.get_text())
 
-            # Lấy dữ liệu của từng url
-            self.recipe[name] = self.request_and_get_recipe()
-
+                cachnau = ['chiên', 'xào', 'kho', 'canh', 'hấp', 'nướng', 'luộc', 'ngâm chua', 'rim', 'lẩu']
+                self.cachnau = 0
+                for item in cachnau:
+                    if name != None and (item in name or item.title() in name):
+                        tag = item
+                        self.tags.append(tag)
+                        self.cachnau = 1    
+                        break
+                # Lấy dữ liệu của từng url
+                self.recipe[name] = self.request_and_get_recipe()
+            
     def get_ingredient(self, soup):
         # Tìm đến mục div - class: block-nguyenlieu
         # Sau đó tìm các phần có mục là span 
@@ -89,24 +101,43 @@ class RECIPE:
         for i in images:
             image = i['src']
         recipe['image'] = image
-
         # Biến đếm
         cnt = 0
         # Truy đến nhánh cần lấy dữ liệu
         detail_main_row_bm3 = self.soup.find_all('div', {'class': 'row mb-3'}) 
         # Vì trong web thì có 5 row mb-3
         # Mỗi row mb-3 có mỗi ý nghĩa khác nhau nên chỉ cần lấy 3 row mb-3 đầu là đủ dữ liệu
-        recipe['tags'] = self.tags
         for row_bm3 in detail_main_row_bm3:  
             if cnt == 0:
                 # Lấy dữ liệu là nguyên liệu
-                recipe.update(self.get_ingredient(row_bm3))
+                nguyenlieu = self.get_ingredient(row_bm3)
+                recipe.update(nguyenlieu)
+                monman = ['cá', 'thịt', 'bò', 'heo', 'sườn', 'gà', 'vịt', 'tôm', 'mực']
+                # Sau đó sẽ dựa trên nguyên liệu đánh giá món chay, mặn
+                tag = 'món chay'
+                for i in nguyenlieu['nguyenlieu']:
+                    for item in monman:
+                        if i != None and (item in i or item.title() in i):
+                            tag = 'món mặn'
+                            break            
+                self.tags.append(tag) 
+                          
             if cnt == 1:
                 # Lấy dữ liệu là Sơ chế
                 recipe.update(self.get_content_of_soup(row_bm3, 'soche'))
             if cnt == 2:
+                thuchien = self.get_content_of_soup(row_bm3, 'thuchien')
                 # Lấy dữ liệu là Thực hiện
-                recipe.update(self.get_content_of_soup(row_bm3, 'thuchien'))
+                recipe.update(thuchien)
+                # Nếu chưa biết cách nấu của món thì ta sẽ xác định trong cách thực hiện món:
+                if self.cachnau == 0:
+                    cachnau = ['chiên', 'xào', 'kho', 'canh', 'hấp', 'nướng', 'luộc', 'ngâm chua', 'rim', 'lẩu']
+                    for i in thuchien['thuchien']:
+                        for item in cachnau:
+                            if i != None and (item in i or item.title() in i):
+                                self.cachnau = 1
+                                self.tags.append(item)
+                                break     
             if cnt == 3:
                 # Lấy dữ liệu là Cách dùng
                 recipe.update(self.get_content_of_soup(row_bm3, 'cachdung'))
@@ -115,11 +146,11 @@ class RECIPE:
                 recipe.update(self.get_content_of_soup(row_bm3, 'machnho'))
             # recipe.update()
             cnt += 1
-        
+        recipe['tags'] = self.tags
         return recipe
 
 # file csv chứa các url
-filepath = 'recipe_links.csv'
+filepath = './url/'
 # Tạo một dictionary tên recipe là các công thức 
 recipe = RECIPE(filepath).recipe
 
