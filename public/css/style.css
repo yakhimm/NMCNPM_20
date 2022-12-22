@@ -439,3 +439,8 @@
 .btn-group .home-btn:hover {
     cursor: pointer ;
 }
+
+.input-group .subscribe-input:focus {
+    outline: none !important;
+    border-color: none !important;
+}
