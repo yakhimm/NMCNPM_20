@@ -83,10 +83,10 @@ exports.postSignin = async (req, res, next) => {
         
     console.log(pwdDb === (pwdHashed + salt));
     if (pwdDb === (pwdHashed + salt)) {
-        // res.render('home', {
-        //     signin: true
-        // });
-        res.redirect("/");
+        res.render('home', {
+            signin: true
+        });
+        // res.redirect("/");
     }
     else {
         res.render('users/signin', {

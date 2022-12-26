@@ -14,7 +14,7 @@ const db = pgp(cn);
 
 module.exports = {
     getAll: async () => {
-        const rs = await db.any('SELECt * FROM users');
+        const rs = await db.any('SELECT * FROM users');
         return rs;
     },
     add: async acc => {
