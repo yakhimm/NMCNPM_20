@@ -20,7 +20,7 @@
 
     <div class="col-10 mt-5 mx-auto">
         <h4 class="text-danger border-bottom border-2 mb-3">Nguyên liệu</h4>
-        <a href="#" class="order-ingredients fs-5">
+        <a href="/ingredients/{{tenmon}}" class="order-ingredients fs-5">
             <ins>Đặt mua nguyên liệu</ins>
         </a>
         <ul>{{#each chitiet.nguyenlieu}}
@@ -47,7 +47,7 @@
 
     <div class="col-10 mt-4 mx-auto">
         <h4 class="text-danger border-bottom border-2 mb-3">Cách dùng</h4>
-        <ul>{{#each chitiet.canhdung}}
+        <ul>{{#each chitiet.cachdung}}
             <li>{{this}}</li>
             {{/each}}
         </ul>

@@ -16,4 +16,6 @@ router.get('/:tenmon', controller.getDetailRecipe);
 
 router.post('/', controller.postSearch);
 
+router.get('/ingredients/:tenmon', controller.getIngredientsRecipe);
+
 module.exports = router;

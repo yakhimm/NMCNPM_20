@@ -505,3 +505,56 @@ label.star:before {
     content: '\f006';
     font-family: FontAwesome;
 }
+
+/* Side-content */
+
+.side-title .title-text {
+    width: 100%;
+    text-align: center;
+    margin: 10px 0 20px;
+    line-height: 0.1em;
+    border-bottom: 1px solid #000;
+}
+
+.side-title .title-text span {
+   background-color: #eee;
+   padding: 0 10px;
+}
+
+.accordion .accordion-body {
+    margin-bottom: 0;
+}
+
+.accordion .accordion-body li {
+    list-style-type: none;
+    margin: 0 0 20px 10px;
+}
+
+.accordion .accordion-body li:last-child {
+    margin-bottom: 10px;
+}
+
+.accordion .accordion-body li a {
+    color: #000;
+}
+
+.accordion .accordion-body li:hover a {
+    color: #386bc0;
+}
+
+
+/* Content */
+
+.content-carousel-title .carousel-title-text {
+    width: 100%;
+    text-align: left;
+    margin: 10px 0 20px;
+    line-height: 0.1em;
+    border-bottom: 1px solid #000;
+}
+
+.content-carousel-title .carousel-title-text span {
+   background-color: #eee;
+   padding: 0 10px 0 0;
+}
+

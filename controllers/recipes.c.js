@@ -2,7 +2,23 @@ const model = require('../models/recipes.m');
 const helpers = require('../helpers/helpers');
 
 exports.getHome = async (req, res, next) => {
-    res.render('home');
+
+    const recipes = await model.getAll();
+    const list_name = Object.keys(recipes);
+    const detail_recipe = [];
+
+    for (var i = 0; i < list_name.length; i++) {
+        let name = list_name[i].replaceAll("-", " ");
+        name = name.toLowerCase();
+        
+        detail_recipe.push({
+            tenmon: name,
+            chitiet: recipes[list_name[i]]
+        });
+    }
+    res.render('home', {
+        detail_recipe
+    });
 };
 
 exports.getDetailRecipe = async (req, res, next) => {
@@ -84,5 +100,13 @@ exports.postSearch = async (req, res, next) => {
     // console.log(Object.values(recipes[list_name[0]]));
 };
 
-
-
+exports.getIngredientsRecipe = async (req, res, next) => {
+    try {
+        res.render('ingredients', {
+            layout: 'ingredients_layout'
+        });
+    } 
+    catch (error) {
+        next(error);
+    }
+}

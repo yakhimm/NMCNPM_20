@@ -12,7 +12,12 @@ module.exports = app => {
         },
     }));
     app.set('view engine', 'hbs');
+    
     app.set('view options', { 
         layout: 'option_layouts'
+    });
+
+    app.set('view options', {
+        layout: 'ingredients_layout'
     });
 }
