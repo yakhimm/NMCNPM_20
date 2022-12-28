@@ -84,5 +84,61 @@ exports.postSearch = async (req, res, next) => {
     // console.log(Object.values(recipes[list_name[0]]));
 };
 
+exports.postSearch_Options = async (req, res, next) => {
+    try {
+        const { vungmien, loaimon, cachnau, thit, haisan, raucu, tinhbot, khac } = req.body;
+        // console.log(vungmien);
+        // console.log(loaimon);
+        // console.log(cachnau);
+        // console.log(thit);
+        // console.log(haisan);
+        // console.log(raucu);
+        // console.log(tinhbot);
+        // console.log(khac);
+    } catch (error) {
+        next(error);
+    }
+}
 
+exports.getRecipes = async (req, res, next) => {
+    try {
+        let data = await model.getAll();
+        const list_name = Object.keys(data);                                         //mảng lưu tên món ăn
+        let recipes = [];                                                       //mảng lưu những công thức mà người dùng nhập từ khóa tìm kiếm
 
+        for (var i = 0; i < list_name.length; i++) {
+            let name = list_name[i].replaceAll("-", " ");                               //bỏ ký tự '-' và viết thường tên món ăn thứ i
+            recipes.push({
+                tenmon: name,
+                chitiet: data[list_name[i]]
+            });
+        }
+
+        let { page } = req.query;
+        let total = recipes.length;
+
+        if (page) {
+            recipes = recipes.slice((page - 1) * 10, (page - 1) * 10 + 10);
+        } else {
+            page = 1;
+            recipes = recipes.slice(0, 10);
+        }
+
+        res.render('recipe', {
+            recipes,
+            total,
+            page,
+            helpers,
+        });
+    } catch (error) {
+        next(error);
+    }
+};
+
+exports.getAboutUs = async (req, res, next) => {
+    try {
+        res.render('about_us');
+    } catch (error) {
+        next(error);
+    }
+};
