@@ -116,7 +116,7 @@ class RECIPE:
                 # Lấy dữ liệu là nguyên liệu
                 nguyenlieu = self.get_ingredient(row_bm3)
                 recipe.update(nguyenlieu)
-                monman = ['cá', 'thịt', 'bò', 'heo', 'sườn', 'gà', 'vịt', 'tôm', 'mực']
+                monman = ['cá', 'thịt', 'bò', 'heo', 'sườn', 'gà', 'vịt', 'tôm', 'mực', 'cua']
                 # Sau đó sẽ dựa trên nguyên liệu đánh giá món chay, mặn
                 tag = 'món chay'
                 for i in nguyenlieu['nguyenlieu']:
@@ -160,5 +160,5 @@ recipe = RECIPE(filepath).recipe
 
 # Ghi các công thức ra file json
 # Kết quả ghi ra không có dấu, tuy nhiên khi đọc vào bằng json thì kết quả đọc vào sẽ có dấu (read.csv có chứng minh)
-with open("./json/recipe.json", "w") as outfile:
+with open("./db/recipe.json", "w") as outfile:
     json.dump(recipe, outfile)

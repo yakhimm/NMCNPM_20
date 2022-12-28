@@ -41,5 +41,5 @@ def get_cart(input, output):
 
 if __name__ == '__main__':
     input = './csv/cart/cart.csv'
-    output = './json/cart.json'
+    output = './db/cart.json'
     get_cart(input, output)
