@@ -84,20 +84,42 @@ exports.postSearch = async (req, res, next) => {
     } catch (error) {
         next(error);
     }
+};
 
-    // const list = search.split(" ");
-    // var regex = new RegExp(list.join("|"),"gi");
-    // console.log(regex);
+exports.getRecipes = async (req, res, next) => {
+    try {
+        let data = await model.getAll();
+        const list_name = Object.keys(data);                                         //mảng lưu tên món ăn
+        let recipes = [];                                                       //mảng lưu những công thức mà người dùng nhập từ khóa tìm kiếm
 
-    // for (const [key, value] of Object.entries(recipes[list_name[0]])) {
-    //     console.log(`${key}: ${value}`);
-    // }
+        for (var i = 0; i < list_name.length; i++) {
+            let name = list_name[i].replaceAll("-", " ");                               //bỏ ký tự '-' và viết thường tên món ăn thứ i
+            
+            recipes.push({
+                name,
+                detail: data[list_name[i]]
+            });
+        }
 
-    // Lấy theo nguyên liệu:
-    // let s = (Object.values(recipes[list_name[0]].nguyenlieu)).includes(search);
+        let { page } = req.query;
+        let total = recipes.length;
 
-    // Lấy giá trị tất cả các trường:
-    // console.log(Object.values(recipes[list_name[0]]));
+        if (page) {
+            recipes = recipes.slice((page - 1) * 10, (page - 1) * 10 + 10);
+        } else {
+            page = 1;
+            recipes = recipes.slice(0, 10);
+        }
+
+        res.render('recipes', {
+            recipes,
+            total,
+            page,
+            helpers,
+        });
+    } catch (error) {
+        next(error);
+    }
 };
 
 exports.getIngredientsRecipe = async (req, res, next) => {

@@ -12,6 +12,8 @@ router.post('/signup', userC.postSignup);
 
 router.get('/', controller.getHome);
 
+router.get('/recipes', controller.getRecipes);
+
 router.get('/:tenmon', controller.getDetailRecipe);
 
 router.post('/', controller.postSearch);
