@@ -41,7 +41,7 @@ class RECIPE:
                 monchay = 'chay'
                 self.monchay = 0
                 if name != None and (monchay in name or monchay.title() in name):
-                    self.tags.append(monchay)
+                    self.tags.append("món " + monchay)
                     self.monchay = 1
                 # Lấy dữ liệu của từng url
                 self.recipe[name] = self.request_and_get_recipe()
@@ -122,7 +122,7 @@ class RECIPE:
                 nguyenlieu = self.get_ingredient(row_bm3)
                 recipe.update(nguyenlieu)
                 if self.monchay == 0:
-                    monman = ['cá', 'thịt', 'bò', 'heo', 'sườn', 'gà', 'vịt', 'tôm', 'mực', 'cua']
+                    monman = ['cá', 'thịt', 'bò', 'heo', 'sườn', 'gà', 'vịt', 'tôm', 'mực', 'cua', 'ốc', 'trứng']
                     # Sau đó sẽ dựa trên nguyên liệu đánh giá món chay, mặn
                     tag = 'món chay'
                     for i in nguyenlieu['nguyenlieu']:
