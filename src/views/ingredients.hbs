@@ -1,179 +1,56 @@
 <div class="container">
 
     <div class="row mb-3">
-        <h4 class="text-danger text-center">Đặt mua nguyên liệu món bún bò gân</h4>
+        <h4 class="text-danger text-center">Đặt mua nguyên liệu món {{recipeName}}</h4>
     </div>
 
+    {{#each ingredients}}
     <div class="row col-12 mb-3 bg-white position-relative">
         <div class="input-group-text bg-light border-0 p-3">
             <input class="form-check-input mt-0" type="checkbox" value=""
                 aria-label="Checkbox for following text input">
 
             <div class="col-4 ms-4" style="width: 250px;  height: auto;  ">
-                <img src="/images/ca.jpg" class="img-fluid h-100" alt="..." style="object-fit: cover;  ">
+                <img src="{{detail.img}}" class="img-fluid h-100" alt="{{name}}" title="{{name}}" style="object-fit: cover;  ">
             </div>
 
-            <h4 class="col-2 text-wrap mb-0">Bắp bò luộc sẵn</h4>
+            <h4 class="col-2 text-wrap mb-0">{{name}}</h4>
 
-            <p class="col-2 text-wrap mb-0 fs-5">155.000đ</p>
+            <p class="col-2 text-wrap mb-0 fs-5">{{detail.price}}</p>
 
             <div class="col-2" style="width: 100px;">
                 <div class="input-group">
-                    <input type="text" class="form-control" aria-describedby="basic-addon1" style="65px;">
+                    <input name="kg" type="text" class="form-control" aria-describedby="basic-addon1" style="65px;">
                     <span class="input-group-text">kg</span>
                 </div>
             </div>
 
             <p class="col-2 text-wrap mb-0 fs-5">155.000đ</p>
 
-            {{!-- <button type="button" class="btn btn-danger shadow-none ">Delete</button> --}}
-
         </div>
     </div>
+    {{/each}}
 
     <div class="row col-12 mb-3 bg-white">
-        <div class="input-group-text bg-light border-0 p-3">
-            <input class="form-check-input mt-0" type="checkbox" value=""
-                aria-label="Checkbox for following text input">
-
-            <div class="col-4 ms-4" style="width: 250px;  height: auto;  ">
-                <img src="/images/ca.jpg" class="img-fluid h-100" alt="..." style="object-fit: cover;  ">
+        <div class="input-group-text justify-content-between bg-light border-0 p-3">
+            <div>
+                <input class="form-check-input mt-2" type="checkbox" value=""
+                    aria-label="Checkbox for following text input">
+                <span class="fs-5">Select all</span>
             </div>
 
-            <h4 class="col-2 text-wrap mb-0">Bắp bò luộc sẵn</h4>
-
-            <p class="col-2 text-wrap mb-0 fs-5">155.000đ</p>
-
-            <div class="col-2" style="width: 100px;">
-                <div class="input-group">
-                    <input type="text" class="form-control" aria-describedby="basic-addon1" style="65px;">
-                    <span class="input-group-text">kg</span>
-                </div>
+            <div>
+                <input class="form-check-input mt-2" type="checkbox" value=""
+                    aria-label="Checkbox for following text input">
+                <span class="fs-5">Delete all</span>
             </div>
 
+            <h4 class="col-2 text-wrap mb-0 text-end">Tổng tiền:</h4>
             <p class="col-2 text-wrap mb-0 fs-5">155.000đ</p>
 
-            {{!-- <button type="button" class="btn btn-danger shadow-none ">Delete</button> --}}
-
-        </div>
-    </div>
-
-    <div class="row col-12 mb-3 bg-white">
-        <div class="input-group-text bg-light border-0 p-3">
-            <input class="form-check-input mt-0" type="checkbox" value=""
-                aria-label="Checkbox for following text input">
-
-            <div class="col-4 ms-4" style="width: 250px;  height: auto;  ">
-                <img src="/images/ca.jpg" class="img-fluid h-100" alt="..." style="object-fit: cover;  ">
-            </div>
-
-            <h4 class="col-2 text-wrap mb-0">Bắp bò luộc sẵn</h4>
-
-            <p class="col-2 text-wrap mb-0 fs-5">155.000đ</p>
-
-            <div class="col-2" style="width: 100px;">
-                <div class="input-group">
-                    <input type="text" class="form-control" aria-describedby="basic-addon1" style="65px;">
-                    <span class="input-group-text">kg</span>
-                </div>
-            </div>
-
-            <p class="col-2 text-wrap mb-0 fs-5">155.000đ</p>
-
-            {{!-- <button type="button" class="btn btn-danger shadow-none ">Delete</button> --}}
-
-        </div>
-    </div>
-
-    <div class="row col-12 mb-3 bg-white">
-        <div class="input-group-text bg-light border-0 p-3">
-            <input class="form-check-input mt-0" type="checkbox" value=""
-                aria-label="Checkbox for following text input">
-
-            <div class="col-4 ms-4" style="width: 250px;  height: auto;  ">
-                <img src="/images/ca.jpg" class="img-fluid h-100" alt="..." style="object-fit: cover;  ">
-            </div>
-
-            <h4 class="col-2 text-wrap mb-0">Bắp bò luộc sẵn</h4>
-
-            <p class="col-2 text-wrap mb-0 fs-5">155.000đ</p>
-
-            <div class="col-2" style="width: 100px;">
-                <div class="input-group">
-                    <input type="text" class="form-control" aria-describedby="basic-addon1" style="65px;">
-                    <span class="input-group-text">kg</span>
-                </div>
-            </div>
-
-            <p class="col-2 text-wrap mb-0 fs-5">155.000đ</p>
-
-            {{!-- <button type="button" class="btn btn-danger shadow-none ">Delete</button> --}}
-
-        </div>
-    </div>
-
-    <div class="row col-12 mb-3 bg-white">
-        <div class="input-group-text bg-light border-0 p-3">
-            <input class="form-check-input mt-0" type="checkbox" value=""
-                aria-label="Checkbox for following text input">
-
-            <div class="col-4 ms-4" style="width: 250px;  height: auto;  ">
-                <img src="/images/ca.jpg" class="img-fluid h-100" alt="..." style="object-fit: cover;  ">
-            </div>
-
-            <h4 class="col-2 text-wrap mb-0">Bắp bò luộc sẵn</h4>
-
-            <p class="col-2 text-wrap mb-0 fs-5">155.000đ</p>
-
-            <div class="col-2" style="width: 100px;">
-                <div class="input-group">
-                    <input type="text" class="form-control" aria-describedby="basic-addon1" style="65px;">
-                    <span class="input-group-text">kg</span>
-                </div>
-            </div>
-
-            <p class="col-2 text-wrap mb-0 fs-5">155.000đ</p>
-
-            {{!-- <button type="button" class="btn btn-danger shadow-none ">Delete</button> --}}
-
-        </div>
-    </div>
-
-    <div class="row col-12 mb-3 bg-white">
-        <div class="input-group-text bg-light border-0 p-3">
-            <input class="form-check-input mt-0" type="checkbox" value=""
-                aria-label="Checkbox for following text input">
-
-            <div class="col-4 ms-4" style="width: 250px;  height: auto;  ">
-                <img src="/images/ca.jpg" class="img-fluid h-100" alt="..." style="object-fit: cover;  ">
-            </div>
-
-            <h4 class="col-2 text-wrap mb-0">Bắp bò luộc sẵn</h4>
-
-            <p class="col-2 text-wrap mb-0 fs-5">155.000đ</p>
-
-            <div class="col-2" style="width: 100px;">
-                <div class="input-group">
-                    <input type="text" class="form-control" aria-describedby="basic-addon1" style="65px;">
-                    <span class="input-group-text">kg</span>
-                </div>
-            </div>
-
-            <p class="col-2 text-wrap mb-0 fs-5">155.000đ</p>
-
-            {{!-- <button type="button" class="btn btn-danger shadow-none ">Delete</button> --}}
-
-        </div>
-    </div>
-
-
-    <div class="row col-12 mb-3 bg-white">
-        <div class="input-group-text justify-content-end bg-light border-0 p-3">           
-            <h4 class="col-3 text-wrap mb-0 text-end">Tổng tiền:</h4>
-
-            <p class="col-3 text-wrap mb-0 fs-5">155.000đ</p>
-
-            <button type="button" class="btn btn-success shadow-none py-3"><h6 class="mb-0">Order</h6></button>
+            <button type="button" class="btn btn-success shadow-none py-3">
+                <h6 class="mb-0">Order</h6>
+            </button>
 
         </div>
     </div>

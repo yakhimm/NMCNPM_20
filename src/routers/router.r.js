@@ -16,10 +16,14 @@ router.get('/', controller.getHome);
 
 router.get('/recipes', controller.getRecipes);
 
+router.get('/ingredients/:name', controller.getIngredientsRecipe);
+
 router.get('/:name', controller.getDetailRecipe);
 
 router.post('/', controller.postSearch);
 
-router.get('/ingredients/:name', controller.getIngredientsRecipe);
+
+// ---------------------------------------------
+
 
 module.exports = router;

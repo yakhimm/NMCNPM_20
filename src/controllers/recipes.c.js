@@ -1,8 +1,9 @@
-const model = require('../models/recipes.m');
+const recipesM = require('../models/recipes.m');
+// const cartsM = require('../models/carts.m');
 const helpers = require('../helpers/helpers');
 
 exports.getHome = async (req, res, next) => {
-    const recipes = await model.getAll();
+    const recipes = await recipesM.getAll();
     const list_name = Object.keys(recipes);
     let detail_recipe = [];
 
@@ -33,12 +34,14 @@ exports.getHome = async (req, res, next) => {
     });
 };
 
+let recipeName = '';
 exports.getDetailRecipe = async (req, res, next) => {
     try {
         let { name } = req.params;
+        recipeName = name;
         name = name.toLowerCase();
 
-        const recipes = await model.getAll();
+        const recipes = await recipesM.getAll();
         const list_name = Object.keys(recipes);
         const detail_recipe = [];
 
@@ -65,24 +68,37 @@ exports.getDetailRecipe = async (req, res, next) => {
 let keyword = '';
 let list = [];
 function checkIngredient(listIngredient, type) {
-    for (var i = 0; i < listIngredient.length; i++) {
-        listIngredient[i] = listIngredient[i].toLowerCase();
-        listIngredient[i] = listIngredient[i].trim();
-
-        for (var j = 0; j < type.length; j++) {
-            if (listIngredient[i].includes(type[j])) {
-                return true;
+    let n = 0;
+    for (var i = 0; i < type.length; i++) {
+        for (var j = 0; j < listIngredient.length; j++) {
+            listIngredient[j] = listIngredient[j].toLowerCase();
+            listIngredient[j] = listIngredient[j].trim();
+            
+            if (listIngredient[j].includes(type[i])) {
+                n++;
+                break;
             }
         }
     }
 
+    if(n === type.length){
+        return true;
+    }
     return false;
 };
+
+function checkObject(type){
+    if(typeof(type) === "string"){
+        return [type];
+    };
+    return type;
+};
+
 exports.postSearch = async (req, res, next) => {
     try {
         let { search } = req.body;
 
-        let recipes = await model.getAll();
+        let recipes = await recipesM.getAll();
         const list_name = Object.keys(recipes);                                         //mảng lưu tên món ăn
         let recipesSearch = [];                                                       //mảng lưu những công thức mà người dùng nhập từ khóa tìm kiếm
 
@@ -94,7 +110,8 @@ exports.postSearch = async (req, res, next) => {
                 let temp = list_name[i].replaceAll("-", " ");                               //bỏ ký tự '-' và viết thường tên món ăn thứ i
                 temp = temp.toLowerCase();
 
-                let list_ingredient = Object.values(recipes[list_name[i]].nguyenlieu);      //mảng lưu các nguyên liệu của món ăn thứ i
+                let [list_ingredient] = Object.values(recipes[list_name[i]].nguyenlieu);      //mảng lưu các nguyên liệu của món ăn thứ i
+                
                 for (var j = 0; j < list_ingredient.length; j++) {
                     list_ingredient[j] = list_ingredient[j].toLowerCase();
                     list_ingredient[j] = list_ingredient[j].trim();
@@ -112,28 +129,20 @@ exports.postSearch = async (req, res, next) => {
             list = recipesSearch;
         }
         else {
-            const { vungmien, loaimon, cachnau, thit, haisan, raucu, tinhbot, khac } = req.body;
-
+            let { vungmien, loaimon, cachnau, thit, haisan, raucu, tinhbot, khac } = req.body;
+            
             for (var i = 0; i < list.length; i++) {
                 if ((list[i].detail.tags.includes(vungmien) || vungmien === 'null') &&
                     (list[i].detail.tags.includes(loaimon) || loaimon === 'null') &&
-                    (list[i].detail.tags.includes(cachnau) || cachnau === 'null')) {
-                    recipesSearch.push(list[i]);
+                    (list[i].detail.tags.includes(cachnau) || cachnau === 'null') &&
+                    ((thit === undefined) || (checkIngredient(list[i].detail.nguyenlieu, checkObject(thit)) === true)) &&
+                    ((haisan === undefined) || (checkIngredient(list[i].detail.nguyenlieu, checkObject(haisan)) === true)) &&
+                    ((raucu === undefined) || (checkIngredient(list[i].detail.nguyenlieu, checkObject(raucu)) === true)) &&
+                    ((tinhbot === undefined) || (checkIngredient(list[i].detail.nguyenlieu, checkObject(tinhbot)) === true)) &&
+                    ((khac === undefined) || (checkIngredient(list[i].detail.nguyenlieu, checkObject(khac)) === true))) {
+                        recipesSearch.push(list[i]);
                 }
             }
-
-            // for (var i = 0; i < list.length; i++) {
-            //     if ((list[i].detail.tags.includes(vungmien) || vungmien === 'null') &&
-            //         (list[i].detail.tags.includes(loaimon) || loaimon === 'null') &&
-            //         (list[i].detail.tags.includes(cachnau) || cachnau === 'null') &&
-            //         ((thit === undefined) || (checkIngredient(list[i].detail.nguyenlieu, thit))) &&
-            //         ((haisan === undefined) || (checkIngredient(list[i].detail.nguyenlieu, haisan))) &&
-            //         ((raucu === undefined) || (checkIngredient(list[i].detail.nguyenlieu, raucu))) &&
-            //         ((tinhbot === undefined) || (checkIngredient(list[i].detail.nguyenlieu, tinhbot))) &&
-            //         ((khac === undefined) || (checkIngredient(list[i].detail.nguyenlieu, khac)))) {
-            //             recipesSearch.push(list[i]);
-            //     }
-            // }
         }
 
         res.render('search', {
@@ -149,7 +158,7 @@ exports.postSearch = async (req, res, next) => {
 
 exports.getRecipes = async (req, res, next) => {
     try {
-        let data = await model.getAll();
+        let data = await recipesM.getAll();
         const list_name = Object.keys(data);                                         //mảng lưu tên món ăn
         let recipes = [];                                                       //mảng lưu những công thức mà người dùng nhập từ khóa tìm kiếm
 
@@ -185,7 +194,40 @@ exports.getRecipes = async (req, res, next) => {
 
 exports.getIngredientsRecipe = async (req, res, next) => {
     try {
+        const carts = await cartsM.getAll();
+        const recipes = await recipesM.getAll();
+        const list_name_recipes = Object.keys(recipes);
+        const list_name_carts = Object.keys(carts);
+
+        let list_ingredient = [];
+        for(var i = 0; i < list_name_recipes.length; i++){
+            if(list_name_recipes[i].replaceAll("-", " ") === recipeName){
+                list_ingredient = Object.values(recipes[list_name_recipes[i]].nguyenlieu);
+                break;
+            }
+        }
+
+        for(var i = 0; i < list_ingredient.length; i++){
+            const temp = list_ingredient[i].split(":");
+            list_ingredient[i] = temp[0];
+        }
+
+        const ingredients = [];
+        for(var i = 0; i < list_ingredient.length; i++){
+            for(var j = 0; j < list_name_carts.length; j++){
+                if(list_ingredient[i] === list_name_carts[j]){
+                    ingredients.push({
+                        name: list_name_carts[j].trim(),
+                        detail: carts[list_name_carts[j]]
+                    });
+                    break;
+                }
+            }
+        }
+
         res.render('ingredients', {
+            recipeName,
+            ingredients,
             layout: 'ingredients_layout'
         });
     }
