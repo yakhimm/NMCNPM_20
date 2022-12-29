@@ -1,7 +1,7 @@
 import pandas as pd
 import json
 
-path = 'recipe.csv'
+path = './db/recipe.json'
 def cart(path):
     # Đọc file path 
     with open(path) as f:
@@ -19,7 +19,7 @@ def cart(path):
         cart = cart.union(item)
     # Ghi cart ra thành một file csv để dễ lưu trữ (với mã encoding = 'utf-16')
     df = pd.DataFrame(cart)
-    df.to_csv('./cart.csv', index = False, encoding = 'utf-16')
+    df.to_csv('./csv/cart/cart.csv', index = False, encoding = 'utf-16')
 
 def get_cart(input, output):
     # Đọc file input với encoding = 'utf-16', tách thành các cột theo sep = '\t'

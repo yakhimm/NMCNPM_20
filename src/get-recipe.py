@@ -38,6 +38,11 @@ class RECIPE:
                         self.tags.append(tag)
                         self.cachnau = 1    
                         break
+                monchay = 'chay'
+                self.monchay = 0
+                if name != None and (monchay in name or monchay.title() in name):
+                    self.tags.append(monchay)
+                    self.monchay = 1
                 # Lấy dữ liệu của từng url
                 self.recipe[name] = self.request_and_get_recipe()
             
@@ -116,15 +121,16 @@ class RECIPE:
                 # Lấy dữ liệu là nguyên liệu
                 nguyenlieu = self.get_ingredient(row_bm3)
                 recipe.update(nguyenlieu)
-                monman = ['cá', 'thịt', 'bò', 'heo', 'sườn', 'gà', 'vịt', 'tôm', 'mực', 'cua']
-                # Sau đó sẽ dựa trên nguyên liệu đánh giá món chay, mặn
-                tag = 'món chay'
-                for i in nguyenlieu['nguyenlieu']:
-                    for item in monman:
-                        if i != None and (item in i or item.title() in i):
-                            tag = 'món mặn'
-                            break            
-                self.tags.append(tag) 
+                if self.monchay == 0:
+                    monman = ['cá', 'thịt', 'bò', 'heo', 'sườn', 'gà', 'vịt', 'tôm', 'mực', 'cua']
+                    # Sau đó sẽ dựa trên nguyên liệu đánh giá món chay, mặn
+                    tag = 'món chay'
+                    for i in nguyenlieu['nguyenlieu']:
+                        for item in monman:
+                            if i != None and (item in i or item.title() in i):
+                                tag = 'món mặn'
+                                break            
+                    self.tags.append(tag) 
                           
             if cnt == 1:
                 # Lấy dữ liệu là Sơ chế
