@@ -7,23 +7,23 @@
                 <li class="me-2">
                     <ion-icon name="chevron-forward-outline"></ion-icon>
                 </li>
-                <li class="breadcrumb-item" aria-current="page">{{tenmon}}</li>
+                <li class="breadcrumb-item" aria-current="page">{{name}}</li>
             </ol>
         </nav>
     </div>
 
-    <h1 class="text-center mt-4">{{tenmon}}</h1>
+    <h1 class="text-center mt-4">{{name}}</h1>
 
     <div class="text-center mt-3">
-        <img src="{{chitiet.image}}" alt="{{tenmon}}" title="{{tenmon}}" width="750px" height="550px" class="rounded-5">
+        <img src="{{detail.image}}" alt="{{name}}" title="{{name}}" width="750px" height="550px" class="rounded-5">
     </div>
 
     <div class="col-10 mt-5 mx-auto">
         <h4 class="text-danger border-bottom border-2 mb-3">Nguyên liệu</h4>
-        <a href="/ingredients/{{tenmon}}" class="order-ingredients fs-5">
+        <a href="/ingredients/{{name}}" class="order-ingredients fs-5">
             <ins>Đặt mua nguyên liệu</ins>
         </a>
-        <ul>{{#each chitiet.nguyenlieu}}
+        <ul>{{#each detail.nguyenlieu}}
             <li>{{this}}</li>
             {{/each}}
         </ul>
@@ -31,7 +31,7 @@
 
     <div class="col-10 mt-4 mx-auto">
         <h4 class="text-danger border-bottom border-2 mb-3">Sơ chế</h4>
-        <ul>{{#each chitiet.soche}}
+        <ul>{{#each detail.soche}}
             <li>{{this}}</li>
             {{/each}}
         </ul>
@@ -39,7 +39,7 @@
 
     <div class="col-10 mt-4 mx-auto">
         <h4 class="text-danger border-bottom border-2 mb-3">Thực hiện</h4>
-        <ul>{{#each chitiet.thuchien}}
+        <ul>{{#each detail.thuchien}}
             <li>{{this}}</li>
             {{/each}}
         </ul>
@@ -47,7 +47,7 @@
 
     <div class="col-10 mt-4 mx-auto">
         <h4 class="text-danger border-bottom border-2 mb-3">Cách dùng</h4>
-        <ul>{{#each chitiet.cachdung}}
+        <ul>{{#each detail.cachdung}}
             <li>{{this}}</li>
             {{/each}}
         </ul>
@@ -55,7 +55,15 @@
 
     <div class="col-10 mt-4 mx-auto">
         <h4 class="text-danger border-bottom border-2 mb-3">Mách nhỏ</h4>
-        <ul>{{#each chitiet.machnho}}
+        <ul>{{#each detail.machnho}}
+            <li>{{this}}</li>
+            {{/each}}
+        </ul>
+    </div>
+
+    <div class="col-10 mt-4 mx-auto">
+        <h4 class="text-danger border-bottom border-2 mb-3">Tags</h4>
+        <ul>{{#each detail.tags}}
             <li>{{this}}</li>
             {{/each}}
         </ul>

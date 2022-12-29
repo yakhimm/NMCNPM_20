@@ -203,11 +203,13 @@
     <div class="card mb-3 shadow-none rounded-0 border border-light">
         <div class="row g-0">
             <div class="col-md-4">
-                <img src="{{chitiet.image}}" class="img-fluid " alt="...">
+                <a href="/{{name}}">
+                    <img src="{{detail.image}}" class="img-fluid " alt="{{name}}" title="{{name}}">
+                </a>
             </div>
             <div class="col-md-8">  
                 <div class="card-body">
-                    <h5 class="card-title">{{tenmon}}</h5>
+                    <h5 class="card-title">{{name}}</h5>
                     <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
                         additional content. This content is a little bit longer.</p>
                     <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
@@ -216,4 +218,21 @@
         </div>
     </div>
     {{/each}}
+</div>
+
+<!--Pagination-->
+<div class="row mt-5 ms-3">
+    <nav aria-label="Page navigation" class="mx-auto">
+        <ul class="pagination">
+            <li class="page-item"><a class="page-link" href="?page={{prevPage page}}">Previous</a></li>
+            {{#each (getNumberOfPage total)}}
+            <li class="page-item {{#if (isEqual ../page (sum this 1))}} active {{/if}}">
+                <a class="page-link" href="?page={{sum this 1}}">
+                    {{sum this 1}}
+                </a>
+            </li>
+            {{/each}}
+            <li class="page-item"><a class="page-link" href="?page={{nextPage page total}}">Next</a></li>
+        </ul>
+    </nav>
 </div>
