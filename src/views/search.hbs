@@ -1,0 +1,185 @@
+<!--Back to home-->
+<div class="row">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item me-2"><a href="/">Trang chủ</a></li>
+            <li class="me-2">
+                <ion-icon name="chevron-forward-outline"></ion-icon>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">Tìm kiếm</li>
+        </ol>
+        <span><i>Tìm thấy <b class="text-danger">{{total}}</b> công thức nấu ăn</i></span>
+    </nav>
+</div>
+
+<!--The title of a search result-->
+<div class="row text-center fw-bold mt-2 mb-2" style="font-size: 25px;">
+    <span>KẾT QUẢ TÌM KIẾM CHO <span>{{search}}</span></span>
+</div>
+
+<hr class="m-2" />
+
+<!--Display options-->
+<div class="row">
+    <ul class="nav justify-content-center">
+        <form class="d-flex" role="search" method="post" action="#">
+            <li class="nav-item me-4">
+                <select name="areas" id="areas" class="form-select d-block" aria-label="Default select example">
+                    <option selected class="text-center">Vùng miền</option>
+                    <option class="text-center" value="bac">Ẩm thực miền Bắc</option>
+                    <option class="text-center" value="trung">Ẩm thực miền Trung</option>
+                    <option class="text-center" value="nam">Ẩm thực miền Nam</option>
+                    <option class="text-center" value="dantoc">Ẩm thực các dân tộc</option>
+                </select>
+            </li>
+            <li class="nav-item me-4">
+                <select name="types" id="types" class="form-select" aria-label="Default select example">
+                    <option selected class="text-center">Loại món</option>
+                    <option class="text-center" value="man">Món mặn</option>
+                    <option class="text-center" value="ngot">Món ngọt</option>
+                    <option class="text-center" value="chay">Món chay</option>
+                    <option class="text-center" value="anvat">Món ăn vặt</option>
+                    <option class="text-center" value="anphu">Các món ăn kèm, món phụ</option>
+                </select>
+            </li>
+            <li class="nav-item me-4">
+                <select name="methods" id="methods" class="form-select" aria-label="Default select example">
+                    <option selected class="text-center p-0">Cách nấu</option>
+                    <option class="text-center p-0" value="chien">Chiên</option>
+                    <option class="text-center p-0" value="kho">Kho</option>
+                    <option class="text-center p-0" value="xao">Món xào</option>
+                    <option class="text-center p-0" value="luoc">Món luộc</option>
+                    <option class="text-center p-0" value="nuong">Nướng</option>
+                    <option class="text-center p-0" value="ham">Hầm</option>
+                    <option class="text-center p-0" value="canh_sup">Canh/Súp</option>
+                    <option class="text-center p-0" value="lau">Lẩu</option>
+                    <option class="text-center p-0" value="goi_tron">Gỏi/Trộn</option>
+                    <option class="text-center p-0" value="hap_tiem">Hấp/Tiềm</option>
+                    <option class="text-center p-0" value="om_rim">Om/Rim</option>
+                    <option class="text-center p-0" value="quay_roti">Quay/Rôti</option>
+                    <option class="text-center p-0" value="khac">Khác</option>
+                </select>
+            </li>
+            <li class="nav-item me-4 mt-2">
+                <div class="dropdown custom-dropdown">
+                    <a href="#" data-toggle="dropdown" class="dropdown-link" aria-haspopup="true" aria-expanded="false">
+                        Nguyên liệu
+                        <span>
+                            <ion-icon name="chevron-down-outline"></ion-icon>
+                        </span>
+                    </a>
+
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <div class="mega-menu d-flex">
+                            <div>
+                                <h3 class="text-primary">Thịt</h3>
+                                <ul class="list-unstyled border-primary">
+                                    <li><input type="checkbox" class="me-1" name="thit" value="heo">Thịt heo</li>
+                                    <li><input type="checkbox" class="me-1" name="thit" value="bo">Thịt bò</li>
+                                    <li><input type="checkbox" class="me-1" name="thit" value="ga">Thịt gà</li>
+                                    <li><input type="checkbox" class="me-1" name="thit" value="khac">Khác</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h3 class="text-danger">Hải sản</h3>
+                                <ul class="list-unstyled border-danger">
+                                    <li><input type="checkbox" class="me-1" name="haisan" value="ca">Cá</li>
+                                    <li><input type="checkbox" class="me-1" name="haisan" value="tom">Tôm</li>
+                                    <li><input type="checkbox" class="me-1" name="haisan" value="cua">Cua</li>
+                                    <li><input type="checkbox" class="me-1" name="haisan" value="muc">Mực</li>
+                                    <li><input type="checkbox" class="me-1" name="haisan" value="bachtuoc">Bạch tuộc
+                                    </li>
+                                    <li><input type="checkbox" class="me-1" name="haisan" value="khac">Khác</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h3 class="text-warning">Rau củ quả</h3>
+                                <ul class="list-unstyled border-warning">
+                                    <li><input type="checkbox" class="me-1" name="raucu" value="rau">Các loại rau</li>
+                                    <li><input type="checkbox" class="me-1" name="raucu" value="cu_qua">Củ quả</li>
+                                    <li><input type="checkbox" class="me-1" name="raucu" value="nam">Nấm</li>
+                                    <li><input type="checkbox" class="me-1" name="raucu" value="cachua">Cà chua</li>
+                                    <li><input type="checkbox" class="me-1" name="raucu" value="carot">Cà rốt</li>
+                                    <li><input type="checkbox" class="me-1" name="raucu" value="khac">Khác</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h3 class="text-primary">Tinh bột</h3>
+                                <ul class="list-unstyled border-primary">
+                                    <li><input type="checkbox" class="me-1" name="tinhbot" value="pho">Phở</li>
+                                    <li><input type="checkbox" class="me-1" name="tinhbot" value="bun">Bún</li>
+                                    <li><input type="checkbox" class="me-1" name="tinhbot" value="hutieu">Hủ tiếu</li>
+                                    <li><input type="checkbox" class="me-1" name="tinhbot" value="mien">Miến</li>
+                                    <li><input type="checkbox" class="me-1" name="tinhbot" value="banhmi">Bánh mì</li>
+                                    <li><input type="checkbox" class="me-1" name="tinhbot" value="gao">Gạo</li>
+                                    <li><input type="checkbox" class="me-1" name="tinhbot" value="khac">Khác</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h3 class="text-danger">Khác</h3>
+                                <ul class="list-unstyled border-danger">
+                                    <li><input type="checkbox" class="me-1" name="khac" value="trung">Trứng</li>
+                                    <li><input type="checkbox" class="me-1" name="khac" value="dauhu">Đậu hủ</li>
+                                    <li><input type="checkbox" class="me-1" name="khac" value="khac">Khác</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+    </ul>
+</div>
+
+<hr class="mt-2 mb-1 ms-2 me-2" />
+
+<!--Display food-->
+<div class="row wrap-row">
+    {{#if recipesSearch}}
+    {{#each recipesSearch}}
+    <div class="col-6">
+        <div class="__area text-center">
+            <a href="/{{tenmon}}" class="__card">
+                <button class="__favorit">
+                    <ion-icon name="heart-outline"></ion-icon>
+                </button>
+                <img src="{{chitiet.image}}" alt="{{chitiet.image}}" class="img-fluid __img" />
+                <div class="__card_detail text-left">
+                    <h4>{{tenmon}}</h4>
+                    <p>{{chitiet.mota}}</p>
+                    {{!-- <div class="__type">
+                        <span href="#">{{tags}}</span>
+                    </div> --}}
+                    <div class="__detail text-center justify-content-center">
+                        <ion-icon name="star-outline"></ion-icon> 5
+                        <ion-icon name="time-outline" class="ms-3"></ion-icon> {{chitiet.thoigian}}
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+    {{/each}}
+    {{else}}
+    <div class="row mt-4 ms-4">
+        <span><i>Không tìm thấy công thức nấu ăn cho món {{search}}</i></span>
+    </div>
+    {{/if}}
+</div>
+
+<!--Pagination-->
+{{!-- <div class="row mt-5 ms-3">
+    <nav aria-label="Page navigation" class="mx-auto">
+        <ul class="pagination">
+            <li class="page-item"><a class="page-link" href="?page={{prevPage page}}">Previous</a></li>
+            {{#each (getNumberOfPage total)}}
+            <li class="page-item {{#if (isEqual ../page (sum this 1))}} active {{/if}}">
+                <a class="page-link" href="?page={{sum this 1}}">
+                    {{sum this 1}}
+                </a>
+            </li>
+            {{/each}}
+            <li class="page-item"><a class="page-link" href="?page={{nextPage page total}}">Next</a></li>
+        </ul>
+    </nav>
+</div> --}}
