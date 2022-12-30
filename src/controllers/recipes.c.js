@@ -1,9 +1,16 @@
-const model = require('../models/recipes.m');
+const allRecipesM = require('../models/recipes.m');
+const carousRecipesM = require('../models/carouselRecipes.m');
+const dailyRecipesM = require('../models/dailyRecipes.m');
+const rcmRecipesM = require('../models/rcmRecipes.m');
+const newRecipesM = require('../models/newRecipes.m');
+const favorRecipesM = require('../models/favoriteRecipes.m');
+const cartsM = require('../models/carts.m');
+
 const helpers = require('../helpers/helpers');
 
-exports.getHome = async (req, res, next) => {
-    const recipes = await model.getAll();
-    const list_name = Object.keys(recipes);
+exports.getAllRecipes = async (req, res, next, model) => {
+    const allRecipes = await model.getAll();
+    const list_name = Object.keys(allRecipes);
     let detail_recipe = [];
 
     for (var i = 0; i < list_name.length; i++) {
@@ -11,34 +18,80 @@ exports.getHome = async (req, res, next) => {
 
         detail_recipe.push({
             name,
-            detail: recipes[list_name[i]]
+            detail: allRecipes[list_name[i]]
         });
     }
 
+    return detail_recipe;
+}
+
+exports.getCarouselRecipes = async (req, res, next, model) => {
+    const allRecipes = await model.getAll();
+    const list_name = Object.keys(allRecipes);
+    let detail_recipe = [];
+    let carouselRecipes = [];
+
+    for (var i = 0, j = 0; i < list_name.length; i++) {
+        let name = list_name[i].replaceAll("-", " ");
+
+        detail_recipe.push({
+            name,
+            detail: allRecipes[list_name[i]]
+        });
+
+        j++;
+        if (j === 3) {
+            carouselRecipes.push({
+                slide: detail_recipe
+            });
+            detail_recipe = [];
+            j = 0;
+        }
+    }
+    return carouselRecipes;
+}
+
+exports.getHome = async (req, res, next) => {
+    let newRecipes = await this.getAllRecipes(req, res, next, newRecipesM)
+    let favorRecipes = await this.getAllRecipes(req, res, next, favorRecipesM);
+
+    // get data for carousels
+    let dailyRecipes = await this.getCarouselRecipes(req, res, next, dailyRecipesM);
+    let rcmRecipes = await this.getCarouselRecipes(req, res, next, rcmRecipesM);
+    let carousRecipes = await this.getCarouselRecipes(req, res, next, carousRecipesM);
+
+
     let { page } = req.query;
-    let total = detail_recipe.length;
+    let total = newRecipes.length;
 
     if (page) {
-        detail_recipe = detail_recipe.slice((page - 1) * 10, (page - 1) * 10 + 10);
+        newRecipes = newRecipes.slice((page - 1) * 10, (page - 1) * 10 + 10);
     } else {
         page = 1;
-        detail_recipe = detail_recipe.slice(0, 10);
+        newRecipes = newRecipes.slice(0, 10);
     }
-
+    
     res.render('home', {
-        detail_recipe,
+        newRecipes,
+        dailyRecipes,
+        rcmRecipes,
+        favorRecipes,
+        carousRecipes,
         total,
         page,
         helpers,
     });
 };
 
+let recipeName = '';
 exports.getDetailRecipe = async (req, res, next) => {
     try {
         let { name } = req.params;
+        console.log(req.params);
         name = name.toLowerCase();
 
-        const recipes = await model.getAll();
+        const favorRecipes = await this.getAllRecipes(req, res, next, favorRecipesM);
+        const recipes = await allRecipesM.getAll();
         const list_name = Object.keys(recipes);
         const detail_recipe = [];
 
@@ -47,13 +100,17 @@ exports.getDetailRecipe = async (req, res, next) => {
             temp = temp.toLowerCase();
 
             if (temp === name) {
+
+                recipeName = list_name[i].replaceAll("-", " ");   // luu ten mon dung cho trang ingredients
                 detail_recipe.push({
-                    name: list_name[i].replaceAll("-", " "),
+                    name: recipeName,
                     detail: recipes[list_name[i]]
                 });
 
                 return res.render('detail_recipe', {
-                    detail_recipe
+                    detail_recipe,
+                    favorRecipes,
+                    layout: 'option02_layouts'
                 });
             }
         }
@@ -64,6 +121,7 @@ exports.getDetailRecipe = async (req, res, next) => {
 
 let keyword = '';
 let list = [];
+
 function checkIngredient(listIngredient, type) {
     for (var i = 0; i < listIngredient.length; i++) {
         listIngredient[i] = listIngredient[i].toLowerCase();
@@ -78,11 +136,20 @@ function checkIngredient(listIngredient, type) {
 
     return false;
 };
+
+function checkObject(type){
+    if(typeof(type) === "string"){
+        return [type];
+    };
+    return type;
+};
+
 exports.postSearch = async (req, res, next) => {
     try {
         let { search } = req.body;
 
-        let recipes = await model.getAll();
+        const favorRecipes = await this.getAllRecipes(req, res, next, favorRecipesM);
+        let recipes = await allRecipesM.getAll();
         const list_name = Object.keys(recipes);                                         //mảng lưu tên món ăn
         let recipesSearch = [];                                                       //mảng lưu những công thức mà người dùng nhập từ khóa tìm kiếm
 
@@ -94,7 +161,7 @@ exports.postSearch = async (req, res, next) => {
                 let temp = list_name[i].replaceAll("-", " ");                               //bỏ ký tự '-' và viết thường tên món ăn thứ i
                 temp = temp.toLowerCase();
 
-                let list_ingredient = Object.values(recipes[list_name[i]].nguyenlieu);      //mảng lưu các nguyên liệu của món ăn thứ i
+                let [list_ingredient] = Object.values(recipes[list_name[i]].nguyenlieu);      //mảng lưu các nguyên liệu của món ăn thứ i
                 for (var j = 0; j < list_ingredient.length; j++) {
                     list_ingredient[j] = list_ingredient[j].toLowerCase();
                     list_ingredient[j] = list_ingredient[j].trim();
@@ -112,35 +179,29 @@ exports.postSearch = async (req, res, next) => {
             list = recipesSearch;
         }
         else {
-            const { vungmien, loaimon, cachnau, thit, haisan, raucu, tinhbot, khac } = req.body;
+            const { vungmien, loaimon, cachnau, thit, haisan, raucu, tinhbot, khac } = req.body;  
 
             for (var i = 0; i < list.length; i++) {
                 if ((list[i].detail.tags.includes(vungmien) || vungmien === 'null') &&
                     (list[i].detail.tags.includes(loaimon) || loaimon === 'null') &&
-                    (list[i].detail.tags.includes(cachnau) || cachnau === 'null')) {
-                    recipesSearch.push(list[i]);
+                    (list[i].detail.tags.includes(cachnau) || cachnau === 'null') &&
+                    ((thit === undefined) || (checkIngredient(list[i].detail.nguyenlieu, checkObject(thit)))) &&
+                    ((haisan === undefined) || (checkIngredient(list[i].detail.nguyenlieu, checkObject(haisan)))) &&
+                    ((raucu === undefined) || (checkIngredient(list[i].detail.nguyenlieu, checkObject(raucu)))) &&
+                    ((tinhbot === undefined) || (checkIngredient(list[i].detail.nguyenlieu, checkObject(tinhbot)))) &&
+                    ((khac === undefined) || (checkIngredient(list[i].detail.nguyenlieu, checkObject(khac))))) {
+                        recipesSearch.push(list[i]);
                 }
             }
-
-            // for (var i = 0; i < list.length; i++) {
-            //     if ((list[i].detail.tags.includes(vungmien) || vungmien === 'null') &&
-            //         (list[i].detail.tags.includes(loaimon) || loaimon === 'null') &&
-            //         (list[i].detail.tags.includes(cachnau) || cachnau === 'null') &&
-            //         ((thit === undefined) || (checkIngredient(list[i].detail.nguyenlieu, thit))) &&
-            //         ((haisan === undefined) || (checkIngredient(list[i].detail.nguyenlieu, haisan))) &&
-            //         ((raucu === undefined) || (checkIngredient(list[i].detail.nguyenlieu, raucu))) &&
-            //         ((tinhbot === undefined) || (checkIngredient(list[i].detail.nguyenlieu, tinhbot))) &&
-            //         ((khac === undefined) || (checkIngredient(list[i].detail.nguyenlieu, khac)))) {
-            //             recipesSearch.push(list[i]);
-            //     }
-            // }
         }
 
         res.render('search', {
+            favorRecipes,
             recipesSearch,
             search: keyword.toUpperCase(),
             keyword,
-            total: recipesSearch.length
+            total: recipesSearch.length,
+            layout: 'option02_layouts'
         });
     } catch (error) {
         next(error);
@@ -149,7 +210,8 @@ exports.postSearch = async (req, res, next) => {
 
 exports.getRecipes = async (req, res, next) => {
     try {
-        let data = await model.getAll();
+        const favorRecipes = await this.getAllRecipes(req, res, next, favorRecipesM);
+        let data = await allRecipesM.getAll();
         const list_name = Object.keys(data);                                         //mảng lưu tên món ăn
         let recipes = [];                                                       //mảng lưu những công thức mà người dùng nhập từ khóa tìm kiếm
 
@@ -174,9 +236,11 @@ exports.getRecipes = async (req, res, next) => {
 
         res.render('recipes', {
             recipes,
+            favorRecipes,
             total,
             page,
             helpers,
+            layout: 'option02_layouts'
         });
     } catch (error) {
         next(error);
@@ -185,8 +249,43 @@ exports.getRecipes = async (req, res, next) => {
 
 exports.getIngredientsRecipe = async (req, res, next) => {
     try {
+        const carts = await cartsM.getAll();
+        const favorRecipes = await this.getAllRecipes(req, res, next, favorRecipesM);
+        const recipes = await allRecipesM.getAll();
+        const list_name_recipes = Object.keys(recipes);
+        const list_name_carts = Object.keys(carts);
+
+        let list_ingredient = [];
+        for(var i = 0; i < list_name_recipes.length; i++){
+            if(list_name_recipes[i].replaceAll("-", " ") === recipeName){
+                list_ingredient = Object.values(recipes[list_name_recipes[i]].nguyenlieu);
+                break;
+            }
+        }
+
+        for(var i = 0; i < list_ingredient.length; i++){
+            const temp = list_ingredient[i].split(":");
+            list_ingredient[i] = temp[0];
+        }
+
+        const ingredients = [];
+        for(var i = 0; i < list_ingredient.length; i++){
+            for(var j = 0; j < list_name_carts.length; j++){
+                if(list_ingredient[i] === list_name_carts[j]){
+                    ingredients.push({
+                        name: list_name_carts[j].trim(),
+                        detail: carts[list_name_carts[j]]
+                    });
+                    break;
+                }
+            }
+        }
+
         res.render('ingredients', {
-            layout: 'ingredients_layout'
+            recipeName,
+            ingredients,
+            favorRecipes,
+            layout: 'option02_layouts'
         });
     }
     catch (error) {

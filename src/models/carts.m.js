@@ -1,9 +1,5 @@
 const fs = require('fs');
-const pathDb = './db/recipes.json';
-
-//WriteFile:
-// const utils = require("util");
-// const writeFileAsync = utils.promisify(fs.writeFile);
+const pathDb = './db/cart.json';
 
 module.exports = {
     getAll: () => {

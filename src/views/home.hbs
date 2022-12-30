@@ -8,83 +8,22 @@
 
     <div id="bestDailyRecipe" class="carousel slide" data-bs-ride="false">
         <div class="carousel-inner">
-            <div class="carousel-item active">
-                <div class="row g-1">
-                    <div class="col-lg-4">
-                        <img src="./images/ca.jpg" class="d-block w-100 rounded-1" alt="...">
-                        <div class="img-left carousel-caption d-none d-md-block">
-                            <h5>First slide label</h5>
-                            <p>Some representative placeholder content for the second slide.</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <img src="./images/ca.jpg" class="d-block w-100 rounded-1" alt="...">
-                        <div class="img-center carousel-caption d-none d-md-block">
-                            <h5>Second slide label</h5>
-                            <p>Some representative placeholder content for the second slide.</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <img src="./images/com.jpg" class="d-block w-100 rounded-1" alt="...">
-                        <div class="img-right carousel-caption d-none d-md-block">
-                            <h5>Third slide label</h5>
-                            <p>Some representative placeholder content for the second slide.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+            {{#each dailyRecipes}}
             <div class="carousel-item">
+                {{#with slide}}
                 <div class="row g-1">
-                    <div class="col-lg-4">
-                        <img src="./images/ca.jpg" class="d-block w-100 rounded-1" alt="...">
-                        <div class="img-left carousel-caption d-none d-md-block">
-                            <h5>First slide label</h5>
-                            <p>Some representative placeholder content for the second slide.</p>
+                    {{#each this}}
+                    <a href="/{{this.name}}" class="col-lg-4 position-relative">
+                        <img src="{{this.detail.image}}" class="d-block w-100 rounded-1" alt="...">
+                        <div class="img-center carousel-caption position-absolute">
+                            <h4 style="text-shadow: 2px 2px 1px #000">{{this.name}}</h4>
                         </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <img src="./images/com.jpg" class="d-block w-100 rounded-1" alt="...">
-                        <div class="img-center carousel-caption d-none d-md-block">
-                            <h5>Second slide label</h5>
-                            <p>Some representative placeholder content for the second slide.</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <img src="./images/com.jpg" class="d-block w-100 rounded-1" alt="...">
-                        <div class="img-right carousel-caption d-none d-md-block">
-                            <h5>Third slide label</h5>
-                            <p>Some representative placeholder content for the second slide.</p>
-                        </div>
-                    </div>
+                    </a>
+                    {{/each}}
                 </div>
+                {{/with}}
             </div>
-
-            <div class="carousel-item">
-                <div class="row g-1">
-                    <div class="col-lg-4">
-                        <img src="./images/com.jpg" class="d-block w-100 rounded-1" alt="...">
-                        <div class="img-left carousel-caption d-none d-md-block">
-                            <h5>First slide label</h5>
-                            <p>Some representative placeholder content for the second slide.</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <img src="./images/bun.jpg" class="d-block w-100 rounded-1" alt="...">
-                        <div class="img-center carousel-caption d-none d-md-block">
-                            <h5>Second slide label</h5>
-                            <p>Some representative placeholder content for the second slide.</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <img src="./images/ca.jpg" class="d-block w-100 rounded-1" alt="...">
-                        <div class="img-right carousel-caption d-none d-md-block">
-                            <h5>Third slide label</h5>
-                            <p>Some representative placeholder content for the second slide.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            {{/each}}
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#bestDailyRecipe" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -97,6 +36,7 @@
     </div>
 </div>
 
+<!-- Daily Recipes  -->
 <div class="col-12">
 
     <div class="content-carousel-title mt-5 mb-4">
@@ -105,88 +45,29 @@
 
     <div id="recommendedRecipe" class="carousel slide" data-bs-ride="false">
         <div class="carousel-inner">
-            <div class="carousel-item active">
-                <div class="row g-1">
-                    <div class="col-lg-4">
-                        <img src="./images/ca.jpg" class="d-block w-100 rounded-1" alt="...">
-                        <div class="img-left carousel-caption d-none d-md-block">
-                            <h5>First slide label</h5>
-                            <p>Some representative placeholder content for the second slide.</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <img src="./images/ca.jpg" class="d-block w-100 rounded-1" alt="...">
-                        <div class="img-center carousel-caption d-none d-md-block">
-                            <h5>Second slide label</h5>
-                            <p>Some representative placeholder content for the second slide.</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <img src="./images/com.jpg" class="d-block w-100 rounded-1" alt="...">
-                        <div class="img-right carousel-caption d-none d-md-block">
-                            <h5>Third slide label</h5>
-                            <p>Some representative placeholder content for the second slide.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+            {{#each rcmRecipes}}
             <div class="carousel-item">
+                {{#with slide}}
                 <div class="row g-1">
-                    <div class="col-lg-4">
-                        <img src="./images/ca.jpg" class="d-block w-100 rounded-1" alt="...">
-                        <div class="img-left carousel-caption d-none d-md-block">
-                            <h5>First slide label</h5>
-                            <p>Some representative placeholder content for the second slide.</p>
+                    {{#each this}}
+                    <a href="/{{this.name}}"  class="col-lg-4 position-relative">
+                        <img src="{{this.detail.image}}" class="d-block w-100 rounded-1" alt="...">
+                        <div class="img-center carousel-caption position-absolute">
+                            <h4 style="text-shadow: 2px 2px 1px #000">{{this.name}}</h4>
                         </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <img src="./images/com.jpg" class="d-block w-100 rounded-1" alt="...">
-                        <div class="img-center carousel-caption d-none d-md-block">
-                            <h5>Second slide label</h5>
-                            <p>Some representative placeholder content for the second slide.</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <img src="./images/com.jpg" class="d-block w-100 rounded-1" alt="...">
-                        <div class="img-right carousel-caption d-none d-md-block">
-                            <h5>Third slide label</h5>
-                            <p>Some representative placeholder content for the second slide.</p>
-                        </div>
-                    </div>
+                    </a>
+                    {{/each}}
                 </div>
+                {{/with}}
             </div>
-
-            <div class="carousel-item">
-                <div class="row g-1">
-                    <div class="col-lg-4">
-                        <img src="./images/com.jpg" class="d-block w-100 rounded-1" alt="...">
-                        <div class="img-left carousel-caption d-none d-md-block">
-                            <h5>First slide label</h5>
-                            <p>Some representative placeholder content for the second slide.</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <img src="./images/bun.jpg" class="d-block w-100 rounded-1" alt="...">
-                        <div class="img-center carousel-caption d-none d-md-block">
-                            <h5>Second slide label</h5>
-                            <p>Some representative placeholder content for the second slide.</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <img src="./images/ca.jpg" class="d-block w-100 rounded-1" alt="...">
-                        <div class="img-right carousel-caption d-none d-md-block">
-                            <h5>Third slide label</h5>
-                            <p>Some representative placeholder content for the second slide.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            {{/each}}
         </div>
+
         <button class="carousel-control-prev" type="button" data-bs-target="#recommendedRecipe" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Previous</span>
         </button>
+
         <button class="carousel-control-next" type="button" data-bs-target="#recommendedRecipe" data-bs-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Next</span>
@@ -199,22 +80,20 @@
         <h5 class="title-text"><span>New Recipes</span></h5>
     </div>
 
-    {{#each detail_recipe}}
+    {{#each newRecipes}}
     <div class="card mb-3 shadow-none rounded-0 border border-light">
         <div class="row g-0">
-            <div class="col-md-4">
-                <a href="/{{name}}">
+            <a href="/{{name}}" class="text-dark" >
+                <div class="col-4 float-start">
                     <img src="{{detail.image}}" class="img-fluid " alt="{{name}}" title="{{name}}">
-                </a>
-            </div>
-            <div class="col-md-8">  
-                <div class="card-body">
-                    <h5 class="card-title">{{name}}</h5>
-                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                        additional content. This content is a little bit longer.</p>
-                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
                 </div>
-            </div>
+                <div class="col-8 float-end">
+                    <div class="card-body">
+                        <h5 class="card-title">{{name}}</h5>
+                        <p class="card-text">{{detail.machnho}}</p>
+                    </div>
+                </div>
+            </a>
         </div>
     </div>
     {{/each}}

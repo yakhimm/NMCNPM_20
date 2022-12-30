@@ -5,10 +5,9 @@ const express = require('express'),
     path = require('path');
     
 app.use(express.static(__dirname + '/public'));
-app.use(express.static(__dirname));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-require('./configs/hbs')(app);
+require('./configs/hbs')(app);  
 require('./configs/session')(app);
 
 var viewPath = path.join(__dirname, '/views');
