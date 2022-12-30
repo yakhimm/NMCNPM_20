@@ -1,26 +1,31 @@
 {
-  "name": "gui_mvc",
+  "name": "source",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon --inspect server.js",
-    "dev": "nodemon --inspect server.js"
+    "start": "nodemon --inspect server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yakhimm/NMCNPM_20.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yakhimm/NMCNPM_20/issues"
+  },
+  "homepage": "https://github.com/yakhimm/NMCNPM_20#readme",
   "dependencies": {
     "crypto-js": "^4.1.1",
     "express": "^4.18.2",
     "express-handlebars": "^6.0.6",
-    "express-session": "^1.17.3",
     "inspector": "^0.5.0",
+    "nodemon": "^2.0.20",
     "path": "^0.12.7",
-    "pg-promise": "^10.15.4"
-  },
-  "devDependencies": {
-    "nodemon": "^2.0.20"
+    "pg-promise": "^10.15.3",
+    "query-string": "^7.1.1"
   }
 }
