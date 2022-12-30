@@ -155,20 +155,6 @@ exports.postSearch = async (req, res, next) => {
     } catch (error) {
         next(error);
     }
-
-    // const list = search.split(" ");
-    // var regex = new RegExp(list.join("|"),"gi");
-    // console.log(regex);
-
-    // for (const [key, value] of Object.entries(recipes[list_name[0]])) {
-    //     console.log(`${key}: ${value}`);
-    // }
-
-    // Lấy theo nguyên liệu:
-    // let s = (Object.values(recipes[list_name[0]].nguyenlieu)).includes(search);
-
-    // Lấy giá trị tất cả các trường:
-    // console.log(Object.values(recipes[list_name[0]]));
 };
 
 exports.getIngredientsRecipe = async (req, res, next) => {
