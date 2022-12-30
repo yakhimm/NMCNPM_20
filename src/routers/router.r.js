@@ -10,12 +10,16 @@ router.post('/signin', userC.postSignin);
 router.get('/signup', userC.getSignup);
 router.post('/signup', userC.postSignup);
 
+
+// ---------------------------------------------
 router.get('/', controller.getHome);
 
-router.get('/:tenmon', controller.getDetailRecipe);
+router.get('/recipes', controller.getRecipes);
+
+router.get('/:name', controller.getDetailRecipe);
 
 router.post('/', controller.postSearch);
 
-router.get('/ingredients/:tenmon', controller.getIngredientsRecipe);
+router.get('/ingredients/:name', controller.getIngredientsRecipe);
 
 module.exports = router;

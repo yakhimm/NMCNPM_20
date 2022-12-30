@@ -1,43 +1,28 @@
 const express = require('express'),
-    app = express(),
+    app = express(),    
     port = 3000,
-    fs = require('fs'),
-    path = require('path'),
-    handlebars = require('express-handlebars');
-    usersRouter = require('./signin_signup/routers/users.r')
-
-// cau hinh handlebars
-app.engine('hbs', handlebars.engine({
-    extname: 'hbs',
-    defaultLayout: 'container.hbs',
-    layoutsDir: __dirname + '/signin_signup/views/layouts'
-}))
-app.set('view engine', 'hbs');
-
-// Thư mục views nằm cùng cấp với file app.js
-
-var viewPath = path.join(__dirname, 'signin_signup/views');
-app.set('views', viewPath);
-
-app.use(express.static(__dirname));
-// console.log(__dirname + '\\signin_signup\\css')
-app.use(express.urlencoded({extended: true}));
+    Router = require('./routers/router.r'),
+    path = require('path');
+    
+app.use(express.static(__dirname + '/public'));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+require('./configs/hbs')(app);  
+require('./configs/session')(app);
 
-app.use('/users', usersRouter);
+var viewPath = path.join(__dirname, '/views');
+app.set('views', viewPath);
+// console.log(viewPath)
 
-app.get('/',  (req, res) => {
-    res.render('home');
+//router
+app.use(Router);
+
+app.use((err, req, res, next) => {
+    const statusCode = err.statusCode || 500;
+    res.status(statusCode).send(err.message);
 });
 
-app.get('/anngon',  (req, res) => {
-    res.render('home');
-});
+app.listen(port, () =>
+    console.log(`Example app listening on port ${port}!`));
 
-app.post('/anngon', (req, res) => {
-    res.render('home');
-});
 
-app.listen(port, () => {
-    console.log(`Server is listening to port ${port}!`)
-});
