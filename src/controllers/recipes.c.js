@@ -87,7 +87,6 @@ let recipeName = '';
 exports.getDetailRecipe = async (req, res, next) => {
     try {
         let { name } = req.params;
-        console.log(req.params);
         name = name.toLowerCase();
 
         const favorRecipes = await this.getAllRecipes(req, res, next, favorRecipesM);
