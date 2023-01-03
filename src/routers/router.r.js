@@ -10,7 +10,7 @@ router.post('/signin', userC.postSignin);
 router.get('/signup', userC.getSignup);
 router.post('/signup', userC.postSignup);
 
-
+// router.get('/logout', userC.getLogout);
 // ---------------------------------------------
 router.get('/', controller.getHome);
 

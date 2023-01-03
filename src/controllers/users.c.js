@@ -32,7 +32,6 @@ exports.getSignup = async (req, res, next) => {
 }
 
 // exports.admin = async (req, res, next) => {
-//     console.log(req.session);
 //     if (!req.session.uid) {
 //         return res.redirect('/signin');
 //     }
@@ -53,7 +52,6 @@ exports.postSignin = async (req, res, next) => {
     const usn = req.body.username;
     const pwd = req.body.password;
 
-    console.log('signin');
     const userDb = await userM.getAll(usn);
 
     if (!userDb || !userDb?.length) {
@@ -81,12 +79,10 @@ exports.postSignin = async (req, res, next) => {
     const pwdSalt = pwd + salt;
     const pwdHashed = CryptoJS.SHA3(pwdSalt, { outputLength: hashLength * 4 }).toString(CryptoJS.enc.Hex); // 1 kết quả mã hóa ra 1 mảng bytes, cần chuyển sang chuỗi -> sử dụng luôn hàm toString
         
-    console.log(pwdDb === (pwdHashed + salt));
     if (pwdDb === (pwdHashed + salt)) {
-        res.render('home', {
-            signin: true
-        });
-        // res.redirect("/");
+        req.session.user = checkUser;
+        console.log(req.session.user);
+        res.redirect("/");
     }
     else {
         res.render('users/signin', {
@@ -95,8 +91,6 @@ exports.postSignin = async (req, res, next) => {
         });
     }
 
-    req.session.user = checkUser;
-    // console.log(req.session.user);
 }
 
 exports.postSignup = async (req, res, next) => {
@@ -150,7 +144,10 @@ exports.postSignup = async (req, res, next) => {
     res.redirect('/signin');
 }
 
-exports.logout = async (res, req, next) => {
-    req.session.user = null;
-    res.redirect("/")
+exports.getLogout = async (res, req, next) => {
+    // if (req.session.user != null) {
+        console.log(req.session);
+        req.session.user = null;
+        res.redirect("/")
+    // }
 }
