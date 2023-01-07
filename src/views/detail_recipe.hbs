@@ -12,6 +12,9 @@
         </nav>
     </div>
 
+    <button type="checkbox" class="btn bg-danger text-white" name="favorite" id="favorite"
+        onclick="addToFavorite('{{name}}')">Like</button>
+
     <h1 class="text-center mt-4">{{name}}</h1>
 
     <div class="text-center mt-3">
@@ -165,3 +168,16 @@
         </section>
     </div>
 </div>
+
+<script>
+    const addToFavorite = async (name) => {
+        const response = await fetch('http://localhost:3000/{{name}}');
+        const res = await fetch('http://localhost:3000/favorite', {
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ name })
+        });
+    }
+</script>

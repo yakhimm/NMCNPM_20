@@ -87,7 +87,6 @@ let recipeName = '';
 exports.getDetailRecipe = async (req, res, next) => {
     try {
         let { name } = req.params;
-        console.log(req.params);
         name = name.toLowerCase();
 
         const favorRecipes = await this.getAllRecipes(req, res, next, favorRecipesM);
@@ -289,6 +288,45 @@ exports.getIngredientsRecipe = async (req, res, next) => {
         });
     }
     catch (error) {
+        next(error);
+    }
+};
+
+let favoriteRecipes = [];
+exports.getFavorite = async (req, res, next) => {
+    try {
+        res.render('favorite', {
+            favoriteRecipes,
+            layout: 'option02_layouts'
+        });
+    } catch (error) {
+        next(error);
+    }
+}
+
+exports.postFavorite = async (req, res, next) => {
+    try {
+        const {name} = req.body;
+
+        const recipes = await allRecipesM.getAll();
+        const list_name = Object.keys(recipes);
+
+        for(var i = 0; i < favoriteRecipes.length; i++){
+            if(name === favoriteRecipes[i].name){
+                favoriteRecipes.splice(i, 1);
+                return;
+            }
+        };
+
+        for(var i = 0; i < list_name.length; i++){
+            if(name === list_name[i].replaceAll("-"," ")){
+                return favoriteRecipes.push({
+                    name,
+                    detail: recipes[list_name[i]]
+                })
+            }
+        }
+    } catch (error) {
         next(error);
     }
 }

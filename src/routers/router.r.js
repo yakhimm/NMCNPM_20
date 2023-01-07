@@ -16,6 +16,9 @@ router.get('/', controller.getHome);
 
 router.get('/recipes', controller.getRecipes);
 
+router.get('/favorite', controller.getFavorite);
+router.post('/favorite', controller.postFavorite);
+
 router.get('/:name', controller.getDetailRecipe);
 
 router.post('/', controller.postSearch);

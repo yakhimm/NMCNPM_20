@@ -1,0 +1,25 @@
+<div class="row wrap-row">
+    {{#each favoriteRecipes}}
+    <div class="col-6">
+        <div class="__area text-center">
+            <a href="/{{name}}" class="__card">
+                <button class="__favorit">
+                    <ion-icon name="heart-outline"></ion-icon>
+                </button>
+                <img src="{{detail.image}}" alt="{{detail.image}}" class="img-fluid __img" />
+                <div class="__card_detail text-left">
+                    <h4>{{name}}</h4>
+                    <p>{{detail.mota}}</p>
+                    {{!-- <div class="__type">
+                        <span href="#">{{tags}}</span>
+                    </div> --}}
+                    <div class="__detail text-center justify-content-center">
+                        <ion-icon name="star-outline"></ion-icon> 5
+                        <ion-icon name="time-outline" class="ms-3"></ion-icon> {{detail.thoigian}}
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+    {{/each}}
+</div>
