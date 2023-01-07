@@ -5,7 +5,7 @@ const hashLength = 64 //bytes
 exports.getAll = async (req, res, next) => {
    
     res.render('users/signin', {
-        layout: 'option_layouts'
+        layout: 'option01_layouts'
     });
 }
 
@@ -16,7 +16,7 @@ exports.getSignin = async (req, res, next) => {
     }
 
     res.render('users/signin', {
-        layout: 'option_layouts'
+        layout: 'option01_layouts'
     });
 }
 
@@ -27,7 +27,7 @@ exports.getSignup = async (req, res, next) => {
     }
 
     res.render('users/signup', {
-        layout: 'option_layouts'
+        layout: 'option01_layouts'
     });
 }
 
@@ -58,7 +58,7 @@ exports.postSignin = async (req, res, next) => {
 
     if (!userDb || !userDb?.length) {
         return res.render('users/signin', {
-            layout: 'option_layouts',
+            layout: 'option01_layouts',
             error: 'No user found'
         });
     };
@@ -70,7 +70,7 @@ exports.postSignin = async (req, res, next) => {
     // check username
     if (!checkUser) {
         return res.render('users/signin', {
-            layout: 'option_layouts',
+            layout: 'option01_layouts',
             usnErr: 'Username does not exist'
         });
     }
@@ -90,7 +90,7 @@ exports.postSignin = async (req, res, next) => {
     }
     else {
         res.render('users/signin', {
-            layout: 'option_layouts',
+            layout: 'option01_layouts',
             pwdErr: 'Password is incorrect'
         });
     }
@@ -117,7 +117,7 @@ exports.postSignup = async (req, res, next) => {
 
     if (checkUser) {
        return res.render('users/signup', {
-            layout: 'option_layouts',
+            layout: 'option01_layouts',
             usnErr: 'Username has already existed'
         });
     }
@@ -126,7 +126,7 @@ exports.postSignup = async (req, res, next) => {
 
     if (!checkPass) {
         return res.render('users/signup', {
-            layout: 'option_layouts',
+            layout: 'option01_layouts',
             rePwdErr: 'Password confirmation does not match password'
         })
     }

@@ -296,7 +296,7 @@ let favoriteRecipes = [];
 exports.getFavorite = async (req, res, next) => {
     try {
         res.render('favorite', {
-            favoriteRecipes,
+            favoriteRecipes: favoriteRecipes.reverse(),
             layout: 'option02_layouts'
         });
     } catch (error) {
