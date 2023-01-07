@@ -12,10 +12,10 @@
         </nav>
     </div>
 
-    <button type="checkbox" class="btn btn-danger position-absolute start-0" name="favorite" id="favorite"
+    <button type="checkbox" id="favoriteButton" class="btn btn-danger position-absolute start-0" name="favorite" id="favorite"
         onclick="addToFavorite('{{name}}')">
-        <ion-icon class="text-white fs-3" name="heart-outline"></ion-icon>
-    </button>
+            <ion-icon class="text-white fs-3" name="heart-outline"></ion-icon>
+    </button>   
 
     <h1 class="text-center mt-4">{{name}}</h1>
 
@@ -182,4 +182,5 @@
             body: JSON.stringify({ name })
         });
     }
+
 </script>
