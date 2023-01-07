@@ -46,10 +46,19 @@
                         <li><a href="#" class="nav-link">About us</a></li>
                         <li><a href="/favorite" class="nav-link">Favorite Recipes</a></li>
                     </ul>
-                </nav>
+                </nav>  
             </div>
 
             <div class="col-3 text-center" style="line-height: 4rem;">
+
+                <div class="btn-group shadow-none position-relative me-3">
+                   <a href="/favorite" class="home-btn d-flex rounded-1 p-0">
+                        <ion-icon class="text-dark fs-4" name="heart-outline"></ion-icon>
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                            {{favorite_counts}}
+                        </span>
+                    </a>
+                </div>
 
                 <div class="btn-group shadow-none position-relative me-3">
                    <a class="home-btn d-flex rounded-1 p-0" data-bs-toggle="dropdown">
@@ -64,7 +73,7 @@
                 <div class="btn-group shadow-none position-relative me-3">
                    <a href="#" class="home-btn d-flex rounded-1 p-0" data-bs-toggle="dropdown">
                         <ion-icon class="text-dark fs-4" name="notifications-outline"></ion-icon>
-                       <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                        
                         <span class="visually-hidden">unread messages</span>
                         </span>

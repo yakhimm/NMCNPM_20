@@ -1,4 +1,4 @@
-<div class="container mb-5">
+<div class="container mb-5 position-relative">
     {{#each detail_recipe}}
     <div class="row">
         <nav aria-label="breadcrumb">
@@ -12,8 +12,10 @@
         </nav>
     </div>
 
-    <button type="checkbox" class="btn bg-danger text-white" name="favorite" id="favorite"
-        onclick="addToFavorite('{{name}}')">Like</button>
+    <button type="checkbox" class="btn btn-danger position-absolute start-0" name="favorite" id="favorite"
+        onclick="addToFavorite('{{name}}')">
+        <ion-icon class="text-white fs-3" name="heart-outline"></ion-icon>
+    </button>
 
     <h1 class="text-center mt-4">{{name}}</h1>
 
