@@ -1,5 +1,5 @@
 <div class="row text-center">
-    <span class="text-danger" style="font-size: 35px;">ALL RECIPES</span>
+    <span class="text-danger" style="font-size: 35px;">Tất cả công thức</span>
 </div>
 
 <div class="row wrap-row">
@@ -32,7 +32,7 @@
 <div class="row mt-5 ms-3">
     <nav aria-label="Page navigation" class="mx-auto">
         <ul class="pagination">
-            <li class="page-item"><a class="page-link" href="?page={{prevPage page}}">Previous</a></li>
+            <li class="page-item"><a class="page-link" href="?page={{prevPage page}}">Trước</a></li>
             {{#each (getNumberOfPage total)}}
             <li class="page-item {{#if (isEqual ../page (sum this 1))}} active {{/if}}">
                 <a class="page-link" href="?page={{sum this 1}}">
@@ -40,7 +40,7 @@
                 </a>
             </li>
             {{/each}}
-            <li class="page-item"><a class="page-link" href="?page={{nextPage page total}}">Next</a></li>
+            <li class="page-item"><a class="page-link" href="?page={{nextPage page total}}">Sau</a></li>
         </ul>
     </nav>
 </div>
