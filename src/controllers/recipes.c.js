@@ -8,6 +8,10 @@ const cartsM = require('../models/carts.m');
 
 const helpers = require('../helpers/helpers');
 
+let favorite_counts = 0;
+let authenticated = false;
+let user = undefined;
+
 exports.getAllRecipes = async (req, res, next, model) => {
     const allRecipes = await model.getAll();
     const list_name = Object.keys(allRecipes);
@@ -52,6 +56,7 @@ exports.getCarouselRecipes = async (req, res, next, model) => {
 }
 
 exports.getHome = async (req, res, next) => {
+
     let newRecipes = await this.getAllRecipes(req, res, next, newRecipesM)
     let favorRecipes = await this.getAllRecipes(req, res, next, favorRecipesM);
 
@@ -59,7 +64,6 @@ exports.getHome = async (req, res, next) => {
     let dailyRecipes = await this.getCarouselRecipes(req, res, next, dailyRecipesM);
     let rcmRecipes = await this.getCarouselRecipes(req, res, next, rcmRecipesM);
     let carousRecipes = await this.getCarouselRecipes(req, res, next, carousRecipesM);
-
 
     let { page } = req.query;
     let total = newRecipes.length;
@@ -70,8 +74,20 @@ exports.getHome = async (req, res, next) => {
         page = 1;
         newRecipes = newRecipes.slice(0, 10);
     }
-    
+
+
+    if (req.session.authenticated) {
+        authenticated = true;
+        user = req.session.user;
+    }
+    else {
+        authenticated = false;
+        user = undefined;
+    }
+
     res.render('home', {
+        authenticated,
+        user,
         newRecipes,
         dailyRecipes,
         rcmRecipes,
@@ -80,8 +96,10 @@ exports.getHome = async (req, res, next) => {
         total,
         page,
         helpers,
+        favorite_counts
     });
 };
+
 
 let recipeName = '';
 exports.getDetailRecipe = async (req, res, next) => {
@@ -107,9 +125,12 @@ exports.getDetailRecipe = async (req, res, next) => {
                 });
 
                 return res.render('detail_recipe', {
+                    authenticated,
+                    user,
                     detail_recipe,
                     favorRecipes,
-                    layout: 'option02_layouts'
+                    layout: 'option02_layouts',
+                    favorite_counts
                 });
             }
         }
@@ -136,8 +157,8 @@ function checkIngredient(listIngredient, type) {
     return false;
 };
 
-function checkObject(type){
-    if(typeof(type) === "string"){
+function checkObject(type) {
+    if (typeof (type) === "string") {
         return [type];
     };
     return type;
@@ -178,7 +199,7 @@ exports.postSearch = async (req, res, next) => {
             list = recipesSearch;
         }
         else {
-            const { vungmien, loaimon, cachnau, thit, haisan, raucu, tinhbot, khac } = req.body;  
+            const { vungmien, loaimon, cachnau, thit, haisan, raucu, tinhbot, khac } = req.body;
 
             for (var i = 0; i < list.length; i++) {
                 if ((list[i].detail.tags.includes(vungmien) || vungmien === 'null') &&
@@ -189,18 +210,21 @@ exports.postSearch = async (req, res, next) => {
                     ((raucu === undefined) || (checkIngredient(list[i].detail.nguyenlieu, checkObject(raucu)))) &&
                     ((tinhbot === undefined) || (checkIngredient(list[i].detail.nguyenlieu, checkObject(tinhbot)))) &&
                     ((khac === undefined) || (checkIngredient(list[i].detail.nguyenlieu, checkObject(khac))))) {
-                        recipesSearch.push(list[i]);
+                    recipesSearch.push(list[i]);
                 }
             }
         }
 
         res.render('search', {
+            authenticated,
+            user,
             favorRecipes,
             recipesSearch,
             search: keyword.toUpperCase(),
             keyword,
             total: recipesSearch.length,
-            layout: 'option02_layouts'
+            layout: 'option02_layouts',
+            favorite_counts
         });
     } catch (error) {
         next(error);
@@ -234,11 +258,14 @@ exports.getRecipes = async (req, res, next) => {
         }
 
         res.render('recipes', {
+            authenticated,
+            user,
             recipes,
             favorRecipes,
             total,
             page,
             helpers,
+            favorite_counts,
             layout: 'option02_layouts'
         });
     } catch (error) {
@@ -255,22 +282,22 @@ exports.getIngredientsRecipe = async (req, res, next) => {
         const list_name_carts = Object.keys(carts);
 
         let list_ingredient = [];
-        for(var i = 0; i < list_name_recipes.length; i++){
-            if(list_name_recipes[i].replaceAll("-", " ") === recipeName){
+        for (var i = 0; i < list_name_recipes.length; i++) {
+            if (list_name_recipes[i].replaceAll("-", " ") === recipeName) {
                 list_ingredient = Object.values(recipes[list_name_recipes[i]].nguyenlieu);
                 break;
             }
         }
 
-        for(var i = 0; i < list_ingredient.length; i++){
+        for (var i = 0; i < list_ingredient.length; i++) {
             const temp = list_ingredient[i].split(":");
             list_ingredient[i] = temp[0];
         }
 
         const ingredients = [];
-        for(var i = 0; i < list_ingredient.length; i++){
-            for(var j = 0; j < list_name_carts.length; j++){
-                if(list_ingredient[i] === list_name_carts[j]){
+        for (var i = 0; i < list_ingredient.length; i++) {
+            for (var j = 0; j < list_name_carts.length; j++) {
+                if (list_ingredient[i] === list_name_carts[j]) {
                     ingredients.push({
                         name: list_name_carts[j].trim(),
                         detail: carts[list_name_carts[j]]
@@ -281,9 +308,12 @@ exports.getIngredientsRecipe = async (req, res, next) => {
         }
 
         res.render('ingredients', {
+            authenticated,
+            user,
             recipeName,
             ingredients,
             favorRecipes,
+            favorite_counts,
             layout: 'option02_layouts'
         });
     }
@@ -296,7 +326,10 @@ let favoriteRecipes = [];
 exports.getFavorite = async (req, res, next) => {
     try {
         res.render('favorite', {
+            authenticated,
+            user,
             favoriteRecipes: favoriteRecipes.reverse(),
+            favorite_counts,
             layout: 'option02_layouts'
         });
     } catch (error) {
@@ -306,20 +339,22 @@ exports.getFavorite = async (req, res, next) => {
 
 exports.postFavorite = async (req, res, next) => {
     try {
-        const {name} = req.body;
+        const { name } = req.body;
 
         const recipes = await allRecipesM.getAll();
         const list_name = Object.keys(recipes);
 
-        for(var i = 0; i < favoriteRecipes.length; i++){
-            if(name === favoriteRecipes[i].name){
+        for (var i = 0; i < favoriteRecipes.length; i++) {
+            if (name === favoriteRecipes[i].name) {
+                favorite_counts--;
                 favoriteRecipes.splice(i, 1);
                 return;
             }
         };
 
-        for(var i = 0; i < list_name.length; i++){
-            if(name === list_name[i].replaceAll("-"," ")){
+        for (var i = 0; i < list_name.length; i++) {
+            if (name === list_name[i].replaceAll("-", " ")) {
+                favorite_counts++;
                 return favoriteRecipes.push({
                     name,
                     detail: recipes[list_name[i]]

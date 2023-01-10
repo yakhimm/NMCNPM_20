@@ -21,6 +21,6 @@ modalClose.addEventListener('click', hideTermOfServices);
 
 // hide modal when clicking out of modal area
 modal.addEventListener('click', hideTermOfServices);
-modalContainer.addEventListener('click', function(event) {
+modalContainer.addEventListener('click', function (event) {
     event.stopPropagation()
 });

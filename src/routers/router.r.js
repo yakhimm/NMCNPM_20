@@ -10,9 +10,16 @@ router.post('/signin', userC.postSignin);
 router.get('/signup', userC.getSignup);
 router.post('/signup', userC.postSignup);
 
+router.get('/logout', userC.getLogout);
 
+router.post('/account', userC.postAccount);
+
+
+// router.get('/', userC.getAll);
 // ---------------------------------------------
-router.get('/', controller.getHome);
+router.get('/',  controller.getHome);
+
+router.get('/home', controller.getHome);
 
 router.get('/recipes', controller.getRecipes);
 

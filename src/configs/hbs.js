@@ -12,8 +12,8 @@ module.exports = app => {
         },
     }));
     app.set('view engine', 'hbs');
-    
-    app.set('view options', { 
+
+    app.set('view options', {
         layout: 'option01_layouts'
     });
 

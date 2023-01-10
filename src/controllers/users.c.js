@@ -3,10 +3,22 @@ const CryptoJS = require("crypto-js");
 const hashLength = 64 //bytes
 
 exports.getAll = async (req, res, next) => {
-   
-    res.render('users/signin', {
-        layout: 'option01_layouts'
-    });
+
+    // res.render('users/signin', {
+    //     layout: 'option01_layouts'
+    // });
+
+    try {
+        if (!req.session.user) {
+            return res.render('users/signin', {
+                layout: 'option01_layouts'
+            });
+        }
+        console.log(req.session.username);
+        return res.redirect('/home');
+    } catch (error) {
+        next(error);
+    }
 }
 
 exports.getSignin = async (req, res, next) => {
@@ -31,39 +43,21 @@ exports.getSignup = async (req, res, next) => {
     });
 }
 
-// exports.admin = async (req, res, next) => {
-//     console.log(req.session);
-//     if (!req.session.uid) {
-//         return res.redirect('/signin');
-//     }
-//     res.redirect('/');
-// };
-
-// exports.add = async (req, res, next) => {
-//     const u = {
-//         username: 'uNew',
-//         password: '123'
-//     };
-//     const uNew = await userM.add(u);
-// 
-// }
-
 exports.postSignin = async (req, res, next) => {
 
     const usn = req.body.username;
     const pwd = req.body.password;
 
-    console.log('signin');
     const userDb = await userM.getAll(usn);
 
     if (!userDb || !userDb?.length) {
         return res.render('users/signin', {
             layout: 'option01_layouts',
-            error: 'No user found'
+            error: 'Không tìm thấy tài khoản'
         });
     };
 
-    const checkUser = userDb.find( (user) => {
+    const checkUser = userDb.find((user) => {
         return user.username == usn;
     });
 
@@ -71,7 +65,7 @@ exports.postSignin = async (req, res, next) => {
     if (!checkUser) {
         return res.render('users/signin', {
             layout: 'option01_layouts',
-            usnErr: 'Username does not exist'
+            usnErr: 'Tên đăng nhập không tồn tại'
         });
     }
 
@@ -80,23 +74,20 @@ exports.postSignin = async (req, res, next) => {
     const salt = pwdDb.slice(hashLength);
     const pwdSalt = pwd + salt;
     const pwdHashed = CryptoJS.SHA3(pwdSalt, { outputLength: hashLength * 4 }).toString(CryptoJS.enc.Hex); // 1 kết quả mã hóa ra 1 mảng bytes, cần chuyển sang chuỗi -> sử dụng luôn hàm toString
-        
-    console.log(pwdDb === (pwdHashed + salt));
+
     if (pwdDb === (pwdHashed + salt)) {
-        res.render('home', {
-            signin: true
-        });
-        // res.redirect("/");
+
+        req.session.user = checkUser;
+        req.session.authenticated = true;
+
+        return res.redirect('/home');
     }
     else {
         res.render('users/signin', {
             layout: 'option01_layouts',
-            pwdErr: 'Password is incorrect'
+            pwdErr: 'Sai mật khẩu'
         });
     }
-
-    req.session.user = checkUser;
-    // console.log(req.session.user);
 }
 
 exports.postSignup = async (req, res, next) => {
@@ -108,17 +99,17 @@ exports.postSignup = async (req, res, next) => {
         addr = req.body.addr,
         pwd = req.body.pass,
         re_pwd = req.body.re_pass;
-    
+
     const userDb = await userM.getAll(usn);
-    
-    const checkUser = userDb.find( (user) => {
+
+    const checkUser = userDb.find((user) => {
         return user.username == usn;
     });
 
     if (checkUser) {
-       return res.render('users/signup', {
+        return res.render('users/signup', {
             layout: 'option01_layouts',
-            usnErr: 'Username has already existed'
+            usnErr: 'Tên đăng nhập đã tồn tại'
         });
     }
 
@@ -127,7 +118,7 @@ exports.postSignup = async (req, res, next) => {
     if (!checkPass) {
         return res.render('users/signup', {
             layout: 'option01_layouts',
-            rePwdErr: 'Password confirmation does not match password'
+            rePwdErr: 'Mật khẩu xác nhận không trùng khớp'
         })
     }
     const salt = Date.now().toString(16); // sử dụng toString để chuyển sang cơ số hex ~ 16 thì dùng toString(16)
@@ -136,21 +127,40 @@ exports.postSignup = async (req, res, next) => {
     // chuyen pwd ve 64 kytu hexa, moi kytu hexa (0->F) co 4bit ~ 16 giatri
     // 1 kytu thuong (thuan) thi co 256 gia tri ~ 8bit
     const pwdHashed = CryptoJS.SHA3(pwdSalt, { outputLength: hashLength * 4 }).toString(CryptoJS.enc.Hex); // 1 kết quả mã hóa ra 1 mảng bytes, cần chuyển sang chuỗi -> sử dụng luôn hàm toString
-    
+
     const user = {
-        fullname : fulln,
+        fullname: fulln,
         username: usn,
-        phone : phone,
-        email : email,
-        address : addr,
+        phone: phone,
+        email: email,
+        address: addr,
         password: pwdHashed + salt // lưu password đã hash và salt
     };
-    
+
     const newUser = await userM.add(user);
     res.redirect('/signin');
 }
 
-exports.logout = async (res, req, next) => {
-    req.session.user = null;
-    res.redirect("/")
+exports.getLogout = async (req, res, next) => {
+    // console.log(req.session.username);
+    delete req.session.user;
+    req.session.authenticated = false;
+    res.redirect('/');
+}
+
+exports.postAccount = async (req, res, next) => {
+
+    try {
+        if (!req.session.user) {
+            return res.render('users/signin', {
+                layout: 'option01_layouts'
+            });
+        }
+
+        const { id } = req.body;
+        console.log(id);
+
+    } catch (error) {
+        next(error);
+    }
 }

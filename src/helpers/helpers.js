@@ -4,7 +4,7 @@ const getNumberOfPage = (totals) => {
 
 module.exports = {
   getNumberOfPage,
-
+  
   getDataRender: (recipesSearch, page, limit) => {
     return recipesSearch.slice((page - 1) * limit, (page - 1) * limit + limit);
   },

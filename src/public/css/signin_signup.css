@@ -118,7 +118,7 @@ list-type-ulli, .socials {
   src: url("/fonts/poppins/poppins-v5-latin-900.eot");
   /* IE9 Compat Modes */
   src: local("Poppins Black"), local("Poppins-Black"), url("/fonts/poppins/poppins-v5-latin-900.eot?#iefix") format("embedded-opentype"), url("/fonts/poppins/poppins-v5-latin-900.woff2") format("woff2"), url("/fonts/poppins/poppins-v5-latin-900.woff") format("woff"), url("/fonts/poppins/poppins-v5-latin-900.ttf") format("truetype"), url("/fonts/poppins/poppins-v5-latin-900.svg#Poppins") format("svg");
-  /* Legacy iOS */ }
+  /* Legacy iOS */ } */
 
 
 a:focus, 
@@ -181,7 +181,7 @@ h2 {
   padding: 0;
   font-weight: bold;
   color: #222;
-  font-family: Poppins;
+  font-family: Helvetica,Arial,sans-serif;
   font-size: 36px;
 }
 
@@ -200,7 +200,7 @@ body {
   color: #222;
   background: #f8f8f8;
   font-weight: 400;
-  font-family: Poppins;
+  font-family: Helvetica,Arial,sans-serif;
 }
 
 .container {
@@ -367,7 +367,7 @@ input {
   border: none;
   border-bottom: 1px solid #999;
   padding: 6px 30px;
-  font-family: Poppins;
+  font-family: Helvetica,Arial,sans-serif;
   box-sizing: border-box;
 }
   input:focus {
