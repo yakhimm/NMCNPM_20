@@ -207,11 +207,11 @@ exports.postAccount = async (req, res, next) => {
 
 exports.getSetting = async (req, res, next) => {
     try {
-        if (!req.session.user) {
-            return res.render('users/signin', {
-                layout: 'option01_layouts'
-            });
-        }
+        // if (!req.session.user) {
+        //     return res.render('users/signin', {
+        //         layout: 'option01_layouts'
+        //     });
+        // }
 
         const { id } = req.params;
         const users = await userM.getAll();
@@ -229,15 +229,15 @@ exports.getSetting = async (req, res, next) => {
 
 exports.postSetting = async (req, res, next) => {
     try {
-        if (!req.session.user) {
-            return res.render('users/signin', {
-                layout: 'option01_layouts'
-            });
-        }
+        // if (!req.session.user) {
+        //     return res.render('users/signin', {
+        //         layout: 'option01_layouts'
+        //     });
+        // }
 
         const { id } = req.params;
 
-        const { old_pw, new_pw, confirm_pw } = req.body;
+        const { old_pw, new_pw, confirm_pw } = req.body; 
 
         const users = await userM.getAll();
         const user = users.find((u) => u.id === +id);
@@ -246,21 +246,23 @@ exports.postSetting = async (req, res, next) => {
         const salt = pwdDb.slice(hashLength);
         const pwdSalt = old_pw + salt;
         const pwdHashed = CryptoJS.SHA3(pwdSalt, { outputLength: hashLength * 4 }).toString(CryptoJS.enc.Hex);
+        
 
         if (pwdDb === (pwdHashed + salt)) {
             if (old_pw === new_pw) {
                 return res.render('users/setting', {
                     user,
                     error: "Mật khẩu mới không được trùng mật khẩu cũ",
-                    layout: 'option01_layouts'
+                    layout: 'option02_layouts'
                 })
+                
             }
             else {
                 if (new_pw !== confirm_pw) {
                     return res.render('users/setting', {
                         user,
                         error: "Mật khẩu xác nhận không đúng",
-                        layout: 'option01_layouts'
+                        layout: 'option02_layouts'
                     })
                 }
                 else {
@@ -268,12 +270,14 @@ exports.postSetting = async (req, res, next) => {
                     const pwdSalt = new_pw + salt;
 
                     const pwdHashed = CryptoJS.SHA3(pwdSalt, { outputLength: hashLength * 4 }).toString(CryptoJS.enc.Hex);
-                    const pw = {
-                        password: pwdHashed
-                    };
-                    const pwNew = await userM.editPassword(pw, id);
+                    const pw =  pwdHashed + salt;
 
-                    return res.redirect('/users/signin');
+                    const pwNew = await userM.editPassword(pw, id);
+                    
+                    delete req.session.user;
+                    delete req.session.authenticated;
+
+                    return res.redirect('/signin');
                 }
             }
         }
@@ -281,7 +285,7 @@ exports.postSetting = async (req, res, next) => {
             return res.render('users/setting', {
                 user,
                 error: "Mật khẩu cũ không đúng",
-                layout: 'option01_layouts'
+                layout: 'option02_layouts'
             })
         }
     } catch (error) {
