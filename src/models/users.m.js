@@ -31,5 +31,10 @@ module.exports = {
         const rs = await db.none('UPDATE "Users" SET "fullname"=$1, "phone"=$2, "email"=$3, "address"=$4 WHERE "id"=$5', 
             [u.fullname, u.phone, u.email, u.address, id]);
         return rs;
+    },
+    editPassword: async(pw, id) => {
+        const rs = await db.none('UPDATE "Users" SET "password"=$1 WHERE "id"=$2', 
+            [pw, id]);
+        return rs;
     }
 };
