@@ -251,7 +251,7 @@ exports.postSetting = async (req, res, next) => {
                 return res.render('users/setting', {
                     user,
                     error: "Mật khẩu mới không được trùng mật khẩu cũ",
-                    layout: 'option01_layouts'
+                    layout: 'option02_layouts'
                 })
             }
             else {
@@ -259,7 +259,7 @@ exports.postSetting = async (req, res, next) => {
                     return res.render('users/setting', {
                         user,
                         error: "Mật khẩu xác nhận không đúng",
-                        layout: 'option01_layouts'
+                        layout: 'option02_layouts'
                     })
                 }
                 else {
@@ -281,7 +281,7 @@ exports.postSetting = async (req, res, next) => {
             return res.render('users/setting', {
                 user,
                 error: "Mật khẩu cũ không đúng",
-                layout: 'option01_layouts'
+                layout: 'option02_layouts'
             })
         }
     } catch (error) {
