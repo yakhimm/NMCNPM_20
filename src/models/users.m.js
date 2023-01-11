@@ -36,5 +36,5 @@ module.exports = {
         const rs = await db.none('UPDATE "Users" SET "password"=$1 WHERE "id"=$2', 
             [pw, id]);
         return rs;
-    }
+    },
 };
