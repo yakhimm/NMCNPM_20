@@ -116,7 +116,7 @@ class RECIPE:
                 # Lấy dữ liệu là nguyên liệu
                 nguyenlieu = self.get_ingredient(row_bm3)
                 recipe.update(nguyenlieu)
-                monman = ['cá', 'thịt', 'bò', 'heo', 'sườn', 'gà', 'vịt', 'tôm', 'mực', 'cua', 'ốc', 'hàu']
+                monman = ['cá', 'thịt', 'bò', 'heo', 'sườn', 'gà', 'vịt', 'tôm', 'mực', 'cua', 'ốc', 'hàu', 'trứng']
                 # Sau đó sẽ dựa trên nguyên liệu đánh giá món chay, mặn
                 tag = 'món chay'
                 for i in nguyenlieu['nguyenlieu']:
