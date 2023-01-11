@@ -12,10 +12,9 @@ router.post('/signup', userC.postSignup);
 
 router.get('/logout', userC.getLogout);
 
-router.post('/account', userC.postAccount);
+router.get('/account/:id', userC.getAccount);
+router.post('/account/:id', userC.postAccount);
 
-
-// router.get('/', userC.getAll);
 // ---------------------------------------------
 router.get('/',  controller.getHome);
 
