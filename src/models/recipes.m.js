@@ -9,7 +9,7 @@ const cn = {
     port: 5432,
     database: 'YummyWebsite',
     user: 'postgres',
-    password: '123',
+    password: '20120275',
     max: 30
 };
 

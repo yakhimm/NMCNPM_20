@@ -1,12 +1,12 @@
 const userM = require('../models/users.m');
+const allRecipesM = require('../models/recipes.m');
 const CryptoJS = require("crypto-js");
 const hashLength = 64 //bytes
 
-exports.getAll = async (req, res, next) => {
 
-    // res.render('users/signin', {
-    //     layout: 'option01_layouts'
-    // });
+
+
+exports.getAll = async (req, res, next) => {
 
     try {
         if (!req.session.user) {
@@ -164,12 +164,17 @@ exports.getAccount = async (req, res, next) => {
         }
 
         const { id } = req.params;
+        const favoriteRecipesDb = await allRecipesM.getAllFavoriteRecipesByUserID(req.session.user.id);
+
         const users = await userM.getAll();
         const user = users.find((u) => u.id === +id);
 
         res.render('users/account', {
             authenticated: req.session.authenticated,
-            user,
+            favorite_counts: favoriteRecipesDb.length,
+            user: req.session.user,
+            favorRecipes: favoriteRecipesDb,
+            showCategorySide: true,
             layout: 'option02_layouts'
         })
 
@@ -188,14 +193,19 @@ exports.postAccount = async (req, res, next) => {
 
         const { id } = req.params;
 
-        const { name, phone, email, address } = req.body;
+        const { fullname, phone, email, address } = req.body;
 
         const u = {
-            fullname: name,
+            id: id,
+            fullname: fullname,
             phone: phone,
             email: email,
             address: address
         };
+
+        // cập nhật lại user trong session
+        req.session.user = u;
+
         const uNew = await userM.editAccount(u, id);
 
         res.redirect(`/account/${id}`);
@@ -213,11 +223,17 @@ exports.getSetting = async (req, res, next) => {
         }
 
         const { id } = req.params;
+        const favoriteRecipesDb = await allRecipesM.getAllFavoriteRecipesByUserID(req.session.user.id);
+
         const users = await userM.getAll();
         const user = users.find((u) => u.id === +id);
 
         res.render('users/setting', {
-            user,
+            authenticated: req.session.authenticated,
+            favorite_counts: favoriteRecipesDb.length,
+            favorRecipes: favoriteRecipesDb,
+            user: req.session.user,
+            showCategorySide: true,
             layout: 'option02_layouts'
         })
 
@@ -241,6 +257,11 @@ exports.postSetting = async (req, res, next) => {
         const users = await userM.getAll();
         const user = users.find((u) => u.id === +id);
 
+        console.log(req.session.user);
+
+        // const favoriteRecipesDb = await allRecipesM.getAllFavoriteRecipesByUserID(req.session.user.id);
+        // console.log(favoriteRecipesDb);
+
         const pwdDb = user.password;
         const salt = pwdDb.slice(hashLength);
         const pwdSalt = old_pw + salt;
@@ -249,7 +270,11 @@ exports.postSetting = async (req, res, next) => {
         if (pwdDb === (pwdHashed + salt)) {
             if (old_pw === new_pw) {
                 return res.render('users/setting', {
-                    user,
+                    authenticated: req.session.authenticated,
+                    favorite_counts: favoriteRecipesDb.length,
+                    favorRecipes: favoriteRecipesDb,
+                    user: req.session.user,
+                    showCategorySide: true,
                     error: "Mật khẩu mới không được trùng mật khẩu cũ",
                     layout: 'option02_layouts'
                 })
@@ -257,7 +282,11 @@ exports.postSetting = async (req, res, next) => {
             else {
                 if (new_pw !== confirm_pw) {
                     return res.render('users/setting', {
-                        user,
+                        authenticated: req.session.authenticated,
+                        favorite_counts: favoriteRecipesDb.length,
+                        favorRecipes: favoriteRecipesDb,
+                        user: req.session.user,
+                        showCategorySide: true,
                         error: "Mật khẩu xác nhận không đúng",
                         layout: 'option02_layouts'
                     })
@@ -279,7 +308,11 @@ exports.postSetting = async (req, res, next) => {
         }
         else {
             return res.render('users/setting', {
-                user,
+                authenticated: req.session.authenticated,
+                favorite_counts: favoriteRecipesDb.length,
+                favorRecipes: favoriteRecipesDb,
+                user: req.session.user,
+                showCategorySide: true,
                 error: "Mật khẩu cũ không đúng",
                 layout: 'option02_layouts'
             })

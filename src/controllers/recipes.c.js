@@ -8,9 +8,6 @@ const cartsM = require('../models/carts.m');
 
 const helpers = require('../helpers/helpers');
 
-// let authenticated = false;
-// let user = undefined;
-
 exports.getAllRecipes = async (req, res, next, model) => {
     const allRecipes = await model.getAll();
     const list_name = Object.keys(allRecipes);
@@ -75,22 +72,18 @@ exports.getHome = async (req, res, next) => {
     }
 
     let favorite_counts = 0;
-
     if (req.session.authenticated) {
-        authenticated = true;
-        user = req.session.user;
         const favoriteRecipesDb = await allRecipesM.getAllFavoriteRecipesByUserID(req.session.user.id);
+        // favorRecipes = await allRecipesM.getAllFavoriteRecipesByUserID(req.session.user.id);
         favorite_counts = favoriteRecipesDb.length;
     }
     else {
-        authenticated = false;
-        user = undefined;
         favorite_counts = 0;
     }
 
     res.render('home', {
         authenticated: req.session.authenticated,
-        user,
+        user: req.session.user,
         newRecipes,
         dailyRecipes,
         rcmRecipes,
@@ -135,11 +128,11 @@ exports.getDetailRecipe = async (req, res, next) => {
 
                 return res.render('detail_recipe', {
                     authenticated: req.session.authenticated,
-                    user,
+                    user: req.session.user,
                     detail_recipe,
                     favorRecipes,
-                    layout: 'option02_layouts',
-                    favorite_counts
+                    favorite_counts,
+                    layout: 'option02_layouts'
                 });
             }
         }
@@ -161,6 +154,10 @@ function checkIngredient(listIngredient, type) {
                 return true;
             }
         }
+    }
+
+    if (n === type.length) {
+        return true;
     }
 
     return false;
@@ -232,7 +229,7 @@ exports.postSearch = async (req, res, next) => {
 
         res.render('search', {
             authenticated: req.session.authenticated,
-            user,
+            user: req.session.user,
             favorRecipes,
             recipesSearch,
             search: keyword.toUpperCase(),
@@ -280,9 +277,10 @@ exports.getRecipes = async (req, res, next) => {
 
         res.render('recipes', {
             authenticated: req.session.authenticated,
-            user,
-            recipes,
+            user: req.session.user,
+
             favorRecipes,
+            recipes,
             total,
             page,
             helpers,
@@ -336,7 +334,7 @@ exports.getIngredientsRecipe = async (req, res, next) => {
 
         res.render('ingredients', {
             authenticated: req.session.authenticated,
-            user,
+            user: req.session.user,
             recipeName,
             ingredients,
             favorRecipes,
@@ -352,32 +350,35 @@ exports.getIngredientsRecipe = async (req, res, next) => {
 let favoriteRecipes = [];
 exports.getFavorite = async (req, res, next) => {
     try {
-        const favoriteRecipesDb = await allRecipesM.getAllFavoriteRecipesByUserID(req.session.user.id);
+        if (req.session.authenticated) {
+            const favoriteRecipesDb = await allRecipesM.getAllFavoriteRecipesByUserID(req.session.user.id);
 
-        let favoriteRecipes = [];
+            let favoriteRecipes = [];
 
-        const recipes = await allRecipesM.getAll();
-        const list_name = Object.keys(recipes);
+            const recipes = await allRecipesM.getAll();
+            const list_name = Object.keys(recipes);
 
-        for (var i = 0; i < favoriteRecipesDb.length; i++) {
-            for (var j = 0; j < list_name.length; j++) {
-                if (favoriteRecipesDb[i].recipeName === list_name[j].replaceAll("-", "")) {
-                    favoriteRecipes.push({
-                        name: favoriteRecipesDb[i].recipeName,
-                        detail: recipes[list_name[j]]
-                    })
-                    break;
+            for (var i = 0; i < favoriteRecipesDb.length; i++) {
+                for (var j = 0; j < list_name.length; j++) {
+                    if (favoriteRecipesDb[i].recipeName === list_name[j].replaceAll("-", "")) {
+                        favoriteRecipes.push({
+                            name: favoriteRecipesDb[i].recipeName,
+                            detail: recipes[list_name[j]]
+                        })
+                        break;
+                    }
                 }
             }
-        }
 
-        res.render('favorite', {
-            authenticated: req.session.authenticated,
-            user,
-            favoriteRecipes: favoriteRecipes.reverse(),
-            favorite_counts: favoriteRecipesDb.length,
-            layout: 'option02_layouts'
-        });
+            res.render('favorite', {
+                authenticated: req.session.authenticated,
+                user: req.session.user,
+                favoriteRecipes: favoriteRecipes.reverse(),
+                favorite_counts: favoriteRecipesDb.length,
+                showFavoriteSide: true,
+                layout: 'option02_layouts'
+            });
+        }
     } catch (error) {
         next(error);
     }

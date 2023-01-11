@@ -22,7 +22,6 @@ function checkPassword(pwd, re_pwd) {
 $('.signin-form').submit((e) => {
 
     const userInput = document.querySelector("input[id='userRegex']");
-    console.log(userInput);
 
     var bool = true;
 
@@ -44,14 +43,19 @@ $('.signin-form').submit((e) => {
 })
 
 $('.signup-form').submit((e) => {
+
     const keys = document.querySelectorAll('input[id$="Regex"]');
+
     console.log(keys);
 
     var bool = true;
+
     for (var item of keys) {
 
         let name = item.attributes.name.value;
-        console.log(`${name}Valid`);
+        // console.log(`${name}Valid`);
+        console.log(item.value);
+        console.log(name);
 
         if (regex_fields[name].test(item.value)) {
             console.log(name + ': ' + bool);
@@ -64,24 +68,28 @@ $('.signup-form').submit((e) => {
             console.log(name + ': false');
 
             $(`span p[id="${name}Valid"]`).html(error_messages[name]);
-            $(`span p[id="${name}Valid"]`).css("margin-top", "-10px");
+            $(`span p[id="${name}Valid"]`).css("margin-top", "10px");
             e.preventDefault();
         }
     }
 
+
+
     const password = document.getElementById('pass');
     const rePassword = document.getElementById('repass');
 
-    if (!checkPassword(password, rePassword)) {
-
-        rePassword.style.borderColor = "red";
-        $('span p[id="repassValid"]').html(error_messages["repass"]);
-        $('span p[id="repassValid"]').css("margin-top", "-10px");
-        e.preventDefault();
-    }
-    else {
-        rePassword.style.borderColor = null;
-        $('span p[id="repassValid"]').html("");
-        $('span p[id="repassValid"]').css("margin-top", "0");
+    if (password && rePassword) {
+        if (!checkPassword(password, rePassword)) {
+    
+            rePassword.style.borderColor = "red";
+            $('span p[id="repassValid"]').html(error_messages["repass"]);
+            $('span p[id="repassValid"]').css("margin-top", "-10px");
+            e.preventDefault();
+        }
+        else {
+            rePassword.style.borderColor = null;
+            $('span p[id="repassValid"]').html("");
+            $('span p[id="repassValid"]').css("margin-top", "0");
+        }
     }
 })
