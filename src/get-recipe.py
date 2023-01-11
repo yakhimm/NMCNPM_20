@@ -10,7 +10,7 @@ class RECIPE:
     # Khi khởi tạo class thì các phần tử sau sẽ được khởi tạo
     def __init__(self, filepath):
         filenames = next(walk(filepath), (None, None, []))[2]  # [] if no file
-        self.recipe = {}
+        self.recipe = []
         for filename in filenames:
             urls = pd.read_csv(filepath + filename).values
             # Danh sách các công thức là một dictionary      
@@ -22,7 +22,7 @@ class RECIPE:
 
                 # Tên món
                 detail_main = self.soup.find('div', {'class':'detail_main'})
-                name = detail_main.find('div', {'class':'col'}).find('h1').get_text()
+                self.name = detail_main.find('div', {'class':'col'}).find('h1').get_text()
 
                 self.tags = []
                 self.tags.append('miền ' + filename[:-4])
@@ -33,18 +33,13 @@ class RECIPE:
                 cachnau = ['chiên', 'xào', 'kho', 'canh', 'hấp', 'nướng', 'luộc', 'ngâm chua', 'rim', 'lẩu']
                 self.cachnau = 0
                 for item in cachnau:
-                    if name != None and (item in name or item.title() in name):
+                    if self.name != None and (item in self.name or item.title() in self.name):
                         tag = item
                         self.tags.append(tag)
                         self.cachnau = 1    
                         break
-                monchay = 'chay'
-                self.monchay = 0
-                if name != None and (monchay in name or monchay.title() in name):
-                    self.tags.append("món " + monchay)
-                    self.monchay = 1
                 # Lấy dữ liệu của từng url
-                self.recipe[name] = self.request_and_get_recipe()
+                self.recipe.append(self.request_and_get_recipe())
             
     def get_ingredient(self, soup):
         # Tìm đến mục div - class: block-nguyenlieu
@@ -102,7 +97,7 @@ class RECIPE:
     # Hàm request lên url và lấy dữ liệu recipe từ url đó 
     def request_and_get_recipe(self):
         recipe = {}
-
+        recipe['tenmon'] = self.name
         # Lấy hình ảnh 
         detail_img = self.soup.find('div', {'class': 'detail_img w-100 float-left'})
         detail_img = detail_img.find('div', {'class': 'youtube text-center'})
@@ -121,16 +116,15 @@ class RECIPE:
                 # Lấy dữ liệu là nguyên liệu
                 nguyenlieu = self.get_ingredient(row_bm3)
                 recipe.update(nguyenlieu)
-                if self.monchay == 0:
-                    monman = ['cá', 'thịt', 'bò', 'heo', 'sườn', 'gà', 'vịt', 'tôm', 'mực', 'cua', 'ốc', 'trứng']
-                    # Sau đó sẽ dựa trên nguyên liệu đánh giá món chay, mặn
-                    tag = 'món chay'
-                    for i in nguyenlieu['nguyenlieu']:
-                        for item in monman:
-                            if i != None and (item in i or item.title() in i):
-                                tag = 'món mặn'
-                                break            
-                    self.tags.append(tag) 
+                monman = ['cá', 'thịt', 'bò', 'heo', 'sườn', 'gà', 'vịt', 'tôm', 'mực', 'cua', 'ốc', 'hàu']
+                # Sau đó sẽ dựa trên nguyên liệu đánh giá món chay, mặn
+                tag = 'món chay'
+                for i in nguyenlieu['nguyenlieu']:
+                    for item in monman:
+                        if i != None and (item in i or item.title() in i):
+                            tag = 'món mặn'
+                            break            
+                self.tags.append(tag) 
                           
             if cnt == 1:
                 # Lấy dữ liệu là Sơ chế
@@ -162,7 +156,7 @@ class RECIPE:
 # file csv chứa các url
 filepath = './csv/recipe/'
 # Tạo một dictionary tên recipe là các công thức 
-recipe = RECIPE(filepath).recipe
+recipe = {'recipes': RECIPE(filepath).recipe}
 
 # Ghi các công thức ra file json
 # Kết quả ghi ra không có dấu, tuy nhiên khi đọc vào bằng json thì kết quả đọc vào sẽ có dấu (read.csv có chứng minh)
