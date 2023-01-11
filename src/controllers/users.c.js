@@ -203,3 +203,87 @@ exports.postAccount = async (req, res, next) => {
         next(error);
     }
 };
+
+exports.getSetting = async (req, res, next) => {
+    try {
+        if (!req.session.user) {
+            return res.render('users/signin', {
+                layout: 'option01_layouts'
+            });
+        }
+
+        const { id } = req.params;
+        const users = await userM.getAll();
+        const user = users.find((u) => u.id === +id);
+
+        res.render('users/setting', {
+            user,
+            layout: 'option02_layouts'
+        })
+
+    } catch (error) {
+        next(error);
+    }
+};
+
+exports.postSetting = async (req, res, next) => {
+    try {
+        if (!req.session.user) {
+            return res.render('users/signin', {
+                layout: 'option01_layouts'
+            });
+        }
+
+        const { id } = req.params;
+
+        const { old_pw, new_pw, confirm_pw } = req.body;
+
+        const users = await userM.getAll();
+        const user = users.find((u) => u.id === +id);
+
+        const pwdDb = user.password;
+        const salt = pwdDb.slice(hashLength);
+        const pwdSalt = old_pw + salt;
+        const pwdHashed = CryptoJS.SHA3(pwdSalt, { outputLength: hashLength * 4 }).toString(CryptoJS.enc.Hex);
+
+        if (pwdDb === (pwdHashed + salt)) {
+            if (old_pw === new_pw) {
+                return res.render('users/setting', {
+                    user,
+                    error: "Mật khẩu mới không được trùng mật khẩu cũ",
+                    layout: 'option01_layouts'
+                })
+            }
+            else {
+                if (new_pw !== confirm_pw) {
+                    return res.render('users/setting', {
+                        user,
+                        error: "Mật khẩu xác nhận không đúng",
+                        layout: 'option01_layouts'
+                    })
+                }
+                else {
+                    const salt = Date.now().toString(16);
+                    const pwdSalt = new_pw + salt;
+
+                    const pwdHashed = CryptoJS.SHA3(pwdSalt, { outputLength: hashLength * 4 }).toString(CryptoJS.enc.Hex);
+                    const pw = {
+                        password: pwdHashed
+                    };
+                    const pwNew = await userM.editPassword(pw, id);
+
+                    return res.redirect('/users/signin');
+                }
+            }
+        }
+        else {
+            return res.render('users/setting', {
+                user,
+                error: "Mật khẩu cũ không đúng",
+                layout: 'option01_layouts'
+            })
+        }
+    } catch (error) {
+        next(error);
+    }
+};

@@ -15,6 +15,9 @@ router.get('/logout', userC.getLogout);
 router.get('/account/:id', userC.getAccount);
 router.post('/account/:id', userC.postAccount);
 
+router.get('/setting/:id', userC.getSetting);
+router.post('/setting/:id', userC.postSetting);
+
 // ---------------------------------------------
 router.get('/',  controller.getHome);
 
