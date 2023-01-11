@@ -28,6 +28,9 @@ router.get('/recipes', controller.getRecipes);
 router.get('/favorite', controller.getFavorite);
 router.post('/favorite', controller.postFavorite);
 
+// router.get('/cart', controller.getCart);
+// router.post('/cart', controller.postCart);
+
 router.get('/:name', controller.getDetailRecipe);
 
 router.post('/', controller.postSearch);
