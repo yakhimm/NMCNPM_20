@@ -79,7 +79,6 @@ exports.postSignin = async (req, res, next) => {
 
         req.session.user = checkUser;
         req.session.authenticated = true;
-
         return res.redirect('/home');
     }
     else {
@@ -169,6 +168,7 @@ exports.getAccount = async (req, res, next) => {
         const user = users.find((u) => u.id === +id);
 
         res.render('users/account', {
+            authenticated: req.session.authenticated,
             user,
             layout: 'option02_layouts'
         })
@@ -267,12 +267,13 @@ exports.postSetting = async (req, res, next) => {
                     const pwdSalt = new_pw + salt;
 
                     const pwdHashed = CryptoJS.SHA3(pwdSalt, { outputLength: hashLength * 4 }).toString(CryptoJS.enc.Hex);
-                    const pw = {
-                        password: pwdHashed
-                    };
+                    const pw = pwdHashed + salt;
                     const pwNew = await userM.editPassword(pw, id);
 
-                    return res.redirect('/users/signin');
+                    // xóa session
+                    delete req.session.user;
+                    delete req.session.authenticated;
+                    return res.redirect('/signin');
                 }
             }
         }

@@ -1,30 +1,30 @@
 <div class="container">
-    {{#with user}}
     <div class="row">
         <div class="col-12">
             <div class="card border-light mb-3">
                 <div class="card-header bg-primary text-center text-white">Đổi mật khẩu</div>
                 <div class="card-body">
+                    {{#with user}}
                     <form method="POST" action="/setting/{{id}}">
+                        {{/with}}
                         <div class="form-group">
                             <label for="old_pw" class="form-label">Mật khẩu cũ</label>
-                            <input type="password" class="form-control" id="old_pw" name="old_pw" />
+                            <input type="password" class="form-control" id="old_pw" name="old_pw" required/>
                         </div>
                         <div class="form-group">
                             <label for="new_pw" class="form-label">Mật khẩu mới</label>
-                            <input type="password" class="form-control" id="new_pw" name="new_pw" />
+                            <input type="password" class="form-control" id="new_pw" name="new_pw" required/>
                         </div>
                         <div class="form-group">
                             <label for="confirm_pw" class="form-label">Xác nhận lại mật khẩu</label>
-                            <input type="password" class="form-control" id="confirm_pw" name="confirm_pw" />
+                            <input type="password" class="form-control" id="confirm_pw" name="confirm_pw" required/>
                         </div>
                         <span style="color: red;"><i>{{error}}</i></span>
-                        
+
                         <button type="submit" class="btn btn-primary mt-3 col-12">Đổi mật khẩu</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-    {{/with}}
 </div>

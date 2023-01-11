@@ -8,9 +8,8 @@ const cartsM = require('../models/carts.m');
 
 const helpers = require('../helpers/helpers');
 
-let favorite_counts = 0;
-let authenticated = false;
-let user = undefined;
+// let authenticated = false;
+// let user = undefined;
 
 exports.getAllRecipes = async (req, res, next, model) => {
     const allRecipes = await model.getAll();
@@ -25,7 +24,7 @@ exports.getAllRecipes = async (req, res, next, model) => {
             detail: allRecipes[list_name[i]]
         });
     }
-    
+
     return detail_recipe;
 }
 
@@ -75,18 +74,22 @@ exports.getHome = async (req, res, next) => {
         newRecipes = newRecipes.slice(0, 10);
     }
 
+    let favorite_counts = 0;
 
     if (req.session.authenticated) {
         authenticated = true;
         user = req.session.user;
+        const favoriteRecipesDb = await allRecipesM.getAllFavoriteRecipesByUserID(req.session.user.id);
+        favorite_counts = favoriteRecipesDb.length;
     }
     else {
         authenticated = false;
         user = undefined;
+        favorite_counts = 0;
     }
 
     res.render('home', {
-        authenticated,
+        authenticated: req.session.authenticated,
         user,
         newRecipes,
         dailyRecipes,
@@ -112,6 +115,12 @@ exports.getDetailRecipe = async (req, res, next) => {
         const list_name = Object.keys(recipes);
         const detail_recipe = [];
 
+        let favorite_counts = 0;
+        if (req.session.authenticated) {
+            const favoriteRecipesDb = await allRecipesM.getAllFavoriteRecipesByUserID(req.session.user.id);
+            favorite_counts = favoriteRecipesDb.length;
+        }
+
         for (var i = 0; i < list_name.length; i++) {
             let temp = list_name[i].replaceAll("-", " ");
             temp = temp.toLowerCase();
@@ -125,7 +134,7 @@ exports.getDetailRecipe = async (req, res, next) => {
                 });
 
                 return res.render('detail_recipe', {
-                    authenticated,
+                    authenticated: req.session.authenticated,
                     user,
                     detail_recipe,
                     favorRecipes,
@@ -173,6 +182,12 @@ exports.postSearch = async (req, res, next) => {
         const list_name = Object.keys(recipes);                                         //mảng lưu tên món ăn
         let recipesSearch = [];                                                       //mảng lưu những công thức mà người dùng nhập từ khóa tìm kiếm
 
+        let favorite_counts = 0;
+        if (req.session.authenticated) {
+            const favoriteRecipesDb = await allRecipesM.getAllFavoriteRecipesByUserID(req.session.user.id);
+            favorite_counts = favoriteRecipesDb.length;
+        }
+
         if (search) {
             keyword = search;
             search = search.toLowerCase();
@@ -216,7 +231,7 @@ exports.postSearch = async (req, res, next) => {
         }
 
         res.render('search', {
-            authenticated,
+            authenticated: req.session.authenticated,
             user,
             favorRecipes,
             recipesSearch,
@@ -257,8 +272,14 @@ exports.getRecipes = async (req, res, next) => {
             recipes = recipes.slice(0, 10);
         }
 
+        let favorite_counts = 0;
+        if (req.session.authenticated) {
+            const favoriteRecipesDb = await allRecipesM.getAllFavoriteRecipesByUserID(req.session.user.id);
+            favorite_counts = favoriteRecipesDb.length;
+        }
+
         res.render('recipes', {
-            authenticated,
+            authenticated: req.session.authenticated,
             user,
             recipes,
             favorRecipes,
@@ -307,8 +328,14 @@ exports.getIngredientsRecipe = async (req, res, next) => {
             }
         }
 
+        let favorite_counts = 0;
+        if (req.session.authenticated) {
+            const favoriteRecipesDb = await allRecipesM.getAllFavoriteRecipesByUserID(req.session.user.id);
+            favorite_counts = favoriteRecipesDb.length;
+        }
+
         res.render('ingredients', {
-            authenticated,
+            authenticated: req.session.authenticated,
             user,
             recipeName,
             ingredients,
@@ -325,11 +352,30 @@ exports.getIngredientsRecipe = async (req, res, next) => {
 let favoriteRecipes = [];
 exports.getFavorite = async (req, res, next) => {
     try {
+        const favoriteRecipesDb = await allRecipesM.getAllFavoriteRecipesByUserID(req.session.user.id);
+
+        let favoriteRecipes = [];
+
+        const recipes = await allRecipesM.getAll();
+        const list_name = Object.keys(recipes);
+
+        for (var i = 0; i < favoriteRecipesDb.length; i++) {
+            for (var j = 0; j < list_name.length; j++) {
+                if (favoriteRecipesDb[i].recipeName === list_name[j].replaceAll("-", "")) {
+                    favoriteRecipes.push({
+                        name: favoriteRecipesDb[i].recipeName,
+                        detail: recipes[list_name[j]]
+                    })
+                    break;
+                }
+            }
+        }
+
         res.render('favorite', {
-            authenticated,
+            authenticated: req.session.authenticated,
             user,
             favoriteRecipes: favoriteRecipes.reverse(),
-            favorite_counts,
+            favorite_counts: favoriteRecipesDb.length,
             layout: 'option02_layouts'
         });
     } catch (error) {
@@ -339,28 +385,41 @@ exports.getFavorite = async (req, res, next) => {
 
 exports.postFavorite = async (req, res, next) => {
     try {
-        const { name } = req.body;
 
-        const recipes = await allRecipesM.getAll();
-        const list_name = Object.keys(recipes);
+        if (req.session.authenticated) {
+            const favoriteRecipesDb = await allRecipesM.getAllFavoriteRecipesByUserID(req.session.user.id);
 
-        for (var i = 0; i < favoriteRecipes.length; i++) {
-            if (name === favoriteRecipes[i].name) {
-                favorite_counts--;
-                favoriteRecipes.splice(i, 1);
-                return;
+            const { name } = req.body;
+
+            for (var i = 0; i < favoriteRecipesDb.length; i++) {
+                if (name === favoriteRecipesDb[i].recipeName) {
+                    const f = {
+                        userID: req.session.user.id,
+                        recipeName: name
+                    };
+                    const fDel = await allRecipesM.deleteFavoriteRecipe(f);
+                    return;
+                }
+            };
+
+            const favoriteRecipes = await allRecipesM.getAllFavoriteRecipes();
+            let id;
+            if (!favoriteRecipes || !favoriteRecipes?.length) {
+                id = 0;
             }
-        };
+            else
+                id = favoriteRecipes[favoriteRecipes.length - 1].id + 1;
 
-        for (var i = 0; i < list_name.length; i++) {
-            if (name === list_name[i].replaceAll("-", " ")) {
-                favorite_counts++;
-                return favoriteRecipes.push({
-                    name,
-                    detail: recipes[list_name[i]]
-                })
-            }
+            const f = {
+                id,
+                userID: req.session.user.id,
+                name
+            };
+            const fNew = await allRecipesM.addFavoriteRecipe(f);
         }
+
+        // else render yêu cầu đăng nhập
+
     } catch (error) {
         next(error);
     }
