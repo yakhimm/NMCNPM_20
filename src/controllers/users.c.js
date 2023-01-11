@@ -169,6 +169,7 @@ exports.getAccount = async (req, res, next) => {
         const user = users.find((u) => u.id === +id);
 
         res.render('users/account', {
+            authenticated: req.session.authenticated,
             user,
             layout: 'option02_layouts'
         })
