@@ -14,12 +14,12 @@ exports.getAll = async (req, res, next) => {
                 layout: 'option01_layouts'
             });
         }
-        console.log(req.session.username);
+
         return res.redirect('/home');
     } catch (error) {
         next(error);
     }
-}
+};
 
 exports.getSignin = async (req, res, next) => {
 
@@ -30,7 +30,7 @@ exports.getSignin = async (req, res, next) => {
     res.render('users/signin', {
         layout: 'option01_layouts'
     });
-}
+};
 
 exports.getSignup = async (req, res, next) => {
 
@@ -41,7 +41,7 @@ exports.getSignup = async (req, res, next) => {
     res.render('users/signup', {
         layout: 'option01_layouts'
     });
-}
+};
 
 exports.postSignin = async (req, res, next) => {
 
@@ -88,7 +88,7 @@ exports.postSignin = async (req, res, next) => {
             pwdErr: 'Sai mật khẩu'
         });
     }
-}
+};
 
 exports.postSignup = async (req, res, next) => {
 
@@ -100,7 +100,7 @@ exports.postSignup = async (req, res, next) => {
         pwd = req.body.pass,
         re_pwd = req.body.re_pass;
 
-    const userDb = await userM.getAll(usn);
+    const userDb = await userM.getAll();
 
     const checkUser = userDb.find((user) => {
         return user.username == usn;
@@ -128,7 +128,15 @@ exports.postSignup = async (req, res, next) => {
     // 1 kytu thuong (thuan) thi co 256 gia tri ~ 8bit
     const pwdHashed = CryptoJS.SHA3(pwdSalt, { outputLength: hashLength * 4 }).toString(CryptoJS.enc.Hex); // 1 kết quả mã hóa ra 1 mảng bytes, cần chuyển sang chuỗi -> sử dụng luôn hàm toString
 
+    let id;
+    if (!userDb || !userDb?.length) {
+        id = 0;
+    }
+    else
+        id = userDb[userDb.length - 1].id + 1;
+
     const user = {
+        id,
         fullname: fulln,
         username: usn,
         phone: phone,
@@ -139,17 +147,16 @@ exports.postSignup = async (req, res, next) => {
 
     const newUser = await userM.add(user);
     res.redirect('/signin');
-}
+};
 
 exports.getLogout = async (req, res, next) => {
     // console.log(req.session.username);
     delete req.session.user;
     req.session.authenticated = false;
     res.redirect('/');
-}
+};
 
-exports.postAccount = async (req, res, next) => {
-
+exports.getAccount = async (req, res, next) => {
     try {
         if (!req.session.user) {
             return res.render('users/signin', {
@@ -157,10 +164,42 @@ exports.postAccount = async (req, res, next) => {
             });
         }
 
-        const { id } = req.body;
-        console.log(id);
+        const { id } = req.params;
+        const users = await userM.getAll();
+        const user = users.find((u) => u.id === +id);
+
+        res.render('users/account', {
+            user,
+            layout: 'option02_layouts'
+        })
 
     } catch (error) {
         next(error);
     }
-}
+};
+
+exports.postAccount = async (req, res, next) => {
+    try {
+        if (!req.session.user) {
+            return res.render('users/signin', {
+                layout: 'option01_layouts'
+            });
+        }
+
+        const { id } = req.params;
+
+        const { name, phone, email, address } = req.body;
+
+        const u = {
+            fullname: name,
+            phone: phone,
+            email: email,
+            address: address
+        };
+        const uNew = await userM.editAccount(u, id);
+
+        res.redirect(`/account/${id}`);
+    } catch (error) {
+        next(error);
+    }
+};

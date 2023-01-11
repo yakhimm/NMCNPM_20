@@ -25,7 +25,7 @@ exports.getAllRecipes = async (req, res, next, model) => {
             detail: allRecipes[list_name[i]]
         });
     }
-
+    
     return detail_recipe;
 }
 
