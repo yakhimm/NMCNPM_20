@@ -246,7 +246,7 @@ exports.postSearch = async (req, res, next) => {
 exports.getRecipes = async (req, res, next) => {
     try {
         const favorRecipes = await this.getAllRecipes(req, res, next, favorRecipesM);
-        
+
         let data = await allRecipesM.getAll();
         const list_name = Object.keys(data);                                         //mảng lưu tên món ăn
         let recipes = [];                                                       //mảng lưu những công thức mà người dùng nhập từ khóa tìm kiếm
@@ -431,6 +431,14 @@ exports.postFavorite = async (req, res, next) => {
 
 exports.getPostRecipe = async (req, res, next) => {
     try {
+
+        //kiem tra dang nhap
+        if (!req.session.user) {
+            return res.render('users/signin', {
+                layout: 'option01_layouts'
+            });
+        }
+
         const favoriteRecipesDb = await allRecipesM.getAllFavoriteRecipesByUserID(req.session.user.id);
 
         const newRecipesDb = await allRecipesM.getNewRecipesByUserID(req.session.user.id);
@@ -465,8 +473,8 @@ exports.postPostRecipe = async (req, res, next) => {
     try {
         const favoriteRecipesDb = await allRecipesM.getAllFavoriteRecipesByUserID(req.session.user.id);
 
-        const { recipes } = await allRecipesM.getAll();
-        const { newRecipes } = await newRecipesM.getAll();
+        let recipes = await allRecipesM.getAll();
+        let newRecipes = await newRecipesM.getAll();
 
         const { ten, image, nguyenlieu, soche, thuchien, cachdung, machnho, tags } = req.body;
 
@@ -477,7 +485,7 @@ exports.postPostRecipe = async (req, res, next) => {
         const mach_nho = machnho.split('. ');
         const Tags = tags.split('. ');
 
-        const newRecipe = {
+        const newRecipe = { 
             tenmon: ten,
             image,
             nguyenlieu: nguyen_lieu,
@@ -487,14 +495,15 @@ exports.postPostRecipe = async (req, res, next) => {
             machnho: mach_nho,
             tags: Tags
         };
+
         recipes.push(newRecipe);
         newRecipes.push(newRecipe);
 
-        let a = JSON.stringify({recipes}, null, 2);
+        let a = JSON.stringify({ recipes }, null, 2);
         fs.promises.writeFile("./db/recipe.json", a, "utf-8");
 
-        let b = JSON.stringify({newRecipes}, null, 2);
-        fs.promises.writeFile("./db/newRecipes.json", b, "utf-8");        
+        let b = JSON.stringify({ newRecipes }, null, 2);
+        fs.promises.writeFile("./db/newRecipes.json", b, "utf-8");
 
         const newRecipesDb = await allRecipesM.getNewRecipes();
         let id;

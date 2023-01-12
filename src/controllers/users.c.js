@@ -3,9 +3,6 @@ const allRecipesM = require('../models/recipes.m');
 const CryptoJS = require("crypto-js");
 const hashLength = 64 //bytes
 
-
-
-
 exports.getAll = async (req, res, next) => {
 
     try {
