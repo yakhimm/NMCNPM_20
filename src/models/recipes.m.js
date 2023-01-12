@@ -43,8 +43,8 @@ module.exports = {
         return rs;
     },
     addFavoriteRecipe: async(f) => {
-        const rs = await db.none('INSERT INTO "FavoriteRecipes"("id", "userID", "recipeName") VALUES($1, $2, $3) RETURNING *',
-            [f.id, f.userID, f.name]);
+        const rs = await db.one('INSERT INTO "FavoriteRecipes"("id", "userID", "recipeName") VALUES($1, $2, $3) RETURNING *',
+            [f.id, f.userID, f.tenmon]);
         return rs;
     },
     deleteFavoriteRecipe: async(f) => {

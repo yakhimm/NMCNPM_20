@@ -7,6 +7,7 @@ const favorRecipesM = require('../models/favoriteRecipes.m');
 const cartsM = require('../models/carts.m');
 
 const helpers = require('../helpers/helpers');
+const fs = require('fs');
 
 exports.getAllRecipes = async (req, res, next, model) => {
     const allRecipes = await model.getAll();
@@ -26,35 +27,31 @@ exports.getAllRecipes = async (req, res, next, model) => {
 }
 
 exports.getCarouselRecipes = async (req, res, next, model) => {
-    const allRecipes = await model.getAll();
-    const list_name = Object.keys(allRecipes);
+    const { carouselRecipes } = await carousRecipesM.getAll();
+
     let detail_recipe = [];
-    let carouselRecipes = [];
+    let carousel_Recipes = [];
 
-    for (var i = 0, j = 0; i < list_name.length; i++) {
-        let name = list_name[i].replaceAll("-", " ");
-
-        detail_recipe.push({
-            name,
-            detail: allRecipes[list_name[i]]
-        });
+    for (var i = 0, j = 0; i < carouselRecipes.length; i++) {
+        detail_recipe.push(carouselRecipes[i]);
 
         j++;
         if (j === 3) {
-            carouselRecipes.push({
+            carousel_Recipes.push({
                 slide: detail_recipe
             });
             detail_recipe = [];
             j = 0;
         }
     }
-    return carouselRecipes;
+    return carousel_Recipes;
 }
 
 exports.getHome = async (req, res, next) => {
+    // console.log(req.session.authenticated);
 
-    let newRecipes = await this.getAllRecipes(req, res, next, newRecipesM)
-    let favorRecipes = await this.getAllRecipes(req, res, next, favorRecipesM);
+    let { newRecipes } = await newRecipesM.getAll()
+    let { favorRecipes } = await favorRecipesM.getAll();
 
     // get data for carousels
     let dailyRecipes = await this.getCarouselRecipes(req, res, next, dailyRecipesM);
@@ -74,7 +71,6 @@ exports.getHome = async (req, res, next) => {
     let favorite_counts = 0;
     if (req.session.authenticated) {
         const favoriteRecipesDb = await allRecipesM.getAllFavoriteRecipesByUserID(req.session.user.id);
-        // favorRecipes = await allRecipesM.getAllFavoriteRecipesByUserID(req.session.user.id);
         favorite_counts = favoriteRecipesDb.length;
     }
     else {
@@ -84,7 +80,8 @@ exports.getHome = async (req, res, next) => {
     res.render('home', {
         authenticated: req.session.authenticated,
         user: req.session.user,
-        newRecipes,
+        newRecipes: newRecipes.reverse(),
+        showFavoriteSide: true,
         dailyRecipes,
         rcmRecipes,
         favorRecipes,
@@ -100,12 +97,11 @@ exports.getHome = async (req, res, next) => {
 let recipeName = '';
 exports.getDetailRecipe = async (req, res, next) => {
     try {
-        let { name } = req.params;
-        name = name.toLowerCase();
+        let { tenmon } = req.params;
 
-        const favorRecipes = await this.getAllRecipes(req, res, next, favorRecipesM);
-        const recipes = await allRecipesM.getAll();
-        const list_name = Object.keys(recipes);
+        const { favorRecipes } = await favorRecipesM.getAll();
+
+        const { recipes } = await allRecipesM.getAll();
         const detail_recipe = [];
 
         let favorite_counts = 0;
@@ -114,21 +110,16 @@ exports.getDetailRecipe = async (req, res, next) => {
             favorite_counts = favoriteRecipesDb.length;
         }
 
-        for (var i = 0; i < list_name.length; i++) {
-            let temp = list_name[i].replaceAll("-", " ");
-            temp = temp.toLowerCase();
+        for (var i = 0; i < recipes.length; i++) {
+            if (recipes[i].tenmon === tenmon) {
+                recipeName = recipes[i].tenmon;
 
-            if (temp === name) {
-
-                recipeName = list_name[i].replaceAll("-", " ");   // luu ten mon dung cho trang ingredients
-                detail_recipe.push({
-                    name: recipeName,
-                    detail: recipes[list_name[i]]
-                });
+                detail_recipe.push(recipes[i]);
 
                 return res.render('detail_recipe', {
                     authenticated: req.session.authenticated,
                     user: req.session.user,
+                    showFavoriteSide: true,
                     detail_recipe,
                     favorRecipes,
                     favorite_counts,
@@ -174,9 +165,9 @@ exports.postSearch = async (req, res, next) => {
     try {
         let { search } = req.body;
 
-        const favorRecipes = await this.getAllRecipes(req, res, next, favorRecipesM);
-        let recipes = await allRecipesM.getAll();
-        const list_name = Object.keys(recipes);                                         //mảng lưu tên món ăn
+        const { favorRecipes } = await favorRecipesM.getAll();
+
+        let { recipes } = await allRecipesM.getAll();
         let recipesSearch = [];                                                       //mảng lưu những công thức mà người dùng nhập từ khóa tìm kiếm
 
         let favorite_counts = 0;
@@ -189,20 +180,17 @@ exports.postSearch = async (req, res, next) => {
             keyword = search;
             search = search.toLowerCase();
 
-            for (var i = 0; i < list_name.length; i++) {
-                let temp = list_name[i].replaceAll("-", " ");                               //bỏ ký tự '-' và viết thường tên món ăn thứ i
+            for (var i = 0; i < recipes.length; i++) {
+                let temp = recipes[i].tenmon;
                 temp = temp.toLowerCase();
 
-                let [list_ingredient] = Object.values(recipes[list_name[i]].nguyenlieu);      //mảng lưu các nguyên liệu của món ăn thứ i
+                let [list_ingredient] = Object.values(recipes[i].nguyenlieu);      //mảng lưu các nguyên liệu của món ăn thứ i
                 for (var j = 0; j < list_ingredient.length; j++) {
                     list_ingredient[j] = list_ingredient[j].toLowerCase();
                     list_ingredient[j] = list_ingredient[j].trim();
 
                     if (temp.includes(search) || list_ingredient[j].includes(search)) {            //tìm kiếm theo tên món hoặc nguyên liệu
-                        recipesSearch.push({
-                            name: list_name[i].replaceAll("-", " "),
-                            detail: recipes[list_name[i]]
-                        });
+                        recipesSearch.push(recipes[i]);
                         break;
                     }
                 }
@@ -214,19 +202,18 @@ exports.postSearch = async (req, res, next) => {
             const { vungmien, loaimon, cachnau, thit, haisan, raucu, tinhbot, khac } = req.body;
 
             for (var i = 0; i < list.length; i++) {
-                if ((list[i].detail.tags.includes(vungmien) || vungmien === 'null') &&
-                    (list[i].detail.tags.includes(loaimon) || loaimon === 'null') &&
-                    (list[i].detail.tags.includes(cachnau) || cachnau === 'null') &&
-                    ((thit === undefined) || (checkIngredient(list[i].detail.nguyenlieu, checkObject(thit)))) &&
-                    ((haisan === undefined) || (checkIngredient(list[i].detail.nguyenlieu, checkObject(haisan)))) &&
-                    ((raucu === undefined) || (checkIngredient(list[i].detail.nguyenlieu, checkObject(raucu)))) &&
-                    ((tinhbot === undefined) || (checkIngredient(list[i].detail.nguyenlieu, checkObject(tinhbot)))) &&
-                    ((khac === undefined) || (checkIngredient(list[i].detail.nguyenlieu, checkObject(khac))))) {
+                if ((list[i].tags.includes(vungmien) || vungmien === 'null') &&
+                    (list[i].tags.includes(loaimon) || loaimon === 'null') &&
+                    (list[i].tags.includes(cachnau) || cachnau === 'null') &&
+                    ((thit === undefined) || (checkIngredient(list[i].nguyenlieu, checkObject(thit)))) &&
+                    ((haisan === undefined) || (checkIngredient(list[i].nguyenlieu, checkObject(haisan)))) &&
+                    ((raucu === undefined) || (checkIngredient(list[i].nguyenlieu, checkObject(raucu)))) &&
+                    ((tinhbot === undefined) || (checkIngredient(list[i].nguyenlieu, checkObject(tinhbot)))) &&
+                    ((khac === undefined) || (checkIngredient(list[i].nguyenlieu, checkObject(khac))))) {
                     recipesSearch.push(list[i]);
                 }
             }
         }
-
         res.render('search', {
             authenticated: req.session.authenticated,
             user: req.session.user,
@@ -245,29 +232,24 @@ exports.postSearch = async (req, res, next) => {
 
 exports.getRecipes = async (req, res, next) => {
     try {
-        const favorRecipes = await this.getAllRecipes(req, res, next, favorRecipesM);
 
-        let data = await allRecipesM.getAll();
-        const list_name = Object.keys(data);                                         //mảng lưu tên món ăn
-        let recipes = [];                                                       //mảng lưu những công thức mà người dùng nhập từ khóa tìm kiếm
+        const { favorRecipes } = await favorRecipesM.getAll();
 
-        for (var i = 0; i < list_name.length; i++) {
-            let name = list_name[i].replaceAll("-", " ");                               //bỏ ký tự '-' và viết thường tên món ăn thứ i
+        let { recipes } = await allRecipesM.getAll();
+        let subRecipes = [];                                                       //mảng lưu những công thức mà người dùng nhập từ khóa tìm kiếm
 
-            recipes.push({
-                name,
-                detail: data[list_name[i]]
-            });
+        for (var i = 0; i < recipes.length; i++) {
+            subRecipes.push(recipes[i]);
         }
 
         let { page } = req.query;
-        let total = recipes.length;
+        let total = subRecipes.length;
 
         if (page) {
-            recipes = recipes.slice((page - 1) * 10, (page - 1) * 10 + 10);
+            subRecipes = subRecipes.slice((page - 1) * 10, (page - 1) * 10 + 10);
         } else {
             page = 1;
-            recipes = recipes.slice(0, 10);
+            subRecipes = subRecipes.slice(0, 10);
         }
 
         let favorite_counts = 0;
@@ -279,8 +261,8 @@ exports.getRecipes = async (req, res, next) => {
         res.render('recipes', {
             authenticated: req.session.authenticated,
             user: req.session.user,
+            subRecipes,
             favorRecipes,
-            recipes,
             total,
             page,
             helpers,
@@ -295,15 +277,15 @@ exports.getRecipes = async (req, res, next) => {
 exports.getIngredientsRecipe = async (req, res, next) => {
     try {
         const carts = await cartsM.getAll();
-        const favorRecipes = await this.getAllRecipes(req, res, next, favorRecipesM);
-        const recipes = await allRecipesM.getAll();
-        const list_name_recipes = Object.keys(recipes);
         const list_name_carts = Object.keys(carts);
 
+        const { favorRecipes } = await favorRecipesM.getAll();
+        const { recipes } = await allRecipesM.getAll()
+
         let list_ingredient = [];
-        for (var i = 0; i < list_name_recipes.length; i++) {
-            if (list_name_recipes[i].replaceAll("-", " ") === recipeName) {
-                list_ingredient = Object.values(recipes[list_name_recipes[i]].nguyenlieu);
+        for (var i = 0; i < recipes.length; i++) {
+            if (recipes[i].tenmon === recipeName) {
+                list_ingredient = recipes[i].nguyenlieu;
                 break;
             }
         }
@@ -347,7 +329,6 @@ exports.getIngredientsRecipe = async (req, res, next) => {
     }
 };
 
-let favoriteRecipes = [];
 exports.getFavorite = async (req, res, next) => {
     try {
         if (req.session.authenticated) {
@@ -355,27 +336,22 @@ exports.getFavorite = async (req, res, next) => {
 
             let favoriteRecipes = [];
 
-            const recipes = await allRecipesM.getAll();
-            const list_name = Object.keys(recipes);
+            const { recipes } = await allRecipesM.getAll();
 
             for (var i = 0; i < favoriteRecipesDb.length; i++) {
-                for (var j = 0; j < list_name.length; j++) {
-                    if (favoriteRecipesDb[i].recipeName === list_name[j].replaceAll("-", "")) {
-                        favoriteRecipes.push({
-                            name: favoriteRecipesDb[i].recipeName,
-                            detail: recipes[list_name[j]]
-                        })
+                for (var j = 0; j < recipes.length; j++) {
+                    if (favoriteRecipesDb[i].recipeName === recipes[j].tenmon) {
+                        favoriteRecipes.push(recipes[j]);
                         break;
                     }
                 }
             }
-
             res.render('favorite', {
                 authenticated: req.session.authenticated,
                 user: req.session.user,
                 favoriteRecipes: favoriteRecipes.reverse(),
                 favorite_counts: favoriteRecipesDb.length,
-                showFavoriteSide: true,
+                showFavoriteSide: false,
                 layout: 'option02_layouts'
             });
         }
@@ -389,16 +365,13 @@ exports.postFavorite = async (req, res, next) => {
         if (req.session.authenticated) {
             const favoriteRecipesDb = await allRecipesM.getAllFavoriteRecipesByUserID(req.session.user.id);
 
-            const { name } = req.body;
-
-            // res.redirect(`/${name}`);
-            // res.render('users/signin');
+            const { tenmon } = req.body;
 
             for (var i = 0; i < favoriteRecipesDb.length; i++) {
-                if (name === favoriteRecipesDb[i].recipeName) {
+                if (tenmon === favoriteRecipesDb[i].recipeName) {
                     const f = {
                         userID: req.session.user.id,
-                        recipeName: name
+                        recipeName: tenmon
                     };
                     const fDel = await allRecipesM.deleteFavoriteRecipe(f);
                     return;
@@ -416,18 +389,17 @@ exports.postFavorite = async (req, res, next) => {
             const f = {
                 id,
                 userID: req.session.user.id,
-                name
+                tenmon
             };
+            console.log(f);
             const fNew = await allRecipesM.addFavoriteRecipe(f);
         }
 
         // else render yêu cầu đăng nhập
-
     } catch (error) {
         next(error);
     }
 }
-
 
 exports.getPostRecipe = async (req, res, next) => {
     try {
@@ -473,8 +445,8 @@ exports.postPostRecipe = async (req, res, next) => {
     try {
         const favoriteRecipesDb = await allRecipesM.getAllFavoriteRecipesByUserID(req.session.user.id);
 
-        let recipes = await allRecipesM.getAll();
-        let newRecipes = await newRecipesM.getAll();
+        let { recipes } = await allRecipesM.getAll();
+        let { newRecipes } = await newRecipesM.getAll();
 
         const { ten, image, nguyenlieu, soche, thuchien, cachdung, machnho, tags } = req.body;
 
@@ -485,7 +457,7 @@ exports.postPostRecipe = async (req, res, next) => {
         const mach_nho = machnho.split('. ');
         const Tags = tags.split('. ');
 
-        const newRecipe = { 
+        const newRecipe = {
             tenmon: ten,
             image,
             nguyenlieu: nguyen_lieu,
@@ -500,7 +472,7 @@ exports.postPostRecipe = async (req, res, next) => {
         newRecipes.push(newRecipe);
 
         let a = JSON.stringify({ recipes }, null, 2);
-        fs.promises.writeFile("./db/recipe.json", a, "utf-8");
+        fs.promises.writeFile("./db/recipes.json", a, "utf-8");
 
         let b = JSON.stringify({ newRecipes }, null, 2);
         fs.promises.writeFile("./db/newRecipes.json", b, "utf-8");
@@ -520,6 +492,7 @@ exports.postPostRecipe = async (req, res, next) => {
         };
         const rNew = await allRecipesM.addNewRecipe(r);
 
+        // this.getHome(req,res,next);
         res.redirect('/');
     } catch (error) {
         next(error);

@@ -7,7 +7,7 @@
                 <li class="me-2">
                     <ion-icon name="chevron-forward-outline"></ion-icon>
                 </li>
-                <li class="breadcrumb-item" aria-current="page">{{name}}</li>
+                <li class="breadcrumb-item" aria-current="page">{{tenmon}}</li>
             </ol>
         </nav>
     </div>
@@ -17,27 +17,25 @@
     {{#if authenticated}}
     {{#each detail_recipe}}
     <button type="checkbox" id="favoriteButton" class="btn btn-danger position-absolute start-0" name="favorite"
-        id="favorite" onclick="addToFavorite('{{name}}')">
+        id="favorite" onclick="addToFavorite('{{tenmon}}')">
         <ion-icon class="text-white fs-3" name="heart-outline"></ion-icon>
     </button>
     {{/each}}
     {{/if}}
 
     {{#each detail_recipe}}
-
-
-    <h1 class="text-center mt-4">{{name}}</h1>
+    <h1 class="text-center mt-4">{{tenmon}}</h1>
 
     <div class="text-center mt-3">
-        <img src="{{detail.image}}" alt="{{name}}" title="{{name}}" width="750px" height="550px" class="rounded-5">
+        <img src="{{image}}" alt="{{tenmon}}" title="{{tenmon}}" width="750px" height="550px" class="rounded-5">
     </div>
 
     <div class="col-10 mt-5 mx-auto">
         <h4 class="text-danger border-bottom border-2 mb-3">Nguyên liệu</h4>
-        <a href="/ingredients/{{name}}" class="order-ingredients fs-5">
+        <a href="/ingredients/{{tenmon}}" class="order-ingredients fs-5">
             <ins>Đặt mua nguyên liệu</ins>
         </a>
-        <ul>{{#each detail.nguyenlieu}}
+        <ul>{{#each nguyenlieu}}
             <li>{{this}}</li>
             {{/each}}
         </ul>
@@ -45,7 +43,7 @@
 
     <div class="col-10 mt-4 mx-auto">
         <h4 class="text-danger border-bottom border-2 mb-3">Sơ chế</h4>
-        <ul>{{#each detail.soche}}
+        <ul>{{#each soche}}
             <li>{{this}}</li>
             {{/each}}
         </ul>
@@ -53,7 +51,7 @@
 
     <div class="col-10 mt-4 mx-auto">
         <h4 class="text-danger border-bottom border-2 mb-3">Thực hiện</h4>
-        <ul>{{#each detail.thuchien}}
+        <ul>{{#each thuchien}}
             <li>{{this}}</li>
             {{/each}}
         </ul>
@@ -61,7 +59,7 @@
 
     <div class="col-10 mt-4 mx-auto">
         <h4 class="text-danger border-bottom border-2 mb-3">Cách dùng</h4>
-        <ul>{{#each detail.cachdung}}
+        <ul>{{#each cachdung}}
             <li>{{this}}</li>
             {{/each}}
         </ul>
@@ -69,7 +67,7 @@
 
     <div class="col-10 mt-4 mx-auto">
         <h4 class="text-danger border-bottom border-2 mb-3">Mách nhỏ</h4>
-        <ul>{{#each detail.machnho}}
+        <ul>{{#each machnho}}
             <li>{{this}}</li>
             {{/each}}
         </ul>
@@ -77,7 +75,7 @@
 
     <div class="col-10 mt-4 mx-auto">
         <h4 class="text-danger border-bottom border-2 mb-3">Từ khóa</h4>
-        <ul>{{#each detail.tags}}
+        <ul>{{#each tags}}
             <li>{{this}}</li>
             {{/each}}
         </ul>
@@ -181,14 +179,14 @@
 </div>
 
 <script>
-    const addToFavorite = async (name) => {
-        const response = await fetch('http://localhost:3000/{{name}}');
+    const addToFavorite = async (tenmon) => {
+        const response = await fetch('http://localhost:3000/{{tenmon}}');
         const res = await fetch('http://localhost:3000/favorite', {
             method: 'post',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ name })
+            body: JSON.stringify({ tenmon })
         });
     }
 

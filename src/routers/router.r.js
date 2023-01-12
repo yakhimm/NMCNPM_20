@@ -37,10 +37,10 @@ router.post('/postRecipe', controller.postPostRecipe);
 router.get('/editRecipe/:tenmon', controller.getEditRecipe);
 //router.post('/deleteRecipe/:tenmon', controller.postDeleteRecipe);
 
-router.get('/:name', controller.getDetailRecipe);
+router.get('/:tenmon', controller.getDetailRecipe);
 
 router.post('/', controller.postSearch);
 
-router.get('/ingredients/:name', controller.getIngredientsRecipe);
+router.get('/ingredients/:tenmon', controller.getIngredientsRecipe);
 
 module.exports = router;

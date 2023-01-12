@@ -10,14 +10,14 @@
         </div>
         <div class="carousel-inner">
             {{#each carousRecipes}}
-            <div class="carousel-item">
+            <div class="carousel-item"> 
                 {{#with slide}}
                 <div class="row g-1">
                     {{#each this}}
-                    <a href="/{{this.name}}" class="col-lg-4 position-relative">
-                        <img src="{{this.detail.image}}" class="d-block w-100 rounded-1" alt="...">
+                    <a href="/{{this.tenmon}}" class="col-lg-4 position-relative">
+                        <img src="{{this.image}}" class="d-block w-100 rounded-1" alt="...">
                         <div class="img-center carousel-caption position-absolute">
-                            <h4 style="text-shadow: 2px 2px 1px #000">{{this.name}}</h4>
+                            <h4 style="text-shadow: 2px 2px 1px #000">{{this.tenmon}}</h4>
                         </div>
                     </a>
                     {{/each}}
