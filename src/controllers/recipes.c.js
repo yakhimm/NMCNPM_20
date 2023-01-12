@@ -246,6 +246,7 @@ exports.postSearch = async (req, res, next) => {
 exports.getRecipes = async (req, res, next) => {
     try {
         const favorRecipes = await this.getAllRecipes(req, res, next, favorRecipesM);
+        
         let data = await allRecipesM.getAll();
         const list_name = Object.keys(data);                                         //mảng lưu tên món ăn
         let recipes = [];                                                       //mảng lưu những công thức mà người dùng nhập từ khóa tìm kiếm
@@ -278,7 +279,6 @@ exports.getRecipes = async (req, res, next) => {
         res.render('recipes', {
             authenticated: req.session.authenticated,
             user: req.session.user,
-
             favorRecipes,
             recipes,
             total,
@@ -386,11 +386,13 @@ exports.getFavorite = async (req, res, next) => {
 
 exports.postFavorite = async (req, res, next) => {
     try {
-
         if (req.session.authenticated) {
             const favoriteRecipesDb = await allRecipesM.getAllFavoriteRecipesByUserID(req.session.user.id);
 
             const { name } = req.body;
+
+            // res.redirect(`/${name}`);
+            // res.render('users/signin');
 
             for (var i = 0; i < favoriteRecipesDb.length; i++) {
                 if (name === favoriteRecipesDb[i].recipeName) {
@@ -417,6 +419,7 @@ exports.postFavorite = async (req, res, next) => {
                 name
             };
             const fNew = await allRecipesM.addFavoriteRecipe(f);
+
         }
 
         // else render yêu cầu đăng nhập

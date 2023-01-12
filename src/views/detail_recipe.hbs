@@ -11,11 +11,20 @@
             </ol>
         </nav>
     </div>
+    {{/each}}
 
+
+    {{#if authenticated}}
+    {{#each detail_recipe}}
     <button type="checkbox" id="favoriteButton" class="btn btn-danger position-absolute start-0" name="favorite"
         id="favorite" onclick="addToFavorite('{{name}}')">
         <ion-icon class="text-white fs-3" name="heart-outline"></ion-icon>
     </button>
+    {{/each}}
+    {{/if}}
+
+    {{#each detail_recipe}}
+
 
     <h1 class="text-center mt-4">{{name}}</h1>
 

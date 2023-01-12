@@ -52,6 +52,13 @@
 
         <!--Main and Side bar-->
         <div class="row mt-4">
+
+            {{#if hideSide}}
+            <!--Main-->
+            <div class="col-12 content-container">
+                {{{body}}}
+            </div>
+            {{else}}
             <!--Main-->
             <div class="col-9 content-container">
                 {{{body}}}
@@ -61,6 +68,8 @@
             <div class="col-3 sidebar-container">
                 {{> side}}
             </div>
+
+            {{/if}}
         </div>
 
     </div>

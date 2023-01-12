@@ -149,7 +149,7 @@ exports.postSignup = async (req, res, next) => {
 };
 
 exports.getLogout = async (req, res, next) => {
-    // console.log(req.session.username);
+    
     delete req.session.user;
     req.session.authenticated = false;
     res.redirect('/');
@@ -164,7 +164,8 @@ exports.getAccount = async (req, res, next) => {
         }
 
         const { id } = req.params;
-        const favoriteRecipesDb = await allRecipesM.getAllFavoriteRecipesByUserID(req.session.user.id);
+
+        const favoriteRecipesDb = await allRecipesM.getAllFavoriteRecipesByUserID(req.session.user.id);    
 
         const users = await userM.getAll();
         const user = users.find((u) => u.id === +id);
@@ -173,8 +174,7 @@ exports.getAccount = async (req, res, next) => {
             authenticated: req.session.authenticated,
             favorite_counts: favoriteRecipesDb.length,
             user: req.session.user,
-            favorRecipes: favoriteRecipesDb,
-            showCategorySide: true,
+            hideSide: true,
             layout: 'option02_layouts'
         })
 
@@ -233,7 +233,7 @@ exports.getSetting = async (req, res, next) => {
             favorite_counts: favoriteRecipesDb.length,
             favorRecipes: favoriteRecipesDb,
             user: req.session.user,
-            showCategorySide: true,
+            hideSide: true,
             layout: 'option02_layouts'
         })
 
@@ -257,10 +257,7 @@ exports.postSetting = async (req, res, next) => {
         const users = await userM.getAll();
         const user = users.find((u) => u.id === +id);
 
-        console.log(req.session.user);
-
-        // const favoriteRecipesDb = await allRecipesM.getAllFavoriteRecipesByUserID(req.session.user.id);
-        // console.log(favoriteRecipesDb);
+        const favoriteRecipesDb = await allRecipesM.getAllFavoriteRecipesByUserID(req.session.user.id);
 
         const pwdDb = user.password;
         const salt = pwdDb.slice(hashLength);
@@ -274,7 +271,7 @@ exports.postSetting = async (req, res, next) => {
                     favorite_counts: favoriteRecipesDb.length,
                     favorRecipes: favoriteRecipesDb,
                     user: req.session.user,
-                    showCategorySide: true,
+                    hideSide: true,
                     error: "Mật khẩu mới không được trùng mật khẩu cũ",
                     layout: 'option02_layouts'
                 })
@@ -286,7 +283,7 @@ exports.postSetting = async (req, res, next) => {
                         favorite_counts: favoriteRecipesDb.length,
                         favorRecipes: favoriteRecipesDb,
                         user: req.session.user,
-                        showCategorySide: true,
+                        hideSide: true,
                         error: "Mật khẩu xác nhận không đúng",
                         layout: 'option02_layouts'
                     })
@@ -312,7 +309,7 @@ exports.postSetting = async (req, res, next) => {
                 favorite_counts: favoriteRecipesDb.length,
                 favorRecipes: favoriteRecipesDb,
                 user: req.session.user,
-                showCategorySide: true,
+                hideSide: true,
                 error: "Mật khẩu cũ không đúng",
                 layout: 'option02_layouts'
             })
