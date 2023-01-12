@@ -31,6 +31,12 @@ router.post('/favorite', controller.postFavorite);
 // router.get('/cart', controller.getCart);
 // router.post('/cart', controller.postCart);
 
+router.get('/postRecipe', controller.getPostRecipe);
+router.post('/postRecipe', controller.postPostRecipe);
+
+router.get('/editRecipe/:tenmon', controller.getEditRecipe);
+//router.post('/deleteRecipe/:tenmon', controller.postDeleteRecipe);
+
 router.get('/:name', controller.getDetailRecipe);
 
 router.post('/', controller.postSearch);

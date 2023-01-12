@@ -1,0 +1,61 @@
+<div class="container">
+    {{#with recipe}}
+    <div class="row g-3">
+        <div class="col-4">
+            <div class="card">
+                <img src="{{image}}" class="card-img-top" alt="{{tenmon}}">
+                <div class="card-body">
+                    <h5 class="card-title">{{tenmon}}</h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-8">
+            <div class="card border-light mb-3">
+                <div class="card-header text-center text-white bg-primary">Chỉnh sửa công thức</div>
+                <div class="card-body">
+                    <form method="" action="">
+                        <div class="form-group">
+                            <label for="ten" class="form-label">Tên công thức</label>
+                            <input type="text" class="form-control" id="ten" name="ten" value="{{tenmon}}" />
+                        </div>
+                        <div class="form-group">
+                            <label for="image" class="form-label">Hình ảnh</label>
+                            <input type="text" class="form-control" id="image" name="image" value="{{image}}" />
+                        </div>
+                        <div class="form-group">
+                            <label for="nguyenlieu" class="form-label">Nguyên liệu</label>
+                            <input type="text" class="form-control" id="nguyenlieu" name="nguyenlieu" value="{{nguyenlieu}}" />
+                        </div>
+                        <div class="form-group">
+                            <label for="soche" class="form-label">Sơ chế</label>
+                            <input type="text" class="form-control" id="soche" name="soche" value="{{soche}}" />
+                        </div>
+                        <div class="form-group">
+                            <label for="thuchien" class="form-label">Thực hiện</label>
+                            <input type="text" class="form-control" id="thuchien" name="thuchien" value="{{thuchien}}" />
+                        </div>
+                        <div class="form-group">
+                            <label for="cachdung" class="form-label">Cách dùng</label>
+                            <input type="text" class="form-control" id="cachdung" name="cachdung" value="{{cachdung}}" />
+                        </div>
+                        <div class="form-group">
+                            <label for="machnho" class="form-label">Mách nhỏ</label>
+                            <input type="text" class="form-control" id="machnho" name="machnho" value="{{machnho}}" />
+                        </div>
+                        <div class="form-group">
+                            <label for="tags" class="form-label">Tags</label>
+                            <input type="text" class="form-control" id="tags" name="tags" value="{{tags}}" />
+                        </div>
+
+                        {{!-- <button type="submit" class="btn btn-primary col-12 mt-3">Lưu công thức</button> --}}
+                    </form>
+
+                    <form method="post" action="/deleteRecipe/{{tenmon}}">
+                        <button class="btn btn-danger col-12 mt-3">Xóa công thức</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{/with}}
+</div>

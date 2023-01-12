@@ -419,7 +419,6 @@ exports.postFavorite = async (req, res, next) => {
                 name
             };
             const fNew = await allRecipesM.addFavoriteRecipe(f);
-
         }
 
         // else render yêu cầu đăng nhập
@@ -428,3 +427,113 @@ exports.postFavorite = async (req, res, next) => {
         next(error);
     }
 }
+
+
+exports.getPostRecipe = async (req, res, next) => {
+    try {
+        const favoriteRecipesDb = await allRecipesM.getAllFavoriteRecipesByUserID(req.session.user.id);
+
+        const newRecipesDb = await allRecipesM.getNewRecipesByUserID(req.session.user.id);
+        const { newRecipes } = await newRecipesM.getAll();
+
+        let recipes = [];
+
+        for (var i = 0; i < newRecipesDb.length; i++) {
+            for (var j = 0; j < newRecipes.length; j++) {
+                if (newRecipesDb[i].recipeName === newRecipes[j].tenmon) {
+                    recipes.push(newRecipes[j]);
+                    break;
+                }
+            }
+        }
+
+        res.render('post_recipe', {
+            authenticated: req.session.authenticated,
+            user: req.session.user,
+            hideSide: true,
+            recipes,
+            favorite_counts: favoriteRecipesDb.length,
+            layout: 'option02_layouts'
+        });
+    } catch (error) {
+        next(error);
+    }
+};
+
+
+exports.postPostRecipe = async (req, res, next) => {
+    try {
+        const favoriteRecipesDb = await allRecipesM.getAllFavoriteRecipesByUserID(req.session.user.id);
+
+        const { recipes } = await allRecipesM.getAll();
+        const { newRecipes } = await newRecipesM.getAll();
+
+        const { ten, image, nguyenlieu, soche, thuchien, cachdung, machnho, tags } = req.body;
+
+        const nguyen_lieu = nguyenlieu.split('. ');
+        const so_che = soche.split('. ');
+        const thuc_hien = thuchien.split('. ');
+        const cach_dung = cachdung.split('. ');
+        const mach_nho = machnho.split('. ');
+        const Tags = tags.split('. ');
+
+        const newRecipe = {
+            tenmon: ten,
+            image,
+            nguyenlieu: nguyen_lieu,
+            soche: so_che,
+            thuchien: thuc_hien,
+            cachdung: cach_dung,
+            machnho: mach_nho,
+            tags: Tags
+        };
+        recipes.push(newRecipe);
+        newRecipes.push(newRecipe);
+
+        let a = JSON.stringify({recipes}, null, 2);
+        fs.promises.writeFile("./db/recipe.json", a, "utf-8");
+
+        let b = JSON.stringify({newRecipes}, null, 2);
+        fs.promises.writeFile("./db/newRecipes.json", b, "utf-8");        
+
+        const newRecipesDb = await allRecipesM.getNewRecipes();
+        let id;
+        if (!newRecipesDb || !newRecipesDb?.length) {
+            id = 0;
+        }
+        else
+            id = newRecipesDb[newRecipesDb.length - 1].id + 1;
+
+        const r = {
+            id,
+            userID: req.session.user.id,
+            recipeName: ten
+        };
+        const rNew = await allRecipesM.addNewRecipe(r);
+
+        res.redirect('/');
+    } catch (error) {
+        next(error);
+    }
+};
+
+exports.getEditRecipe = async (req, res, next) => {
+    try {
+        const favoriteRecipesDb = await allRecipesM.getAllFavoriteRecipesByUserID(req.session.user.id);
+
+        const { newRecipes } = await newRecipesM.getAll();
+
+        const { tenmon } = req.params;
+        const recipe = newRecipes.find((r) => r.tenmon === tenmon);
+
+        res.render('edit_recipe', {
+            authenticated: req.session.authenticated,
+            user: req.session.user,
+            recipe,
+            favorite_counts: favoriteRecipesDb.length,
+            layout: 'option02_layouts'
+        });
+    } catch (error) {
+        next(error);
+    }
+};
