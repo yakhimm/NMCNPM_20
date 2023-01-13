@@ -91,7 +91,6 @@ exports.getRcmRecipes = async (req, res, next) => {
 
 
 exports.getHome = async (req, res, next) => {
-    // console.log(req.session.authenticated);
 
     let { newRecipes } = await newRecipesM.getAll()
     let { favorRecipes } = await favorRecipesM.getAll();
@@ -119,7 +118,6 @@ exports.getHome = async (req, res, next) => {
     else {
         favorite_counts = 0;
     }
-    console.log(dailyRecipes);
 
     res.render('home', {
         authenticated: req.session.authenticated,
@@ -568,20 +566,20 @@ exports.getEditRecipe = async (req, res, next) => {
 
 exports.postDeleteRecipe = async (req, res, next) => {
     try {
-        const {tenmon} = req.params;
+        const { tenmon } = req.params;
 
-        let {recipes} = await allRecipesM.getAll();
+        let { recipes } = await allRecipesM.getAll();
         recipes.splice(recipes.indexOf(tenmon), 1);
-        let newdata = JSON.stringify({recipes}, null, 2);
+        let newdata = JSON.stringify({ recipes }, null, 2);
         await allRecipesM.write(newdata);
 
-        let {newRecipes} = await newRecipesM.getAll();
+        let { newRecipes } = await newRecipesM.getAll();
         newRecipes.splice(newRecipes.indexOf(tenmon), 1);
-        newdata = JSON.stringify({newRecipes}, null, 2);
+        newdata = JSON.stringify({ newRecipes }, null, 2);
         await newRecipesM.write(newdata);
 
         const rDel = await allRecipesM.deleteRecipe(tenmon, req.session.user.id);
-        
+
         res.redirect('/postRecipe');
     } catch (error) {
         next(error);
