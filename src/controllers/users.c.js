@@ -45,7 +45,8 @@ exports.postSignin = async (req, res, next) => {
     const usn = req.body.username;
     const pwd = req.body.password;
 
-    const userDb = await userM.getAll(usn);
+    const userDb = await userM.getAll();
+    // console.log(userDb);
 
     if (!userDb || !userDb?.length) {
         return res.render('users/signin', {
@@ -98,6 +99,8 @@ exports.postSignup = async (req, res, next) => {
 
     const userDb = await userM.getAll();
 
+    // console.log(userDb);
+
     const checkUser = userDb.find((user) => {
         return user.username == usn;
     });
@@ -129,7 +132,10 @@ exports.postSignup = async (req, res, next) => {
         id = 0;
     }
     else
+    {
         id = userDb[userDb.length - 1].id + 1;
+    }
+
 
     const user = {
         id,

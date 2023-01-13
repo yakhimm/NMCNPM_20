@@ -89,7 +89,6 @@ exports.getRcmRecipes = async (req, res, next) => {
     return carouselRecipes;
 };
 
-
 exports.getHome = async (req, res, next) => {
 
     let { newRecipes } = await newRecipesM.getAll()
