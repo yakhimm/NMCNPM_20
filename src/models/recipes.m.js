@@ -15,9 +15,8 @@ const cn = {
 
 const db = pgp(cn);
 
-//WriteFile:
-// const utils = require("util");
-// const writeFileAsync = utils.promisify(fs.writeFile);
+const utils = require("util");
+const writeFileAsync = utils.promisify(fs.writeFile);
 
 module.exports = {
     getAll: () => {
@@ -31,6 +30,7 @@ module.exports = {
             });
         });
     },
+    
     write: async(data) => {
         return await writeFileAsync(pathDb, data, 'utf8');
     },
@@ -75,4 +75,6 @@ module.exports = {
                 [recipeName, id]);
         return rs;
     },
+
+
 };

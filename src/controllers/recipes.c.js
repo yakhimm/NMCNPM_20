@@ -26,7 +26,7 @@ exports.getAllRecipes = async (req, res, next, model) => {
     return detail_recipe;
 }
 
-exports.getCarouselRecipes = async (req, res, next, model) => {
+exports.getCarouselRecipes = async (req, res, next) => {
     const { carouselRecipes } = await carousRecipesM.getAll();
 
     let detail_recipe = [];
@@ -45,7 +45,50 @@ exports.getCarouselRecipes = async (req, res, next, model) => {
         }
     }
     return carousel_Recipes;
-}
+};
+
+exports.getDailyRecipes = async (req, res, next) => {
+    const { dailyRecipes } = await dailyRecipesM.getAll();
+
+    let detail_recipe = [];
+    let carouselRecipes = [];
+
+    for (var i = 0, j = 0; i < dailyRecipes.length; i++) {
+        detail_recipe.push(dailyRecipes[i]);
+
+        j++;
+        if (j === 3) {
+            carouselRecipes.push({
+                slide: detail_recipe
+            });
+            detail_recipe = [];
+            j = 0;
+        }
+    }
+    return carouselRecipes;
+};
+
+exports.getRcmRecipes = async (req, res, next) => {
+    const { rcmRecipes } = await rcmRecipesM.getAll();
+
+    let detail_recipe = [];
+    let carouselRecipes = [];
+
+    for (var i = 0, j = 0; i < rcmRecipes.length; i++) {
+        detail_recipe.push(rcmRecipes[i]);
+
+        j++;
+        if (j === 3) {
+            carouselRecipes.push({
+                slide: detail_recipe
+            });
+            detail_recipe = [];
+            j = 0;
+        }
+    }
+    return carouselRecipes;
+};
+
 
 exports.getHome = async (req, res, next) => {
     // console.log(req.session.authenticated);
@@ -54,9 +97,9 @@ exports.getHome = async (req, res, next) => {
     let { favorRecipes } = await favorRecipesM.getAll();
 
     // get data for carousels
-    let dailyRecipes = await this.getCarouselRecipes(req, res, next, dailyRecipesM);
-    let rcmRecipes = await this.getCarouselRecipes(req, res, next, rcmRecipesM);
-    let carousRecipes = await this.getCarouselRecipes(req, res, next, carousRecipesM);
+    const dailyRecipes = await this.getDailyRecipes(req, res, next);
+    const rcmRecipes = await this.getRcmRecipes(req, res, next);
+    const carousRecipes = await this.getCarouselRecipes(req, res, next);
 
     let { page } = req.query;
     let total = newRecipes.length;
@@ -76,6 +119,7 @@ exports.getHome = async (req, res, next) => {
     else {
         favorite_counts = 0;
     }
+    console.log(dailyRecipes);
 
     res.render('home', {
         authenticated: req.session.authenticated,
@@ -134,15 +178,17 @@ exports.getDetailRecipe = async (req, res, next) => {
 
 let keyword = '';
 let list = [];
-
 function checkIngredient(listIngredient, type) {
-    for (var i = 0; i < listIngredient.length; i++) {
-        listIngredient[i] = listIngredient[i].toLowerCase();
-        listIngredient[i] = listIngredient[i].trim();
+    let n = 0;
+    for (var j = 0; j < type.length; j++) {
 
-        for (var j = 0; j < type.length; j++) {
+        for (var i = 0; i < listIngredient.length; i++) {
+            listIngredient[i] = listIngredient[i].toLowerCase();
+            listIngredient[i] = listIngredient[i].trim();
+
             if (listIngredient[i].includes(type[j])) {
-                return true;
+                n++;
+                break;
             }
         }
     }
@@ -515,6 +561,28 @@ exports.getEditRecipe = async (req, res, next) => {
             favorite_counts: favoriteRecipesDb.length,
             layout: 'option02_layouts'
         });
+    } catch (error) {
+        next(error);
+    }
+};
+
+exports.postDeleteRecipe = async (req, res, next) => {
+    try {
+        const {tenmon} = req.params;
+
+        let {recipes} = await allRecipesM.getAll();
+        recipes.splice(recipes.indexOf(tenmon), 1);
+        let newdata = JSON.stringify({recipes}, null, 2);
+        await allRecipesM.write(newdata);
+
+        let {newRecipes} = await newRecipesM.getAll();
+        newRecipes.splice(newRecipes.indexOf(tenmon), 1);
+        newdata = JSON.stringify({newRecipes}, null, 2);
+        await newRecipesM.write(newdata);
+
+        const rDel = await allRecipesM.deleteRecipe(tenmon, req.session.user.id);
+        
+        res.redirect('/postRecipe');
     } catch (error) {
         next(error);
     }

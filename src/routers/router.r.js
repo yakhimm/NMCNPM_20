@@ -35,7 +35,7 @@ router.get('/postRecipe', controller.getPostRecipe);
 router.post('/postRecipe', controller.postPostRecipe);
 
 router.get('/editRecipe/:tenmon', controller.getEditRecipe);
-//router.post('/deleteRecipe/:tenmon', controller.postDeleteRecipe);
+router.post('/deleteRecipe/:tenmon', controller.postDeleteRecipe);
 
 router.get('/:tenmon', controller.getDetailRecipe);
 
