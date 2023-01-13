@@ -1,0 +1,117 @@
+{{!-- <h1>MAIN</h1> --}}
+
+<div class="col-12">
+
+    <div class="content-carousel-title mt-4 mb-4">
+        <h5 class="carousel-title-text"><span>Công thức hôm nay</span></h5>
+    </div>
+
+    <div id="bestDailyRecipe" class="carousel slide" data-bs-ride="false">
+        <div class="carousel-inner">
+            {{#each dailyRecipes}}
+            <div class="carousel-item">
+                {{#with slide}}
+                <div class="row g-1">
+                    {{#each this}}
+                    <a href="/{{this.tenmon}}" class="col-lg-4 position-relative">
+                        <img src="{{this.image}}" class="d-block w-100 rounded-1" alt="...">
+                        <div class="img-center carousel-caption position-absolute">
+                            <h4 style="text-shadow: 2px 2px 1px #000">{{this.tenmon}}</h4>
+                        </div>
+                    </a>
+                    {{/each}}
+                </div>
+                {{/with}}
+            </div>
+            {{/each}}
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#bestDailyRecipe" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#bestDailyRecipe" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+</div>
+
+<!-- Daily Recipes  -->
+<div class="col-12">
+
+    <div class="content-carousel-title mt-5 mb-4">
+        <h5 class="carousel-title-text"><span>Công thức đề xuất</span></h5>
+    </div>
+
+    <div id="recommendedRecipe" class="carousel slide" data-bs-ride="false">
+        <div class="carousel-inner">
+            {{#each rcmRecipes}}
+            <div class="carousel-item">
+                {{#with slide}}
+                <div class="row g-1">
+                    {{#each this}}
+                    <a href="/{{this.tenmon}}" class="col-lg-4 position-relative">
+                        <img src="{{this.image}}" class="d-block w-100 rounded-1" alt="...">
+                        <div class="img-center carousel-caption position-absolute">
+                            <h4 style="text-shadow: 2px 2px 1px #000">{{this.tenmon}}</h4>
+                        </div>
+                    </a>
+                    {{/each}}
+                </div>
+                {{/with}}
+            </div>
+            {{/each}}
+        </div>
+
+        <button class="carousel-control-prev" type="button" data-bs-target="#recommendedRecipe" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+
+        <button class="carousel-control-next" type="button" data-bs-target="#recommendedRecipe" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+</div>
+
+<div class="col-12">
+    <div class="side-title mt-5 mb-4">
+        <h5 class="title-text"><span>Công thức mới</span></h5>
+    </div>
+
+    {{#each newRecipes}}
+    <div class="card mb-3 shadow-none rounded-0 border border-light">
+        <div class="row g-0">
+            <a href="/{{tenmon}}" class="text-dark">
+                <div class="col-4 float-start">
+                    <img src="{{image}}" class="img-fluid " alt="{{tenmon}}" title="{{tenmon}}">
+                </div>
+                <div class="col-8 float-end">
+                    <div class="card-body">
+                        <h5 class="card-title">{{tenmon}}</h5>
+                        <p class="card-text">{{machnho}}</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+    {{/each}}
+</div>
+
+<!--Pagination-->
+<div class="row mt-5 ms-3">
+    <nav aria-label="Page navigation" class="mx-auto">
+        <ul class="pagination">
+            <li class="page-item"><a class="page-link" href="?page={{prevPage page}}">Previous</a></li>
+            {{#each (getNumberOfPage total)}}
+            <li class="page-item {{#if (isEqual ../page (sum this 1))}} active {{/if}}">
+                <a class="page-link" href="?page={{sum this 1}}">
+                    {{sum this 1}}
+                </a>
+            </li>
+            {{/each}}
+            <li class="page-item"><a class="page-link" href="?page={{nextPage page total}}">Next</a></li>
+        </ul>
+    </nav>
+</div>

@@ -1,0 +1,40 @@
+<div class="row text-center">
+    <span class="text-danger" style="font-size: 35px;">Tất cả công thức</span>
+</div>
+
+<div class="row wrap-row">
+    {{#each subRecipes}}
+    <div class="col-6">
+        <div class="__area text-center">
+            <a href="/{{tenmon}}" class="__card">
+                <img src="{{image}}" alt="{{image}}" class="img-fluid __img" />
+                <div class="__card_detail text-left">
+                    <h4>{{tenmon}}</h4>
+                    <p>{{mota}}</p>
+                    <div class="__detail text-center justify-content-center">
+                        <ion-icon name="star-outline"></ion-icon> 5
+                        <ion-icon name="time-outline" class="ms-3"></ion-icon> {{thoigian}}
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+    {{/each}}
+</div>
+
+<!--Pagination-->
+<div class="row mt-5 ms-3">
+    <nav aria-label="Page navigation" class="mx-auto">
+        <ul class="pagination">
+            <li class="page-item"><a class="page-link" href="?page={{prevPage page}}">Trước</a></li>
+            {{#each (getNumberOfPage total)}}
+            <li class="page-item {{#if (isEqual ../page (sum this 1))}} active {{/if}}">
+                <a class="page-link" href="?page={{sum this 1}}">
+                    {{sum this 1}}
+                </a>
+            </li>
+            {{/each}}
+            <li class="page-item"><a class="page-link" href="?page={{nextPage page total}}">Sau</a></li>
+        </ul>
+    </nav>
+</div>

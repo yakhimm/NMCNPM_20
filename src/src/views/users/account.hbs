@@ -1,0 +1,66 @@
+<div class="container">
+    {{#with user}}
+    <div class="row  mt-4 g-3">
+        <div class="col-4">
+            <div class="card h-100">
+                <img src="https://icons.veryicon.com/png/o/internet--web/prejudice/user-128.png" class="card-img-top"
+                    alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">{{fullname}}</h5>
+                    <p class="card-text">Email: {{email}}</p>
+                    <p class="card-text">Address: {{address}}</p>
+                </div>
+                <div class="card-footer">
+                    <small class="text-muted">Phone: {{phone}}</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-8">
+            <div class="card border-light mb-3">
+                <h4 class="card-header bg-primary text-center text-white">Chỉnh sửa thông tin cá nhân</h4>
+                <div class="card-body">
+                    <form class="signup-form" method="POST" action="/account/{{id}}">
+                        <div class="form-group">
+                            <label for="name" class="form-label">Full Name</label>
+                            <input type="text" class="form-control" id="nameRegex" name="fullname"
+                                value="{{fullname}}" />
+                        </div>
+
+                        <span>
+                            <p class="validInput" id="fullnameValid" style="color:red; font-size:medium"></p>
+                        </span>
+
+                        <div class="form-group">
+                            <label for="phone" class="form-label">Phone</label>
+                            <input type="text" class="form-control" id="phoneRegex" name="phone" value="{{phone}}" />
+                        </div>
+
+                        <span>
+                            <p class="validInput" id="phoneValid" style="color:red; font-size:medium"></p>
+                        </span>
+
+                        <div class="form-group">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="text" class="form-control" id="emailRegex" name="email" value="{{email}}" />
+                        </div>
+
+                        <span>
+                            <p class="validInput" id="emailValid" style="color:red; font-size:medium"></p>
+                        </span>
+
+                        <div class="form-group">
+                            <label for="address" class="form-label">Address</label>
+                            <input type="text" class="form-control" id="address" name="address" value="{{address}}" />
+                        </div>
+                        <div class="row justify-content-center my-3">
+                            <a href="/account/{{id}}" class="btn btn-danger col-5 mt-3  me-5">Hủy</a>
+
+                            <button type="submit" class="btn btn-primary col-5 mt-3 ">Lưu thông tin</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{/with}}
+</div>

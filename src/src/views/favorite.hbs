@@ -1,0 +1,29 @@
+<div class="row text-center">
+    <span class="text-danger" style="font-size: 35px;">Công thức yêu thích</span>
+</div>
+
+<div class="row wrap-row">
+    {{#each favoriteRecipes}}
+    <div class="col-6">
+        <div class="__area text-center">
+            <a href="/{{tenmon}}" class="__card">
+                <button class="__favorit">
+                    <ion-icon name="heart-outline"></ion-icon>
+                </button>
+                <img src="{{image}}" alt="{{image}}" class="img-fluid __img" />
+                <div class="__card_detail text-left">
+                    <h4>{{tenmon}}</h4>
+                    <p>{{mota}}</p>
+                    {{!-- <div class="__type">
+                        <span href="#">{{tags}}</span>
+                    </div> --}}
+                    <div class="__detail text-center justify-content-center">
+                        <ion-icon name="star-outline"></ion-icon> 5
+                        <ion-icon name="time-outline" class="ms-3"></ion-icon> {{thoigian}}
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+    {{/each}}
+</div>

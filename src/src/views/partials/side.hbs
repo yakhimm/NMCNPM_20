@@ -1,0 +1,110 @@
+
+{{#if showFavoriteSide}}
+<div class="col-12 mb-5">
+    <div class="side-title mt-4 mb-4">
+        <h5 class="title-text"><span>Công thức yêu thích</span></h5>
+    </div>
+
+    {{#each favorRecipes}}
+    <div class="side-content-item card mb-3  rounded-0" style="max-width: 540px;">
+        <a href="/{{tenmon}}" class="row text-dark">
+            <div class="col-5">
+                <img src="{{image}}" class="img-fluid h-100" alt="...">
+            </div>
+            <div class="card-body col-7">
+                <h6 class="card-title">{{tenmon}}</h6>
+            </div>
+        </a>
+    </div>
+    {{/each}}
+
+</div>
+{{/if}}
+
+{{!-- {{#if showCategorySide}} --}}
+<div class="col-12">
+    <div class="side-title mb-4">
+        <h5 class="title-text"><span>Món ăn chọn lọc</span></h5>
+    </div>
+
+    <div class="accordion" id="accordionPanelsStayOpenExample">
+        <div class="accordion-item rounded-0">
+            <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
+                    aria-controls="panelsStayOpen-collapseOne">
+                    Vùng miền
+                </button>
+            </h2>
+            <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show"
+                aria-labelledby="panelsStayOpen-headingOne">
+                <ul class="accordion-body">
+                    <li><a href="#">Miền Bắc</a></li>
+                    <li><a href="#">Miền Trung</a></li>
+                    <li><a href="#">Miền Nam</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false"
+                    aria-controls="panelsStayOpen-collapseTwo">
+                    Loại món
+                </button>
+            </h2>
+            <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse"
+                aria-labelledby="panelsStayOpen-headingTwo">
+                <ul class="accordion-body">
+                    <li><a href="#">Món mặn</a></li>
+                    <li><a href="#">Món chay</a></li>
+                    <li><a href="#">Món ngọt</a></li>
+                    <li><a href="#">Món ăn vặt</a></li>
+                    <li><a href="#">Món ăn kèm, món phụ</a></li>
+                
+                </ul>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="panelsStayOpen-headingThree">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false"
+                    aria-controls="panelsStayOpen-collapseThree">
+                    Cách nấu
+                </button>
+            </h2>
+            <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse"
+                aria-labelledby="panelsStayOpen-headingThree">
+                <ul class="accordion-body">
+                    <li><a href="#">Chiên</a></li>
+                    <li><a href="#">Kho</a></li>
+                    <li><a href="#">Xào</a></li>
+                    <li><a href="#">Luộc</a></li>
+                    <li><a href="#">Nướng</a></li>
+                    <li><a href="#">Hầm</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="accordion-item rounded-0">
+            <h2 class="accordion-header" id="panelsStayOpen-headingFour">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#panelsStayOpen-collapseFour" aria-expanded="false"
+                    aria-controls="panelsStayOpen-collapseFour">
+                    Nguyên liệu
+                </button>   
+            </h2>
+            <div id="panelsStayOpen-collapseFour" class="accordion-collapse collapse"
+                aria-labelledby="panelsStayOpen-headingFour">
+                <ul class="accordion-body">
+                    <li><a href="#">Thịt</a></li>
+                    <li><a href="#">Hải sản</a></li>
+                    <li><a href="#">Rau củ quả</a></li>
+                    <li><a href="#">Tinh bột</a></li>
+                    <li><a href="#">Khác</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{{!-- {{/if}} --}}
+

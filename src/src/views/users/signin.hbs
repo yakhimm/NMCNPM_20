@@ -1,0 +1,67 @@
+  <div class="main">
+        <!-- Sing in  Form -->
+        <section class="sign-in">
+            <div class="container">
+                <div class="signin-content">
+                    <div class="signin-image">
+                        <figure><img src="/images/asian_cruisine.jpg" alt="sign in image"></figure>
+                        <!-- <a href="#" class="signin-image-link">Create an account</a> -->
+                    </div>
+
+                    <div class="signin-form">
+                        <h2 class="form-title">Đăng nhập</h2>
+                        <form method="POST" action="/signin" class="register-form" id="login-form">
+                            <div class="form-group">
+                                <label for="your_name"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                                <input type="text" name="username" id="usernameRegex" placeholder="Tên đăng nhập" required/>
+                            </div>
+
+                            <span><p id="userErr" style="color:red; font-size:medium">{{usnErr}}</p></span>
+
+                            <div class="form-group">
+                                <label for="your_pass"><i class="zmdi zmdi-lock"></i></label>
+                                <input type="password" name="password" id="password" placeholder="Mật khẩu" required/>
+                            </div>
+
+                            {{#if pwdErr}}
+                                <span><p style="color:red; font-size:medium">{{pwdErr}}</p></span>
+                             {{/if}}
+                            <!-- <div class="form-group">
+                                    <input type="checkbox" name="remember-me" id="remember-me" class="agree-term" />
+                                    <label for="remember-me" class="label-agree-term"><span><span></span></span>Remember me</label>
+                                </div> -->
+                            <div class="form-group form-button">
+                                <input type="submit" name="signin" id="signin" class="form-submit" value="Đăng nhập" />
+                            </div>
+
+                            <div class="form-helper">
+                                <a href="#" name="forget-pw" id="forget-pw" class="forget-pw">Quên mật khẩu?</a>
+                            </div>
+                            
+                            <div class="new-account">
+                                <p class="form-query">Chưa có tài khoản?
+                                    <a href="/signup" class="signup-now">Đăng ký ngay!</a>
+                                </p>
+                                
+                            </div>
+                        </form>
+                        <!-- <div class="social-login">
+                            <span class="social-label">Or login with</span>
+                            <ul class="socials">
+                                <li><a href="#"><i class="display-flex-center zmdi zmdi-facebook"></i></a></li>
+                                <li><a href="#"><i class="display-flex-center zmdi zmdi-twitter"></i></a></li>
+                                <li><a href="#"><i class="display-flex-center zmdi zmdi-google"></i></a></li>
+                            </ul>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="/js/jquery-3.3.1.min.js"></script>
+    <script src="/js/validate.js"></script>
+
+    
+    {{!--
+            tạo trang quên mật khẩu --}}

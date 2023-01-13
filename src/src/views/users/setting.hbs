@@ -1,0 +1,49 @@
+<div class="container">
+    <div class="row mt-5">
+        {{#with user}}
+
+        <div class="col-4">
+            <div class="card h-100">
+                <img src="https://icons.veryicon.com/png/o/internet--web/prejudice/user-128.png" class="card-img-top"
+                    alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">{{fullname}}</h5>
+                    <p class="card-text">Email: {{email}}</p>
+                    <p class="card-text">Address: {{address}}</p>
+                </div>
+                <div class="card-footer">
+                    <small class="text-muted">Phone: {{phone}}</small>
+                </div>
+            </div>
+        </div>
+        {{/with}}
+
+
+        <div class="col-8">
+            <div class="card border-light mb-3">
+                <h4 class="card-header bg-primary text-center text-white">Đổi mật khẩu</h4>
+                <div class="card-body">
+                    {{#with user}}
+                    <form method="POST" action="/setting/{{id}}">
+                        {{/with}}
+                        <div class="form-group">
+                            <label for="old_pw" class="form-label">Mật khẩu cũ</label>
+                            <input type="password" class="form-control" id="old_pw" name="old_pw" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="new_pw" class="form-label">Mật khẩu mới</label>
+                            <input type="password" class="form-control" id="new_pw" name="new_pw" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="confirm_pw" class="form-label">Xác nhận lại mật khẩu</label>
+                            <input type="password" class="form-control" id="confirm_pw" name="confirm_pw" required />
+                        </div>
+                        <span style="color: red;"><i>{{error}}</i></span>
+
+                        <button type="submit" class="btn btn-primary mt-3 col-12">Đổi mật khẩu</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

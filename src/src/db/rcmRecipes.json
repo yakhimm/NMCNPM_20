@@ -1,0 +1,394 @@
+{
+    "rcmRecipes": [
+        {
+            "tenmon": "L\u1ea9u n\u1ea5m chay",
+            "image": "https://monngonmoingay.com/wp-content/uploads/2015/08/lau-nam-chay-880.jpg",
+            "nguyenlieu": [
+                "M\u00eda lau n\u01b0\u1edbng: 2 kh\u00fac",
+                "B\u1eafp M\u1ef9: 1 tr\u00e1i",
+                "H\u00e0nh boaro: 1c\u00e2y",
+                "C\u00e0 r\u1ed1t: 1/2 c\u1ee7",
+                "Khoai m\u00f4n: 1/2 c\u1ee7",
+                "B\u00f4ng c\u1ea3i xanh:  100g ",
+                "C\u00e1c lo\u1ea1i n\u1ea5m: n\u1ea5m kim ch\u00e2m, n\u1ea5m b\u00e0o ng\u01b0, n\u1ea5m ch\u00e2n g\u00e0, n\u1ea5m \u0111\u00f4ng c\u00f4 t\u01b0\u01a1i, n\u1ea5m linh chi t\u01b0\u01a1i, n\u1ea5m m\u1ee1, n\u1ea5m r\u01a1m: 300g ",
+                "\u0110\u1eadu h\u0169 chi\u00ean: 1 mi\u1ebfng ",
+                "\u0102N K\u00c8M: m\u00ec v\u00e0ng, t\u00e0u h\u0169 ki",
+                "Gia v\u1ecb: : Mu\u1ed1i, \u0111\u01b0\u1eddng, d\u1ea7u \u0103n, h\u1ea1t n\u00eam chay",
+                "B\u1ed9t ng\u1ecdt ",
+                "N\u01b0\u1edbc t\u01b0\u01a1ng "
+            ],
+            "soche": [
+                "\u2013 B\u1eafp M\u1ef9 c\u1eaft kh\u00fac, cho v\u00e0o n\u1ed3i n\u1ea5u v\u1edbi m\u00eda lau v\u00e0 3 l\u00edt n\u01b0\u1edbc cho ra n\u01b0\u1edbc ng\u1ecdt.",
+                "\u2013 C\u00e1c lo\u1ea1i n\u1ea5m c\u1eaft b\u1ecf ch\u00e2n, ng\u00e2m n\u01b0\u1edbc mu\u1ed1i, r\u1eeda s\u1ea1ch, \u0111\u1ec3 r\u00e1o. T\u00e0u h\u0169 ki chi\u00ean v\u00e0ng. \u0110\u1eadu h\u0169 non c\u1eaft mi\u1ebfng nh\u1ecf . X\u1ebfp t\u1ea5t c\u1ea3 ra d\u0129a.",
+                "\u2013 H\u00e0nh boaro c\u1eaft m\u1ecfng phi v\u00e0ng.",
+                "\u2013 Khoai m\u00f4n c\u1eaft th\u00e0nh mi\u1ebfng vu\u00f4ng, chi\u00ean r\u00e1m m\u1eb7t. C\u00e0 r\u1ed1t t\u1ec9a b\u00f4ng, c\u1eaft l\u00e1t. B\u00f4ng c\u1ea3i xanh c\u1eaft th\u00e0nh t\u1eebng b\u00fap nh\u1ecf.",
+                "\u2013 M\u00ec tr\u1ee9ng tr\u1ee5ng nhanh qua n\u01b0\u1edbc s\u00f4i, v\u1edbt ra x\u1ea3 n\u01b0\u1edbc l\u1ea1nh, \u0111\u1ec3 r\u00e1o, tr\u1ed9n v\u1edbi d\u1ea7u phi h\u00e0nh boaro"
+            ],
+            "thuchien": [
+                "V\u1edbt b\u1ecf m\u00eda, khoai m\u00f4n, c\u00e0 r\u1ed1t v\u00e0o, n\u00eam 2m b\u1ed9t ng\u1ecdt AJI-NO-MOTO\u00ae, 1m mu\u1ed1i, 1m \u0111\u01b0\u1eddng, 1/2M n\u01b0\u1edbc t\u01b0\u01a1ng \u201cPh\u00fa S\u0129\u201d, 1M h\u1ea1t n\u00eam chay, n\u1ebfm v\u1ecb ng\u1ecdt m\u1eb7n v\u1eeba \u0103n. Cho b\u00f4ng c\u1ea3i xanh, h\u00e0nh boaro v\u00e0 2M d\u1ea7u phi h\u00e0nh boaro v\u00e0o."
+            ],
+            "cachdung": [
+                "\u2013 B\u00e0y t\u1ea5t c\u1ea3 ra b\u00e0n, khi \u0103n cho \u0111\u1eadu h\u0169 non, t\u00e0u h\u0169 ki v\u00e0 c\u00e1c lo\u1ea1i n\u1ea5m v\u00e0o. D\u00f9ng chung v\u1edbi m\u00ec, ch\u1ea5m th\u00eam n\u01b0\u1edbc t\u01b0\u01a1ng \u201cPh\u00fa S\u0129\u201d t\u00f9y kh\u1ea9u v\u1ecb.",
+                "\u2013 M\u00f3n \u0103n \u0111i k\u00e8m:G\u1ecfi hoa chu\u1ed1i th\u1ecbt g\u00e0 chay"
+            ],
+            "machnho": [
+                "\u2013 M\u1ed9t s\u1ed1 lo\u1ea1i n\u1ea5m s\u1ebd dai v\u00e0 m\u1ea5t v\u1ecb ng\u1ecdt khi b\u1ecb ch\u00edn qu\u00e1, v\u00ec v\u1eady khi \u0103n t\u1edbi \u0111\u00e2u cho v\u00e0o t\u1edbi \u0111\u00f3, v\u1eeba ch\u00edn t\u1edbi v\u1edbt ra d\u00f9ng ngay.",
+                "\u2013 Chi\u00ean khoai m\u00f4n \u0111\u1ec3 khoai \u0111\u01b0\u1ee3c th\u01a1m h\u01a1n.",
+                "\u2013 N\u01b0\u1edbng m\u00eda lau \u0111\u1ec3 n\u01b0\u1edbc d\u00f9ng trong c\u00f3 m\u00f9i th\u01a1m, v\u1ecb ng\u1ecdt m\u00e0 kh\u00f4ng b\u1ecb chua."
+            ],
+            "tags": [
+                "mi\u1ec1n Trung",
+                "m\u00f3n ngon t\u1eeb n\u1ea5m",
+                "l\u1ea9u n\u1ea5m",
+                "l\u1ea9u chay",
+                "l\u1ea9u",
+                "m\u00f3n chay"
+            ]
+        },
+        {
+            "tenmon": "B\u00f2 kho chay",
+            "image": "https://monngonmoingay.com/wp-content/uploads/2017/12/bo-kho-chay-880.jpg",
+            "nguyenlieu": [
+                "\u0110\u1eadu h\u0169 tr\u1eafng, chi\u00ean v\u00e0ng: 1 mi\u1ebfng ",
+                "N\u1ea5m \u0111\u00f4ng c\u00f4 kh\u00f4:  30g  ",
+                "\u0110\u1eadu h\u1ea1t H\u00e0 Lan: 30g  ",
+                "T\u00e0u h\u0169 ki c\u1ecdng m\u1ec1m: 100g  ",
+                "C\u00e0 r\u1ed1t: 100g  ",
+                "Khoai t\u00e2y: 200g   ",
+                "N\u01b0\u1edbc d\u1eeba t\u01b0\u01a1i: 700ml ",
+                "\u1edat hi\u1ec3m b\u0103m: 1m ",
+                "C\u00e0 paste: 2M",
+                "RAU N\u00caM: Ng\u00f2 gai, S\u1ea3, rau qu\u1ebf, h\u00e0nh boaro, h\u00fang qu\u1ebf",
+                "\u0102N K\u00c8M: B\u00e1nh m\u00ec: ",
+                "Gia v\u1ecb:  \u0110\u01b0\u1eddng, mu\u1ed1i, ti\u00eau, \u1edbt b\u1eb1m, b\u1ed9t n\u0103ng, b\u1ed9t b\u00f2 kho",
+                "B\u1ed9t ng\u1ecdt ",
+                "H\u1ea1t n\u00eam "
+            ],
+            "soche": [
+                "\u2013 N\u1ea5m \u0111\u00f4ng c\u00f4 ng\u00e2m n\u01b0\u1edbc s\u00f4i cho m\u1ec1m, b\u1ecf ch\u00e2n, c\u1eaft \u0111\u00f4i. C\u00e0 r\u1ed1t, khoai t\u00e2y c\u1eaft kh\u1ed1i 3cm. \n\u2013 \u0110\u1eadu h\u0169 tr\u1eafng c\u1eaft mi\u1ebfng vu\u00f4ng 3cm. T\u00e0u h\u0169 ki c\u1eaft kh\u00fac 3cm. S\u1ea3 c\u00e2y \u0111\u1eadp d\u1eadp c\u1eaft kh\u00fac. \u1edat s\u1eebng c\u1eaft kh\u00fac. H\u00e0nh boaro c\u1eaft l\u00e1t m\u1ecfng. Ng\u00f2 gai, rau qu\u1ebf c\u1eaft nh\u1ecf. B\u1ed9t n\u0103ng h\u00f2a v\u1edbi n\u01b0\u1edbc cho lo\u00e3ng."
+            ],
+            "thuchien": [
+                "\u2013 Phi th\u01a1m h\u00e0nh boaro, s\u1ea3 \u1edbt b\u0103m, r\u1ed3i cho 2M c\u00e0 paste, b\u1ed9t m\u00ec, cho c\u00e0 r\u1ed1t, khoai t\u00e2y v\u00e0o, cho 2M b\u1ed9t b\u00f2 kho, 2M sa t\u1ebf v\u00e0o x\u00e0o v\u1edbi l\u1eeda nh\u1ecf, \u0111\u1ebfn khi h\u1ed7n h\u1ee3p l\u00ean m\u00e0u \u0111\u1ecf \u0111\u1eb7c tr\u01b0ng.",
+                "\u2013 Th\u00eam v\u00e0o 700ml n\u01b0\u1edbc d\u1eeba t\u01b0\u01a1i, s\u1ea3 c\u00e2y, n\u1ea5m \u0111\u00f4ng c\u00f4 v\u00e0 n\u00eam v\u00e0o 1/2m mu\u1ed1i, 1m b\u1ed9t ng\u1ecdt AJI-NO-MOTO\u00ae, 1,5M \u0111\u01b0\u1eddng, 2,5M h\u1ea1t n\u00eam Aji-ngon\u00ae N\u1ea5m, \u0111un s\u00f4i v\u1edbi l\u1eeda l\u1edbn 5 ph\u00fat, cho ti\u1ebfp t\u00e0u h\u0169 ki, \u0111\u1eadu h\u0169 v\u00e0 \u0111\u1eadu h\u1ea1t H\u00e0 Lan v\u00e0o, n\u1ea5u ch\u00edn t\u1edbi, cho n\u01b0\u1edbc b\u1ed9t n\u0103ng v\u00e0o t\u1eeb t\u1eeb, t\u1ea1o \u0111\u1ed9 s\u1ec7t, t\u1eaft l\u1eeda, th\u00eam ng\u00f2 gai v\u00e0 rau qu\u1ebf v\u00e0o."
+            ],
+            "cachdung": [
+                "\u2013 M\u00fac b\u00f2 kho chay ra t\u00f4, r\u1eafc \u00edt ti\u00eau, d\u00f9ng n\u00f3ng v\u1edbi b\u00e1nh m\u00ec ho\u1eb7c h\u1ee7 ti\u1ebfu.",
+                "\u2013 M\u00f3n \u0103n \u0111i k\u00e8m:Tr\u00e0 s\u1eefa h\u1ea1t \u00e9 s\u01b0\u01a1ng s\u00e2m"
+            ],
+            "machnho": [
+                "\u2013 Khi cho b\u1ed9t b\u00f2 kho v\u00e0o x\u00e0o, n\u00ean \u0111\u1ec3 l\u1eeda nh\u1ecf, \u0111\u1ec3 b\u1ed9t kh\u00f4ng b\u1ecb ch\u00e1y.",
+                "\u2013 Cho \u0111\u1eadu h\u0169 tr\u1eafng v\u00e0o sau c\u00f9ng \u0111\u1ec3 \u0111\u1eadu kh\u00f4ng b\u1ecb n\u00e1t.",
+                "\u2013 Cho b\u1ed9t m\u00ec v\u00e0o x\u00e0o \u0111\u1ec3 c\u00f3 \u0111\u1ed9 s\u00e1nh & ngon h\u01a1n"
+            ],
+            "tags": [
+                "mi\u1ec1n Nam",
+                "bo kho",
+                "bo kho chay",
+                "m\u00f3n chay",
+                "m\u00f3n kho",
+                "m\u00f3n chay ngon",
+                "m\u00f3n chay d\u1ec5 l\u00e0m",
+                "kho",
+                "m\u00f3n chay"
+            ]
+        },
+        {
+            "tenmon": "Ho\u00e0nh th\u00e1nh chay",
+            "image": "https://monngonmoingay.com/wp-content/uploads/2015/08/hoanh-thanh-chay-880.jpg",
+            "nguyenlieu": [
+                "L\u00e1 ho\u00e0nh th\u00e1nh : 20 mi\u1ebfng ",
+                "C\u1ee7 n\u0103ng: 3 c\u1ee7 ",
+                "Khoai cau h\u1ea5p ch\u00edn : 100g ",
+                "N\u1ea5m m\u00e8o: 1 tai v\u1eeba ",
+                "N\u1ea5m h\u01b0\u01a1ng: 5 tai ",
+                "\u0110\u1eadu h\u0169 tr\u1eafng: 1/2 mi\u1ebfng nh\u1ecf ",
+                "B\u00e1nh tr\u00e1ng m\u00e8 n\u01b0\u1edbng b\u00f3p v\u1ee5n: 2M  ",
+                "RAU N\u00caM: C\u1ecdng ng\u00f2 r\u00ed b\u0103m, \u1edbt s\u1eebng b\u0103m",
+                "\u0102N K\u00c8M: X\u00e0 l\u00e1ch, c\u00e0 chua",
+                "Gia v\u1ecb:  \u0110\u01b0\u1eddng, d\u1ea7u \u0103n, ti\u00eau, d\u1ea7u m\u00e8, t\u01b0\u01a1ng x\u00ed mu\u1ed9i, 1M h\u00e0nh boaro phi, 1/2M ti\u00eau xanh",
+                "H\u1ea1t n\u00eam ",
+                "N\u01b0\u1edbc t\u01b0\u01a1ng "
+            ],
+            "soche": [
+                "\u2013 \u0110\u1eadu h\u0169 lu\u1ed9c ch\u00edn, v\u1eaft r\u00e1o, b\u00f3p nhuy\u1ec5n, qu\u1ebft cho dai.",
+                "\u2013 N\u1ea5m m\u00e8o, n\u1ea5m h\u01b0\u01a1ng ng\u00e2m n\u1edf, c\u1eaft nhuy\u1ec5n. C\u1ee7 n\u0103ng c\u1eaft h\u1ea1t l\u1ef1u.",
+                "\u2013 B\u00e1nh tr\u00e1ng b\u00f3p v\u1ee5n"
+            ],
+            "thuchien": [
+                "\u2013 Tr\u1ed9n nh\u00e2n g\u1ed3m: \u0111\u1eadu h\u0169, khoai cau, n\u1ea5m m\u00e8o, n\u1ea5m h\u01b0\u01a1ng, c\u1ee7 n\u0103ng, 1M boa r\u00f4 b\u0103m, 1/2M ti\u00eau xanh \u0111\u1eadp d\u1eadp, 1/2m c\u1ecdng ng\u00f2, 1/3m ti\u00eau, 1/2m \u0111\u01b0\u1eddng, 1m h\u1ea1t n\u00eam Aji-ngon\u00ae N\u1ea5m, 1/2m d\u1ea7u m\u00e8 v\u00e0 1m n\u01b0\u1edbc t\u01b0\u01a1ng \u201cPh\u00fa S\u0129\u201d, \u1edbt s\u1eebng b\u0103m nh\u1ecf. Qu\u1ebft nh\u00e2n cho dai.",
+                "\u2013 Cho m\u1ed9t \u00edt nh\u00e2n v\u00e0o v\u1ecf ho\u00e0nh th\u00e1nh, t\u00fam l\u1ea1i, c\u00f3 th\u1ec3 th\u00eam 1 \u00edt \u1edbt s\u1eebng \u0111\u1ec3 th\u00eam m\u00e0u s\u1eafc.",
+                "\u2013 \u0110un n\u00f3ng d\u1ea7u \u0103n, chi\u00ean ho\u00e0nh th\u00e1nh ch\u00edn v\u00e0ng gi\u00f2n, v\u1edbt ra \u0111\u1ec3 r\u00e1o d\u1ea7u."
+            ],
+            "cachdung": [
+                "\u2013 X\u1ebfp ho\u00e0nh th\u00e1nh ra d\u0129a, b\u00e0y chung v\u1edbi x\u00e0 l\u00e1ch, c\u00e0 chua. Khi \u0103n ch\u1ea5m k\u00e8m t\u01b0\u01a1ng x\u00ed mu\u1ed9i."
+            ],
+            "machnho": [
+                "\u2013 V\u1eaft r\u00e1o v\u00e0 qu\u1ebft \u0111\u1eadu h\u0169 non \u0111\u1ec3 nh\u00e2n c\u00f3 \u0111\u1ed9 k\u1ebft d\u00ednh t\u1ed1t.",
+                "\u2013 C\u00f3 th\u1ec3 c\u1eaft nh\u1ecf khoai m\u00f4n, th\u00eam 1 \u00edt n\u01b0\u1edbc v\u00e0 h\u1ea5p ch\u00edn trong l\u00f2 vi s\u00f3ng trong 5 ph\u00fat"
+            ],
+            "tags": [
+                "mi\u1ec1n Nam",
+                "ho\u00e0nh th\u00e1nh chay",
+                "m\u00f3n chay ngon",
+                "ho\u00e0nh th\u00e1nh",
+                "m\u00f3n chay",
+                "kho",
+                "chi\u00ean"
+            ]
+        },
+        {
+            "tenmon": "B\u00ed \u0111\u1ecf h\u1ea5p h\u1ea1t sen",
+            "image": "https://monngonmoingay.com/wp-content/uploads/2021/02/bi-do-hap-hat-sen-880.webp",
+            "nguyenlieu": [
+                "B\u00ed \u0111\u1ecf non: 4 tr\u00e1i",
+                "H\u1ea1t sen: 100g ",
+                "\u0110\u1eadu bi: 30g ",
+                "\u0110\u1eadu h\u0169 chi\u00ean: 50g ",
+                "C\u00e0 r\u1ed1t: 40g ",
+                "Boaro: 1 c\u00e2y",
+                "N\u1ea5m \u0111\u00f4ng c\u00f4 t\u01b0\u01a1i: 40g ",
+                "RAU N\u00caM: L\u00e1 boaro, c\u1ecdng ng\u00f2, \u1edbt s\u1eebng c\u1eaft s\u1ee3i: ",
+                "Gia v\u1ecb: d\u1ea7u \u0103n",
+                "N\u01b0\u1edbc t\u01b0\u01a1ng ",
+                "H\u1ea1t n\u00eam "
+            ],
+            "soche": [
+                "B\u00ed \u0111\u1ecf c\u1eaft ch\u00f3p, n\u1ea1o b\u1ecf ph\u1ea7n h\u1ea1t, gi\u1eef l\u1ea1i ph\u1ea7n n\u1eafp, h\u1ea5p b\u00ed \u0111\u1ecf 10 ph\u00fat.",
+                "H\u1ea1t sen l\u1ea5y tim sen, lu\u1ed9c ch\u00edn h\u1ea1t sen v\u00e0 \u0111\u1eadu bi.",
+                "\u0110\u1eadu h\u0169, c\u00e0 r\u1ed1t v\u00e0 n\u1ea5m \u0111\u00f4ng c\u00f4 t\u01b0\u01a1i c\u1eaft h\u1ea1t l\u1ef1u. H\u00e0nh boaro c\u1eaft m\u1ecfng ph\u1ea7n c\u1ecdng, ph\u1ea7n l\u00e1 c\u1eaft nhuy\u1ec5n."
+            ],
+            "thuchien": [
+                "Phi th\u01a1m h\u00e0nh boaro, cho n\u1ea5m v\u00e0 c\u00e0 r\u1ed1t v\u00e0o x\u00e0o, th\u00eam 2M n\u01b0\u1edbc, cho h\u1ea1t sen, \u0111\u1eadu bi, \u0111\u1eadu h\u0169 v\u00e0o x\u00e0o s\u01a1, n\u00eam 1m H\u1ea1t n\u00eam Aji-ngon\u00ae N\u1ea5m H\u01b0\u01a1ng v\u00e0 H\u1ea1t Sen, 1/3m ti\u00eau. T\u1eaft l\u1eeda. Th\u00eam l\u00e1 boaro.",
+                "Cho rau c\u1ee7 \u0111\u00e3 x\u00e0o v\u00e0o b\u00ed, \u0111\u1eady n\u1eafp, h\u1ea5p th\u00eam 25 ph\u00fat \u0111\u1ebfn khi b\u00ed \u0111\u1ecf v\u00e0 rau c\u1ee7 ch\u00edn m\u1ec1m. R\u1eafc \u00edt l\u00e1 boaro v\u00e0 \u1edbt s\u1eebng c\u1eaft s\u1ee3i c\u00f9ng c\u1ecdng ng\u00f2 l\u00ean tr\u00ean."
+            ],
+            "cachdung": [
+                "D\u00f9ng n\u00f3ng. Ch\u1ea5m k\u00e8m N\u01b0\u1edbc t\u01b0\u01a1ng \u201cPh\u00fa S\u0129\u201d."
+            ],
+            "machnho": [
+                "H\u1ea5p s\u01a1 b\u00ed gi\u00fap m\u00f3n \u0103n ch\u00edn \u0111\u1ec1u sau khi ho\u00e0n th\u00e0nh.",
+                "X\u00e0o n\u1ea5m ch\u00edn k\u0129 \u0111\u1ec3 gi\u1ea3m m\u00f9i h\u0103ng c\u1ee7a n\u1ea5m.",
+                "Ch\u1ecdn qu\u1ea3 b\u00ed tr\u00f2n \u0111\u1ec1u, \u0111\u00e1y b\u1eb1ng, v\u1ecf \u0111\u1eadm m\u00e0u, sau khi h\u1ea5p s\u1ebd \u0111\u1eb9p h\u01a1n.",
+                "M\u00f3n \u0103n \u0111i k\u00e8m \u0111\u1ec3 t\u1ea1o th\u00e0nh b\u1eefa \u0103n ho\u00e0n ch\u1ec9nh: S\u00fap b\u00e1t tr\u00e2n chay."
+            ],
+            "tags": [
+                "mi\u1ec1n Nam",
+                "b\u00ed \u0111\u1ecf",
+                "h\u1ea1t sen",
+                "m\u00f3n chay d\u1ec5 l\u00e0m",
+                "h\u1ea5p",
+                "m\u00f3n chay"
+            ]
+        },
+        {
+            "tenmon": "Chu\u1ed1i \u0111\u1eadu kho t\u01b0\u01a1ng s\u1ea3",
+            "image": "https://monngonmoingay.com/wp-content/uploads/2021/02/chuoi-dau-kho-tuong-sa-880.webp",
+            "nguyenlieu": [
+                "Chu\u1ed1i gi\u00e0 xanh t\u01b0\u01a1i: 4 qu\u1ea3 ",
+                "\u0110\u1eadu h\u0169 m\u01a1: 5 mi\u1ebfng",
+                "T\u01b0\u01a1ng h\u1ed9t ngon: 1/2 ch\u00e9n ",
+                "N\u1ea5m h\u01b0\u01a1ng Sapa: 10 tai  : ",
+                "H\u00e0nh t\u00e2y: 1/2 c\u1ee7 ",
+                "Boaro: 1 c\u00e2y ",
+                "S\u1ea3 c\u00e2y: 4 c\u00e2y ",
+                "N\u01b0\u1edbc d\u1eeba t\u01b0\u01a1i: 1 ch\u00e9n ",
+                "S\u1ea3 \u1edbt b\u0103m: 2M ",
+                "Gia v\u1ecb: d\u1ea7u \u0103n, d\u1ea7u \u0111i\u1ec1u, d\u1ea7u m\u00e8, \u1edbt s\u1eebng",
+                "N\u01b0\u1edbc t\u01b0\u01a1ng ",
+                "H\u1ea1t n\u00eam "
+            ],
+            "soche": [
+                "Chu\u1ed1i t\u01b0\u1edbc v\u1ecf, c\u1eaft l\u00e1t d\u00e0y 1cm r\u1eeda qua n\u01b0\u1edbc mu\u1ed1i, lu\u1ed9c nhanh trong 2 ph\u00fat, \u01b0\u1edbp gia v\u1ecb g\u1ed3m 1m h\u1ea1t n\u00eam H\u1ea1t n\u00eam Aji-ngon\u00ae N\u1ea5m v\u00e0 1M m\u00e0u d\u1ea7u \u0111i\u1ec1u.",
+                "\u0110\u1eadu h\u0169 c\u1eaft mi\u1ebfng vu\u00f4ng 2 cm, chi\u00ean v\u00e0ng.",
+                "T\u01b0\u01a1ng h\u1ed9t xay m\u1ecbn. N\u1ea5m h\u01b0\u01a1ng ng\u00e2m n\u1edf. H\u00e0nh Boaro c\u1eaft l\u00e1t. S\u1ea3 c\u00e2y \u0111\u1eadp \u0111\u1eadp, c\u1eaft kh\u00fac. H\u00e0nh t\u00e2y c\u1eaft m\u00fai cau."
+            ],
+            "thuchien": [
+                "Phi th\u01a1m s\u1ea3 c\u00e2y, boaro v\u00e0 2M s\u1ea3 \u1edbt b\u0103m v\u1edbi 2M d\u1ea7u \u0103n, cho t\u01b0\u01a1ng v\u00e0o tr\u1ed9n \u0111\u1ec1u. Ti\u1ebfp theo x\u00e0o chu\u1ed1i xanh kho\u1ea3ng 1 ph\u00fat, r\u1ed3i th\u00eam n\u1ea5m h\u01b0\u01a1ng, n\u00eam 1/2M H\u1ea1t n\u00eam Aji-ngon\u00ae N\u1ea5m, 1m N\u01b0\u1edbc t\u01b0\u01a1ng \u201cPh\u00fa S\u0129\u201d. Th\u00eam \u0111\u1eadu h\u0169, n\u01b0\u1edbc d\u1eeba v\u00e0 1 ch\u00e9n n\u01b0\u1edbc l\u1ecdc v\u00e0o kho l\u1eeda nh\u1eb9 \u0111\u1ec3 \u0111\u1eadu v\u00e0 chu\u1ed1i th\u1ea5m v\u1ecb. Cho \u1edbt s\u1eebng, h\u00e0nh t\u00e2y kho \u0111\u1ebfn khi n\u01b0\u1edbc sanh s\u00e1nh. T\u1eaft l\u1eeda v\u00e0 th\u00eam \u00edt d\u1ea7u m\u00e8, l\u00e1 boaro."
+            ],
+            "cachdung": [
+                "M\u00fac m\u00f3n \u0103n ra b\u00e0y th\u00eam \u1edbt."
+            ],
+            "machnho": [
+                "Chi\u00ean v\u00e0ng non \u0111\u1eadu h\u0169 gi\u00fap th\u1ea5m v\u1ecb, khi kho ko b\u1ecb b\u1ec3.",
+                "N\u1ebfu khong mua \u0111\u01b0\u1ee3c n\u1ea5m h\u01b0\u01a1ng Sapa c\u00f3 th\u1ec3 d\u00f9ng lo\u1ea1i n\u1ea5m h\u01b0\u01a1ng kh\u00e1c.",
+                "T\u00f9y theo \u0111\u1ed9 m\u1eb7n c\u1ee7a t\u01b0\u01a1ng h\u1ed9t, c\u00f3 th\u1ec3 gia gi\u1ea3m ch\u00fat gia v\u1ecb \u0111\u1ec3 c\u00e2n b\u1eb1ng v\u1ecb cho m\u00f3n \u0103n.",
+                "M\u00f3n \u0103n \u0111i k\u00e8m: Canh b\u1ea1ch qu\u1ea3 b\u00ed \u0111\u1ecf, kh\u1ed5 qua x\u00e0o chay."
+            ],
+            "tags": [
+                "mi\u1ec1n Nam",
+                "t\u01b0\u01a1ng s\u1ea3",
+                "dau kho",
+                "m\u00f3n kho d\u1ec5 l\u00e0m",
+                "kho",
+                "m\u00f3n chay"
+            ]
+        },
+        {
+            "tenmon": "Canh c\u1ee7 sen rong bi\u1ec3n",
+            "image": "https://monngonmoingay.com/wp-content/uploads/2021/02/canh-cu-sen-rong-bien-880.webp",
+            "nguyenlieu": [
+                "C\u1ee7 sen: 150g",
+                "L\u00e1 rong bi\u1ec3n: 5g ",
+                "B\u1ea1ch qu\u1ea3 t\u01b0\u01a1i : 50g ",
+                "T\u00e0u h\u1ee7 ky c\u1ecdng t\u01b0\u01a1i: 100g ",
+                "Boaro b\u0103m : 2M ",
+                "C\u00e0 r\u1ed1t: 1/2 c\u1ee7 ",
+                "G\u1eebng c\u1eaft s\u1ee3i: 1M ",
+                "RAU N\u00caM: Boaro phi, ng\u00f2 r\u00ed",
+                "\u0102N K\u00c8M: C\u01a1m tr\u1eafng.",
+                "Gia v\u1ecb: D\u1ea7u \u0103n, mu\u1ed1i, ti\u00eau, \u0111\u01b0\u1eddng",
+                "B\u1ed9t ng\u1ecdt ",
+                "H\u1ea1t n\u00eam "
+            ],
+            "soche": [
+                "C\u1ee7 sen b\u00e0o v\u1ecf, c\u1eaft l\u00e1t 0.5cm, lu\u1ed9c ch\u00edn. R\u1eeda s\u1ea1ch t\u00e0u h\u1ee7 ky, c\u1eaft kh\u00fac 3cm. B\u1ea1ch qu\u1ea3 lu\u1ed9c m\u1ec1m. C\u00e0 r\u1ed1t t\u1ec9a hoa, c\u1eaft khoanh tr\u00f2n.",
+                "T\u00e0u h\u1ee7 ky \u01b0\u1edbp 1M boaro, 1m B\u1ed9t ng\u1ecdt AJI-NO-MOTO\u00ae, 1m H\u1ea1t n\u00eam Aji-ngon\u00ae N\u1ea5m tr\u1ed9n \u0111\u1ec1u \u0111\u1ec3 th\u1ea5m 15 ph\u00fat."
+            ],
+            "thuchien": [
+                "Phi th\u01a1m boaro v\u1edbi \u00edt d\u1ea7u \u0103n, x\u00e0o th\u01a1m t\u00e0u h\u1ee7 ky, th\u00eam 1.2 l\u00edt n\u01b0\u1edbc v\u00e0 cho c\u1ee7 sen, b\u1ea1ch qu\u1ea3, c\u00e0 r\u1ed1t v\u00e0o n\u1ea5u s\u00f4i, n\u00eam 1m mu\u1ed1i, 1/2M \u0111\u01b0\u1eddng, 1m B\u1ed9t ng\u1ecdt AJI-NO-MOTO\u00ae, 1/2M H\u1ea1t n\u00eam Aji-ngon\u00ae N\u1ea5m v\u00e0o khu\u1ea5y \u0111\u1ec1u \u0111\u1ec3 nh\u1ecf l\u1eeda n\u1ea5u kho\u1ea3ng 20 ph\u00fat cho c\u1ee7 sen, b\u1ea1ch qu\u1ea3 v\u00e0 t\u00e0u h\u1ee7 ch\u00edn m\u1ec1m cho l\u00e1 rong bi\u1ec3n, 1M g\u1eebng c\u1eaft s\u1ee3i v\u00e0o khu\u1ea5y \u0111\u1ec1u n\u1ea5u th\u00eam 5 ph\u00fat n\u1ebfm l\u1ea1i t\u1eaft l\u1eeda."
+            ],
+            "cachdung": [
+                "M\u00fac canh ra t\u00f4, th\u00eam ng\u00f2 r\u00ed, h\u00e0nh boaro phi v\u00e0 ti\u00eau v\u00e0o d\u00f9ng n\u00f3ng k\u00e8m c\u01a1m tr\u1eafng."
+            ],
+            "machnho": [
+                ""
+            ],
+            "tags": [
+                "mi\u1ec1n Nam",
+                "canh c\u1ee7 sen",
+                "rong bi\u1ec3n",
+                "m\u00f3n canh d\u1ec5 n\u1ea5u",
+                "canh",
+                "m\u00f3n chay"
+            ]
+        },
+        {
+            "tenmon": "Ch\u1ea3 chay cu\u1ed1n rong bi\u1ec3n",
+            "image": "https://monngonmoingay.com/wp-content/uploads/2022/04/cha-chay-cuon-rong-bien-880.jpg",
+            "nguyenlieu": [
+                "L\u00e1 rong bi\u1ec3n ( l\u00e1 nori): 3 l\u00e1  ",
+                "L\u00e1 t\u00e0u h\u1ee7 k\u1ef7 y\u1ec3u: 3 mi\u1ebfng ",
+                "Gi\u00f2 s\u1ed1ng chay: 400gr ",
+                "\u0110\u1eadu h\u1ee7 tr\u1eafng lo\u1ea1i mi\u1ebfng nh\u1ecf: 3 mi\u1ebfng  ",
+                "N\u1ea5m H\u01b0\u01a1ng  kh\u00f4: 50gr ",
+                "H\u00e0nh Boaro phi: 20 gr ",
+                "C\u00e0 r\u1ed1t c\u1eaft nhuy\u1ec5n: 70gr ",
+                "\u0102N K\u00c8M: C\u01a1m tr\u1eafng, d\u01b0a leo, x\u00e0 l\u00e1ch, n\u01b0\u1edbc t\u01b0\u01a1ng, \u1edbt ",
+                "Gia v\u1ecb: : D\u1ea7u \u0103n, ti\u00eau tr\u1eafng xay, \u0111\u01b0\u1eddng, b\u1ed9t ng\u1ecdt, M\u00d9 T\u1ea0T XANH, n\u01b0\u1edbc d\u1eeba, \u1edbt s\u1eebng b\u0103m 2m",
+                "H\u1ea1t n\u00eam "
+            ],
+            "soche": [
+                "\u2013 L\u00e1 t\u00e0u h\u1ee7 k\u1ef7 y\u1ec3u: T\u00e0u h\u1ee7 ky c\u1eaft mi\u1ebfng ch\u1eef nh\u1eadt b\u1ec1 ngang b\u1eb1ng l\u00e1 rong bi\u1ec3n, b\u1ec1 d\u00e0i h\u01a1n l\u00e1 rong bi\u1ec3n 5cm.",
+                "\u2013 \u0110\u1eadu h\u1ee7 tr\u1eafng lo\u1ea1i mi\u1ebfng nh\u1ecf: Ch\u1ea7n qua n\u01b0\u1edbc s\u00f4i, v\u1eaft r\u00e1o gi\u00e3 nhuy\u1ec5n.",
+                "\u2013 N\u1ea5m h\u01b0\u01a1ng kh\u00f4: Ng\u00e2m m\u1ec1m c\u1eaft nhuy\u1ec5n."
+            ],
+            "thuchien": [
+                "\u2013 Tr\u1ed9n Nh\u00e2n (\u01b0\u1edbp): Tr\u1ed9n \u0111\u1ec1u gi\u00f2 s\u1ed1ng chay, t\u00e0u h\u1ee7, n\u1ea5m H\u01b0\u01a1ng, c\u00e0 r\u1ed1t, Boaro phi, n\u00eam v\u00e0o 1m ti\u00eau xay, 1m \u0111\u01b0\u1eddng, 1m b\u1ed9t ng\u1ecdt, 2m h\u1ea1t n\u00eam Aji-ngon\u00ae N\u1ea5m tr\u1ed9n \u0111\u1ec1u l\u1ea1i cho th\u1ea5m gia v\u1ecb.",
+                "\u2013 Cu\u1ed1n ch\u1ea3: \u0110\u1eb7t l\u00e1 t\u00e0u h\u1ee7 ky l\u00ean d\u0129a, thoa n\u01b0\u1edbc l\u00ean t\u00e0u h\u0169 ki cho m\u1ec1m, d\u00e0n \u0111\u1ec1u nh\u00e2n l\u00ean l\u00e1 t\u00e0u h\u1ee7 ky, \u0111\u1eb7t ti\u1ebfp l\u00e1 rong bi\u1ec3n l\u00ean nh\u00e2n, d\u00e0n \u0111\u1ec1u ti\u1ebfp nh\u00e2n l\u00ean l\u00e1 rong bi\u1ec3n, sau \u0111\u00f3 cu\u1ed9n tr\u00f2n l\u1ea1i, c\u1eaft l\u00e0m \u0111\u00f4i.",
+                "\u2013 Chi\u00ean ch\u1ea3: L\u00e0m n\u00f3ng 4M d\u1ea7u cho cu\u1ed1n ch\u1ea3 v\u00e0o chi\u00ean v\u00e0ng, gi\u00f2n r\u1ed3i th\u00eam 2/3 ch\u00e9n n\u01b0\u1edbc d\u1eeba v\u00e0o, om l\u1eeda nh\u1ecf \u0111\u1ebfn l\u00fac cu\u1ed1n ch\u1ea3 ch\u00edn, c\u1ea1n n\u01b0\u1edbc l\u00e0 t\u1eaft l\u1eeda, \u0111\u1ec3 ngu\u1ed9i, c\u1eaft khoanh v\u1eeba \u0103n.",
+                "\u2013 Pha n\u01b0\u1edbc t\u01b0\u01a1ng \u0103n k\u00e8m: 1m m\u00f9 t\u1ea1t xanh, 2M n\u01b0\u1edbc d\u1eeba, 2M n\u01b0\u1edbc t\u01b0\u01a1ng Ph\u00fa s\u0129, \u00edt \u1edbt b\u0103m, khu\u1ea5y \u0111\u1ec1u."
+            ],
+            "cachdung": [
+                "X\u1ebfp cu\u1ed1n ch\u1ea3 ra d\u0129a k\u00e8m d\u01b0a leo x\u00e0 l\u00e1ch, d\u00f9ng k\u00e8m c\u01a1m tr\u1eafng v\u00e0 n\u01b0\u1edbc t\u01b0\u01a1ng."
+            ],
+            "machnho": [
+                "\u2013 Gi\u00e3 nhuy\u1ec5n \u0111\u1eadu h\u1ee7, \u0111\u1ec3 ph\u1ea7n nh\u00e2n c\u1ee7a ch\u1ea3 dai h\u01a1n v\u00e0 k\u1ebft d\u00ednh.",
+                "\u2013 D\u00f9ng t\u00e0u h\u1ee7 k\u1ef7 y\u1ec3u \u0111\u1ec3 d\u1ec3 t\u1ea1o h\u00ecnh cu\u1ed1n ch\u1ea3.",
+                "\u2013 M\u00f3n \u0103n \u0111i k\u00e8m: Canh c\u1ee7 sen rong bi\u1ec3n"
+            ],
+            "tags": [
+                "mi\u1ec1n B\u1eafc",
+                "ch\u1ea3 chay",
+                "cu\u1ed1n rong bi\u1ec3n",
+                "m\u00f3n chay",
+                "chi\u00ean"
+            ]
+        },
+        {
+            "tenmon": "X\u00e0o l\u0103n chay th\u1ea3o m\u1ed9c",
+            "image": "https://monngonmoingay.com/wp-content/uploads/2022/12/xao-lan-chay-thao-moc.jpg",
+            "nguyenlieu": [
+                "M\u00ec c\u0103n: 4 c\u00e2y ",
+                "N\u1ea5m r\u01a1m b\u00fap: 100g ",
+                "N\u1ea5m m\u00e8o ng\u00e2m n\u1edf: 3 tai ",
+                "Chu\u1ed1i s\u00e1p lu\u1ed9c ch\u00edn: 6 tr\u00e1i ",
+                "L\u00e1 nh\u00e0u (lo\u1ea1i b\u00e1nh t\u1ebb): 40g ",
+                "T\u00e0u h\u0169 ky l\u00e1 chi\u00ean gi\u00f2n: 50g ",
+                "Mi\u1ebfn kh\u00f4: 20g ",
+                "RAU N\u00caM:  Ng\u00f2 gai, rau om, h\u00fang qu\u1ebf: ",
+                "\u0102N K\u00c8M: B\u00e1nh m\u00ec: ",
+                "Gia v\u1ecb: B\u1ed9t ca ri, mu\u1ed1i, \u0111\u01b0\u1eddng, ti\u00eau, poa r\u00f4 b\u1eb1m, s\u1ea3 c\u00e2y, \u0111\u1eadu ph\u1ecdng rang gi\u00e3 b\u1ec3, \u1edbt s\u1eebng c\u1eaft s\u1ee3i, m\u00e0u d\u1ea7u \u0111i\u1ec1u, n\u01b0\u1edbc c\u1ed1t d\u1eeba",
+                "N\u01b0\u1edbc t\u01b0\u01a1ng ",
+                "H\u1ea1t n\u00eam "
+            ],
+            "soche": [
+                "\u2013 N\u1ea5m r\u01a1m b\u00fap: ng\u00e2m r\u1eeda s\u1ea1ch, c\u1eaft ch\u1eef th\u1eadp \u0111\u1ea7u n\u1ea5m.",
+                "\u2013 M\u00ec c\u1eafn c\u1eaft c\u1ee1 n\u1ea5m r\u01a1m, chi\u00ean \u01b0\u1edbp 1/2m h\u1ea1t n\u00eam aji-ngon, 1m n\u01b0\u1edbc t\u01b0\u01a1ng Ph\u00fa S\u0129, chi\u00ean s\u01a1 M\u00ec c\u0103n.",
+                "\u2013 Chu\u1ed1i s\u00e1p lu\u1ed9c c\u1eaft kh\u1ed1i vu\u00f4ng c\u1edf n\u1ea5m r\u01a1m. \u01af\u1edbp 1/2m h\u1ea1t n\u00eam Aji-ngon.",
+                "\u2013 N\u1ea5m m\u00e8o c\u1eaft mi\u1ebfng v\u1eeba \u0103n, \u01b0\u1edbp 1/4m ti\u00eau."
+            ],
+            "thuchien": [
+                "\u2013 Th\u1ea3o m\u1ed9c: L\u00e1 nh\u00e0u l\u1ea5y 1 n\u1eafm c\u1eaft s\u1ee3i d\u1ea7y 5 li \u0111\u1ec3 trang tr\u00ed. C\u00f2n l\u1ea1i c\u1eaft r\u1ed1i d\u1ea7y 1cm c\u00f9ng v\u1edbi ng\u00f2 gai, rau om, h\u00fang qu\u1ebf. Mi\u1ebfn ng\u00e2m v\u1eeba m\u1ec1m, c\u1eaft kh\u00fac 4cm. S\u1ea3 d\u1eadp gi\u1eadp, c\u1eaft kh\u00fac 3cm. \u0110un n\u00f3ng d\u1ea7u \u0103n, chi\u00ean ng\u1eadp d\u1ea7u l\u00e1 nh\u00e0u c\u1eaft nh\u1ecf, v\u1edbt ra \u0111\u1ec3 l\u00ean gi\u1ea5y th\u1ea5m d\u1ea7u cho r\u00e1o.",
+                "\u2013 X\u00e0o l\u0103n: \u0110un n\u00f3ng 2M m\u00e0u d\u1ea7u \u0111i\u1ec1u trong ch\u1ea3o, phi th\u01a1m s\u1ea3 \u0111\u1eadp gi\u1eadp, c\u00f9ng 3M boa r\u00f4 b\u1eb1m, th\u00eam m\u00ec c\u0103n, n\u1ea5m r\u01a1m v\u00e0o x\u00e0o 1 ph\u00fat, th\u00eam chu\u1ed1i s\u00e1p x\u00e0o th\u01a1m, cho 1 ch\u00e9n n\u01b0\u1edbc c\u1ed1t d\u1eeba, 1 ch\u00e9n n\u01b0\u1edbc x\u00e0o chung, n\u00eam 1m H\u1ea1t n\u00eam Aji-ngon\u00ae N\u1ea5m, 1/2m b\u1ed9t c\u00e0 ri, 1m \u0111\u01b0\u1eddng, n\u1ea5u s\u00f4i 2 ph\u00fat, n\u01b0\u1edbc h\u01a1i s\u00e1nh s\u00e1nh, th\u00eam n\u1ea5m m\u00e8o, n\u1ea5u 2p r\u1ed3i cho mi\u1ebfn \u0111\u1ea3o \u0111\u1ec1u. Th\u00eam \u1edbt s\u1eebng c\u1eaft l\u00e1t v\u00e0 th\u1ea3o m\u1ed9c, t\u1eaft l\u1eeda, tr\u1ed9n \u0111\u1ec1u."
+            ],
+            "cachdung": [
+                "M\u00fac x\u00e0o l\u0103n ra \u0111\u0129a s\u00e2u l\u00f2ng, r\u1eafc th\u00eam \u0111\u1eadu ph\u1ecdng rang, t\u00e0u h\u0169 ky chi\u00ean b\u00f3p nh\u1ecf, tr\u00ecnh b\u00e0y v\u1edbi l\u00e1 nh\u00e0u chi\u00ean gi\u00f2n, \u0103n k\u00e8m b\u00e1nh m\u00ec.",
+                "M\u00f3n \u0103n \u0111i k\u00e8m:G\u1ecfi hoa chu\u1ed1i th\u1ecbt g\u00e0 chay"
+            ],
+            "machnho": [
+                "\u2013 Ch\u1ecdn l\u00e1 nh\u00e0u b\u00e1nh t\u1ebb (kh\u00f4ng qu\u00e1 non c\u0169ng kh\u00f4ng qu\u00e1 gi\u00e0) s\u1ebd ngon v\u00e0 ph\u00f9 h\u1ee3p m\u00f3n \u0103n.",
+                "\u2013 \u01af\u1edbp ti\u00eau sau khi c\u1eaft n\u1ea5m m\u00e8o gi\u00fap \u00e1t \u0111i m\u00f9i g\u1ed7 m\u1ee5c c\u1ee7a n\u1ea5m.",
+                "\u2013 Kh\u00f4ng n\u1ea5u n\u01b0\u1edbc c\u1ed1t d\u1eeba l\u00e2u, s\u1ebd b\u1ecb v\u00f3n c\u1ee5c."
+            ],
+            "tags": [
+                "mi\u1ec1n B\u1eafc",
+                "m\u00f3n x\u00e0o chay",
+                "x\u00e0o l\u0103n",
+                "x\u00e0o",
+                "m\u00f3n chay"
+            ]
+        },
+        {
+            "tenmon": "B\u00ed \u0111\u1ecf h\u1ea5p h\u1ea1nh nh\u00e2n",
+            "image": "https://monngonmoingay.com/wp-content/uploads/2021/02/bi-do-hap-hat-sen-880.webp",
+            "nguyenlieu": [
+                "B\u00ed \u0111\u1ecf non: 4 tr\u00e1i",
+                "H\u1ea1t sen: 100g ",
+                "\u0110\u1eadu bi: 30g ",
+                "\u0110\u1eadu h\u0169 chi\u00ean: 50g ",
+                "C\u00e0 r\u1ed1t: 40g ",
+                "Boaro: 1 c\u00e2y",
+                "N\u1ea5m \u0111\u00f4ng c\u00f4 t\u01b0\u01a1i: 40g ",
+                "RAU N\u00caM: L\u00e1 boaro, c\u1ecdng ng\u00f2, \u1edbt s\u1eebng c\u1eaft s\u1ee3i: ",
+                "Gia v\u1ecb: d\u1ea7u \u0103n",
+                "N\u01b0\u1edbc t\u01b0\u01a1ng ",
+                "H\u1ea1t n\u00eam "
+            ],
+            "soche": [
+                "B\u00ed \u0111\u1ecf c\u1eaft ch\u00f3p, n\u1ea1o b\u1ecf ph\u1ea7n h\u1ea1t, gi\u1eef l\u1ea1i ph\u1ea7n n\u1eafp, h\u1ea5p b\u00ed \u0111\u1ecf 10 ph\u00fat.",
+                "H\u1ea1t sen l\u1ea5y tim sen, lu\u1ed9c ch\u00edn h\u1ea1t sen v\u00e0 \u0111\u1eadu bi.",
+                "\u0110\u1eadu h\u0169, c\u00e0 r\u1ed1t v\u00e0 n\u1ea5m \u0111\u00f4ng c\u00f4 t\u01b0\u01a1i c\u1eaft h\u1ea1t l\u1ef1u. H\u00e0nh boaro c\u1eaft m\u1ecfng ph\u1ea7n c\u1ecdng, ph\u1ea7n l\u00e1 c\u1eaft nhuy\u1ec5n."
+            ],
+            "thuchien": [
+                "Phi th\u01a1m h\u00e0nh boaro, cho n\u1ea5m v\u00e0 c\u00e0 r\u1ed1t v\u00e0o x\u00e0o, th\u00eam 2M n\u01b0\u1edbc, cho h\u1ea1t sen, \u0111\u1eadu bi, \u0111\u1eadu h\u0169 v\u00e0o x\u00e0o s\u01a1, n\u00eam 1m H\u1ea1t n\u00eam Aji-ngon\u00ae N\u1ea5m H\u01b0\u01a1ng v\u00e0 H\u1ea1t Sen, 1/3m ti\u00eau. T\u1eaft l\u1eeda. Th\u00eam l\u00e1 boaro.",
+                "Cho rau c\u1ee7 \u0111\u00e3 x\u00e0o v\u00e0o b\u00ed, \u0111\u1eady n\u1eafp, h\u1ea5p th\u00eam 25 ph\u00fat \u0111\u1ebfn khi b\u00ed \u0111\u1ecf v\u00e0 rau c\u1ee7 ch\u00edn m\u1ec1m. R\u1eafc \u00edt l\u00e1 boaro v\u00e0 \u1edbt s\u1eebng c\u1eaft s\u1ee3i c\u00f9ng c\u1ecdng ng\u00f2 l\u00ean tr\u00ean."
+            ],
+            "cachdung": [
+                "D\u00f9ng n\u00f3ng. Ch\u1ea5m k\u00e8m N\u01b0\u1edbc t\u01b0\u01a1ng \u201cPh\u00fa S\u0129\u201d."
+            ],
+            "machnho": [
+                "H\u1ea5p s\u01a1 b\u00ed gi\u00fap m\u00f3n \u0103n ch\u00edn \u0111\u1ec1u sau khi ho\u00e0n th\u00e0nh.",
+                "X\u00e0o n\u1ea5m ch\u00edn k\u0129 \u0111\u1ec3 gi\u1ea3m m\u00f9i h\u0103ng c\u1ee7a n\u1ea5m.",
+                "Ch\u1ecdn qu\u1ea3 b\u00ed tr\u00f2n \u0111\u1ec1u, \u0111\u00e1y b\u1eb1ng, v\u1ecf \u0111\u1eadm m\u00e0u, sau khi h\u1ea5p s\u1ebd \u0111\u1eb9p h\u01a1n.",
+                "M\u00f3n \u0103n \u0111i k\u00e8m \u0111\u1ec3 t\u1ea1o th\u00e0nh b\u1eefa \u0103n ho\u00e0n ch\u1ec9nh: S\u00fap b\u00e1t tr\u00e2n chay."
+            ],
+            "tags": [
+                "mi\u1ec1n Nam",
+                "b\u00ed \u0111\u1ecf",
+                "h\u1ea1t sen",
+                "m\u00f3n chay d\u1ec5 l\u00e0m",
+                "h\u1ea5p",
+                "m\u00f3n chay"
+            ]
+        }
+    ]
+}

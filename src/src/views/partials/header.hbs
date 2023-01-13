@@ -1,0 +1,165 @@
+<div id="header" class="fixed-top p-0 shadow" style="height: 80px;">
+
+    <div class="col-12 bg-light d-flex flex-wrap align-items-center justify-content-between fw-bold"
+        style="color: rgb(187, 181, 181);">
+        <div class="col-6 text-md-center fs-6">
+            <span>
+                <ion-icon class="" name="call-outline"></ion-icon>
+            </span>
+            <span>1234567890</span>
+
+            <span>
+                <ion-icon class="" name="location-outline"></ion-icon>
+            </span>
+            <span>Đại học Khoa học Tự nhiên - ĐHQG TPHCM</span>
+        </div>
+
+        <div class="col-3 text-md-end social-icon">
+            <a href="#" class="me-3">
+                <ion-icon class="text-primary" name="logo-facebook"></ion-icon>
+            </a>
+            <a href="#" class="me-3">
+                <ion-icon class="text-danger" name="logo-youtube"></ion-icon>
+            </a>
+            <a href="#" class="me-3">
+                <ion-icon class="text-info" name="logo-twitter"></ion-icon>
+            </a>
+            <a href="https://github.com/yakhimm/NMCNPM_20" class="me-5" target="_blank">
+                <ion-icon class="text-secondary" name="logo-github"></ion-icon>
+            </a>
+        </div>
+
+        <div class="row col-12">
+
+            <div class="site-navbar site-navbar-target p-0 d-flex">
+                <div class="site-logo col-3 text-center" style="line-height: 4rem;">
+                    <a href="/" class="text-black fs-3"><span class="text-primary">Team 04</span></a>
+                </div>
+                {{#if authenticated}}
+                <div class="col-6 offset-0 text-center">
+                    <nav class="site-navigation text-right ml-auto " role="navigation">
+                        <ul class="site-menu main-menu js-clone-nav ml-auto d-none d-lg-block p-0">
+                            <li><a href="/" class="nav-link">Trang chủ</a></li>
+                            <li><a href="/recipes" class="nav-link">Công thức</a></li>
+                            <li><a href="/postRecipe" class="nav-link">Đăng công thức</a></li>
+                            <li><a href="#" class="nav-link">Giỏ hàng</a></li>
+                            <li><a href="#" class="nav-link">Giới thiệu</a></li>
+                        </ul>
+                    </nav>
+                </div>
+
+                {{else}}
+
+                <div class="col-6 offset-0 text-center">
+                    <nav class="site-navigation text-right ml-auto " role="navigation">
+                        <ul class="site-menu main-menu js-clone-nav ml-auto d-none d-lg-block p-0">
+                            <li><a href="/" class="nav-link">Trang chủ</a></li>
+                            <li><a href="/signin" class="nav-link">Đăng nhập</a></li>
+                            <li><a href="/recipes" class="nav-link">Công thức</a></li>
+                            <li><a href="#" class="nav-link">Giỏ hàng</a></li>
+                            <li><a href="#" class="nav-link">Giới thiệu</a></li>
+                        </ul>
+                    </nav>
+                </div>
+
+                {{/if}}
+                
+                <div class="col-3 text-center" style="line-height: 4rem;">
+
+                    {{#if authenticated}}
+                    <div class="btn-group shadow-none position-relative me-3">
+                        <a href="/favorite" class="home-btn d-flex rounded-1 p-0">
+                            <ion-icon class="text-dark fs-4" name="heart-outline"></ion-icon>
+                            <span
+                                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                {{favorite_counts}}
+                            </span>
+                        </a>
+                    </div>
+
+                    <div class="btn-group shadow-none position-relative me-3">
+                        <a class="home-btn d-flex rounded-1 p-0" data-bs-toggle="dropdown">
+                            <ion-icon class="text-dark fs-4" name="cart-outline"></ion-icon>
+                            <span
+                                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                <span class="visually-hidden">unread messages</span>
+                            </span>
+                        </a>
+                    </div>
+
+                    <div class="btn-group shadow-none position-relative me-3">
+                        <a href="#" class="home-btn d-flex rounded-1 p-0" data-bs-toggle="dropdown">
+                            <ion-icon class="text-dark fs-4" name="notifications-outline"></ion-icon>
+                            <span
+                                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                <span class="visually-hidden">unread messages</span>
+                            </span>
+                        </a>
+                    </div>
+
+                    {{else}}
+
+                    <div class="btn-group shadow-none position-relative me-3">
+                        <a class="home-btn d-flex rounded-1 p-0" data-bs-toggle="dropdown">
+                            <ion-icon class="text-dark fs-4" name="cart-outline"></ion-icon>
+                        </a>
+                    </div>
+
+                    <div class="btn-group shadow-none position-relative me-3">
+                        <a href="#" class="home-btn d-flex rounded-1 p-0" data-bs-toggle="dropdown">
+                            <ion-icon class="text-dark fs-4" name="notifications-outline"></ion-icon>
+                        </a>
+                    </div>
+                    {{/if}}
+
+                    {{#if authenticated}}
+                    <div class="btn-group shadow-none">
+                        <div class="btn btn-light d-flex rounded-1" data-bs-toggle="dropdown">
+                            <ion-icon class="text-info fs-4 text-dark" name="person-circle-outline"></ion-icon>
+                            <div class="row rounded-end">
+                                <p class="account-username text-center m-0"> {{user.fullname}} </p>
+                                <ion-icon class="text-dark d-block m-0 w-75" name="chevron-down-outline"></ion-icon>
+                            </div>
+                        </div>
+
+                        <ul class="dropdown-menu" style="line-height: 2rem;">
+                            <li><a class="dropdown-item" href="/account/{{user.id}}">Trang cá nhân</a></li>
+                            <li><a class="dropdown-item" href="/setting/{{user.id}}">Đổi mật khẩu</a></li>
+                            <li><a class="dropdown-item" href="/logout">Đăng xuất</a></li>
+                        </ul>
+                    </div>
+
+                    {{else}}
+
+                    <div class="btn-group shadow-none">
+                        <a href="/signin" class="btn btn-light d-flex rounded-1">
+                            <ion-icon class="text-info fs-4 text-dark" name="person-circle-outline"></ion-icon>
+                            <div class="row rounded-end">
+                                <p class="account-username text-center m-0"> Sign in </p>
+                                <ion-icon class="text-dark d-block m-0 w-75" name="chevron-down-outline"></ion-icon>
+                            </div>
+                        </a>
+                    </div>
+
+                    {{/if}}
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<script>
+    const getID = async (username) => {
+        const response = await fetch('http://localhost:3000');
+        const res = await fetch('http://localhost:3000/account', {
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ username })
+        });
+    }
+
+</script>

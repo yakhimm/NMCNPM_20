@@ -1,0 +1,49 @@
+<div class="row">
+    <div id="content-body" class="col-12">
+        <div class="card border-light mb-3">
+            <h4 class="card-header text-center bg-primary" style="color: white">Đặt mua nguyên liệu món {{recipeName}}
+            </h4>
+            <div class="card-body">
+                <div class="row row-cols-1 row-cols-md-3 g-4">
+                    {{#each ingredients}}
+                    <div class="col">
+                        <div class="card h-100">
+                            <img src="{{detail.img}}" width="100" height="250" class="card-img-top" alt="..."
+                                title="{{name}}">
+                            <div class="card-body">
+                                <h5 class="card-title">{{name}}</h5>
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">Price: {{detail.price}}</li>
+                                <li class="list-group-item">
+                                    <button class="btn btn-danger mt-3 w-100" onclick="getName('{{name}}')">
+                                        <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                fill="currentColor" class="bi bi-cart4" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l.5 2H5V5H3.14zM6 5v2h2V5H6zm3 0v2h2V5H9zm3 0v2h1.36l.5-2H12zm1.11 3H12v2h.61l.5-2zM11 8H9v2h2V8zM8 8H6v2h2V8zM5 8H3.89l.5 2H5V8zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z" />
+                                            </svg></span>
+                                        <span>Thêm vào giỏ hàng</span>
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const getID = async (name) => {
+        const response = await fetch('http://localhost:3000/ingredients/{{recipeName}}');
+        const res = await fetch('http://localhost:3000/cart', {
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ name })
+        });
+    }
+</script>

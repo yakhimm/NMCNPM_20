@@ -1,0 +1,71 @@
+<div class="row">
+
+    <div class="col-5">
+        <div class="card border-light mb-3">
+            <h4 class="card-header bg-primary text-center text-white">Đăng công thức</h4>
+            <div class="card-body">
+                <form method="POST" action="/postRecipe">
+                    <div class="form-group">
+                        <label for="ten" class="form-label">Tên công thức</label>
+                        <input type="text" class="form-control" id="ten" name="ten" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="image" class="form-label">Hình ảnh</label>
+                        <input type="text" class="form-control" id="image" name="image" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="nguyenlieu" class="form-label">Nguyên liệu</label>
+                        <input type="text" class="form-control" id="nguyenlieu" name="nguyenlieu" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="soche" class="form-label">Sơ chế</label>
+                        <input type="text" class="form-control" id="soche" name="soche" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="thuchien" class="form-label">Thực hiện</label>
+                        <input type="text" class="form-control" id="thuchien" name="thuchien" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="cachdung" class="form-label">Cách dùng</label>
+                        <input type="text" class="form-control" id="cachdung" name="cachdung" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="machnho" class="form-label">Mách nhỏ</label>
+                        <input type="text" class="form-control" id="machnho" name="machnho" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="tags" class="form-label">Tags</label>
+                        <input type="text" class="form-control" id="tags" name="tags" required />
+                    </div>
+
+                    <button type="submit" class="btn btn-primary mt-3 col-12">Đăng công thức</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-7">
+        <div class="card border-light mb-3">
+            <h4 class="card-header text-center bg-primary" style="color: white">Công thức đã đăng</h4>
+            <div class="card-body">
+                <div class="row row-cols-1 row-cols-md-3 g-4" style="min-height: 630px;">
+                    {{#each recipes}}
+                    <div class="col-6">
+                        <div class="__area text-center">
+                            <a href="/editRecipe/{{tenmon}}" class="__card">
+                                <button class="__favorit">
+                                    <ion-icon name="heart-outline"></ion-icon>
+                                </button>
+                                <img src="{{image}}" alt="{{tenmon}}" title="{{tenmon}}" class="img-fluid __img" />
+                                <div class="__card_detail text-left">
+                                    <h4>{{tenmon}}</h4>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
